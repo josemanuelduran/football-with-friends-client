@@ -1,0 +1,25 @@
+ion-navbar.navbar-search {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+
+    ion-searchbar.searchbar-md {
+        .searchbar-search-icon,
+        &.searchbar-has-value.searchbar-has-focus .searchbar-clear-icon {
+            display: none;
+        }
+
+        .searchbar-input {
+            padding: 0;
+            background-color: transparent;
+            box-shadow: none;
+            color: inherit;
+
+            &::placeholder {
+                color: inherit;
+                opacity: 0.75;
+            }
+        }
+    }
+}

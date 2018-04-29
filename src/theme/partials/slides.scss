@@ -1,0 +1,23 @@
+ion-slides {
+    // Use key color in slides pagination
+    & .swiper-pagination-bullet-active,
+    & .swiper-pagination-progress .swiper-pagination-progressbar {
+        background-color: color($colors, primary);
+    }
+
+    // Use a full slider component only to display the pager
+    &.pager-only {
+        .swiper-wrapper {
+            min-height: 16px;
+        }
+
+        .swiper-pagination-bullets,
+        .swiper-pagination-fraction {
+            top: 0;
+        }
+
+        .swiper-pagination-progress {
+            top: 6px;
+        }
+    }
+}

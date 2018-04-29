@@ -1,0 +1,49 @@
+<ion-header>
+    <ion-navbar color="primary">        
+        <ion-title>
+            {{match.name}} {{"MATCHPAGE.TEAMS" | translate}}
+        </ion-title>
+        <ion-buttons end>               
+            <button ion-button
+                    icon-only
+                    clear
+                    (click)="showOptions()">
+                <ion-icon name="more"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+<ion-content>
+    <ion-card *ngIf="match.team1 && match.team2; else elesBlock">
+        <ion-grid>
+            <ion-row>
+                <ion-col>                    
+                    <ion-list>
+                        <ion-list-header>
+                            {{match.team1.color}}
+                        </ion-list-header>
+                        <ion-item *ngFor="let player of match.team1.players; let i = index;">
+                            {{i+1}}. {{player.name}} <span *ngIf="!player.fixed">(s)</span>
+                        </ion-item>
+                    </ion-list>
+                </ion-col>
+                <ion-col>
+                    <ion-list>
+                        <ion-list-header>
+                            {{match.team2.color}}
+                        </ion-list-header>
+                        <ion-item *ngFor="let player of match.team2.players; let i = index;">
+                            {{i+1}}. {{player.name}} <span *ngIf="!player.fixed">(s)</span>
+                        </ion-item>
+                    </ion-list>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-card>  
+    <ng-template #elseBlock>
+        <fwf-empty-state>
+            {{'TEAMSPAGE.NO_TEAMS' | translate}}
+        </fwf-empty-state>
+    </ng-template>
+</ion-content>
+

@@ -1,0 +1,90 @@
+{
+    "APPLICATION_DETAIL": {
+        "COPYRIGHT": " 2018 Jose Manuel Durán. Todos los derechos reservados.",
+        "NAME": "Fútbol Con Amigos",
+        "VERSION": "v0.1.0"
+    },
+    "INTRODUCTION": {
+        "CONTINUE": "Continuar",
+        "SLIDE1_1": "Bienvenido a",
+        "SLIDE1_2": "La",
+        "SLIDE1_3": "para gestionar el partido de fútbol de los martes",
+        "SLIDE2_1": "¿Qué es y para que sirve Fútbol con Amigos?",
+        "SLIDE2_2": "es una aplicación móvil de alta calidad con tecnologías web como HTML, CSS y JavaScript",
+        "SLIDE2_3": "te permite administrar todo lo relacionado con los partidos del martes que llevamos jugando desde hace casi 10 años. ¡¡Por fin!!",
+        "SLIDE3_1": "Qué tengo que hacer ahora?",
+        "SLIDE3_2": "Sólo tienes que disfrutar de la aplicación y decir",
+        "SLIDE3_3": "\"vaya equipito\"",
+        "SLIDE3_4": "cada vez que se hagan los equipos cada semana",
+        "SLIDE4_1": "Y recuerda tener cuidado con Jero"
+    },
+    "TABS": {
+        "TAB1": "Partidos",
+        "TAB2": "Perfil",
+        "TAB3": "Pagos",
+        "TAB4": "Estadísticas"
+    },
+    "MENU": {
+        "TITLE": "Fútbol Con Amigos",
+        "MATCHES": "Partidos",
+        "PROFILE": "Perfil",
+        "PAYMENTS": "Pagos",
+        "STATS": "Estadísticas",
+        "SETTINGS": "Ajustes",
+        "INTRODUCTION": "Introducción",
+        "ABOUT": "Acerca de",
+        "LOGOUT": "Salir",
+        "TITLE_DIVIDER": "Ajustes",
+        "LOCATION": "Localización"
+    },
+    "LOGIN": {
+        "LOGIN": "Entrar",
+        "USERNAME": "Usuario",
+        "PASSWORD": "Contraseña",
+        "ERROR_LOGIN_TITLE": "Error de acceso",
+        "ERROR_LOGIN_MSG": "Nombre de usuario o contraseña invalidos"
+    },
+    "MATCHESPAGE": {
+        "TITLE": "Partidos",
+        "NO_FOUND": "No se han encontrado partidos para esas fechas.",
+        "DELETE_MATCH": "Borrar Partido",
+        "DELETE_SURE": "¿Estás seguro de eliminar este partido?",
+        "CONFIRMATION": "Confirmación",
+        "ACTION_OK": "Acción completada con éxito"
+    },
+    "MATCHPAGE": {
+        "DATA_HEADER": "Información del Partido",
+        "CALL_UP": "Convocatoria",
+        "TEAMS": "Equipos",
+        "SCOREBOARD": "Marcador",
+        "MISTER": "Creador de los equipos",
+        "NOT_PLAYED": "No jugado"
+    },
+    "ADDMATCHPAGE": {
+        "TITLE": "Añadir nuevo partido",
+        "NAME": "Nombre",
+        "DATE": "Fecha",
+        "NUMPLAYERS": "Número de jugadores",
+        "OPEN_CALL_UP": "Abrir convocatoria",
+        "CANCELLED": "Partido cancelado"
+    },
+    "PAYMENTSPAGE": {
+        "TITLE": "Pagos",
+        "NO_FOUND": "No se han encontrado pagos."
+    },
+    "PROFILEPAGE": {
+        "TITLE": "Perfil"
+    },
+    "STATSPAGE": {
+        "TITLE": "Estadísticas",
+        "NO_FOUND": "No se han encontrado estadísticas."
+    },
+    "REFRESHER_COMPONENT": {
+        "PULL_TO_REFRESH": "Arrastrar para refrescar"
+    },
+    "CANCEL_BUTTON": "Cancel",
+    "DELETE_BUTTON": "Delete",
+    "EDIT_BUTTON": "Edit",
+    "JOIN_BUTTON": "Unirse",
+    "UNJOIN_BUTTON": "Salirse"
+}

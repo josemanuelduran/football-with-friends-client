@@ -1,0 +1,25 @@
+// Fetch map font size value
+// @param {Map} $map - Map
+// @param {String} $size-name - Font size name to get
+// @param {String} $size-key  - Font size key (optional), default base
+// @return {Font size}
+// --------------------------------------------------
+
+@function font-size($map, $size-name, $size-key:null) {
+  // Get the value from $size-name in the map
+  // this can be of type color or a map
+  $size-value: map-get($map, $size-name);
+
+  // If we were given a map we need to grab the value
+  // of the key that is passed or the base key
+  @if(type-of($size-value) == map) {
+    @if($size-key) {
+      $size-value: map-fetch($map, $size-name, $size-key);
+    } @else {
+      $size-value: map-fetch($map, $size-name, base);
+    }
+  }
+
+  // If it isn't a map then return the value
+  @return $size-value;
+}

@@ -1,0 +1,44 @@
+<form id="loginForm" [formGroup]="loginForm" (ngSubmit)="submit()" novalidate>
+
+    <!-- username -->
+    <ion-item>
+        <ion-input
+            id="username"
+            name="username"
+            formControlName="username"
+            placeholder="{{ 'LOGIN.USERNAME' | translate }}"
+            required>
+        </ion-input>
+    </ion-item>
+    <!-- <na-control-messages
+        [submitted]="wasSubmitted"
+        [control]="loginForm.controls['username']"
+        [waitTouch]="false">
+    </na-control-messages> -->
+
+    <!-- password -->
+    <ion-item>
+        <ion-input
+            id="password"
+            name="password"
+            type="password"
+            formControlName="password"
+            placeholder="{{ 'LOGIN.PASSWORD' | translate }}"
+            required>
+        </ion-input>
+    </ion-item>
+    <!-- <na-control-messages
+        [submitted]="wasSubmitted"
+        [control]="loginForm.controls['password']"
+        [waitTouch]="false">
+    </na-control-messages> -->
+
+    <!-- Submit button -->
+    <button ion-button
+            block
+            type="submit"
+            [disabled]="!canLogin">
+        {{ 'LOGIN.LOGIN' | translate }}
+    </button>
+
+</form>

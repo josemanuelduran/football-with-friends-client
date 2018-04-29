@@ -1,0 +1,57 @@
+<ion-header>
+        <ion-navbar color="primary" hideBackButton>
+            <ion-buttons left>
+                <button ion-button 
+                        icon-only
+                        clear
+                        (click)="cancel()">
+                    <ion-icon name="close-circle"></ion-icon>
+                </button>
+            </ion-buttons>
+            <ion-title>
+                {{ "ADDMATCHPAGE.TITLE" | translate}}
+            </ion-title>
+            <ion-buttons end>
+                <button ion-button
+                        icon-only
+                        clear
+                        (click)="saveMatch()"
+                        [disabled]="!matchForm.valid">
+                    <ion-icon name="checkmark-circle"></ion-icon>
+                </button>        
+            </ion-buttons>
+        </ion-navbar>
+    </ion-header>
+
+<ion-content padding>
+    <form [formGroup]="matchForm">
+        <ion-item>
+            <ion-label floating>{{'ADDMATCHPAGE.NAME' | translate}}</ion-label>
+            <ion-input [formControl]="matchForm.controls['name']" type="text"></ion-input>
+            <div *ngIf="!matchForm.controls.name.valid && matchForm.controls.name.dirty" class="validator-error">
+                Please enter a name.
+            </div>
+        </ion-item>
+            
+        <ion-item>
+            <ion-label floating>{{'ADDMATCHPAGE.DATE' | translate}}</ion-label>
+            <ion-datetime [formControl]="matchForm.controls['date']" displayFormat="DD/MM/YYYY"></ion-datetime>
+        </ion-item>
+
+        <ion-item>
+            <ion-label floating>{{'ADDMATCHPAGE.NUMPLAYERS' | translate}}</ion-label>
+            <ion-input [formControl]="matchForm.controls['numPlayers']" type="number"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>{{'ADDMATCHPAGE.OPEN_CALL_UP' | translate}}</ion-label>
+            <ion-checkbox [formControl]="matchForm.controls['openCallUp']"></ion-checkbox>
+        </ion-item>
+
+        <ion-item *ngIf="match?.id">
+            <ion-label>{{'ADDMATCHPAGE.CANCELLED' | translate}}</ion-label>
+            <ion-checkbox [formControl]="matchForm.controls['cancelled']"></ion-checkbox>
+        </ion-item>
+    </form>
+
+</ion-content>

@@ -1,8 +1,18 @@
 {
   "name": "footballwithfriends",
-  "app_id": "",
+  "app_id": "FWF_v1.0",
   "type": "ionic-angular",
   "integrations": {
     "cordova": {}
-  }
+  },
+  "proxies": [
+    {
+      "path": "/fwf",
+      "proxyUrl": "http://localhost:8080/fwf"
+    },
+    {
+      "path": "/login",
+      "proxyUrl": "http://localhost:8080/login"
+    }
+  ]
 }

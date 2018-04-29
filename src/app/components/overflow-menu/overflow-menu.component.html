@@ -1,0 +1,8 @@
+<button
+        ion-item
+        no-lines
+        *ngFor="let item of options"
+        (click)="optionSelected(item)">
+    <!-- <ion-icon name="{{item.icon}}"></ion-icon> -->
+    {{item.token | translate}}
+</button>

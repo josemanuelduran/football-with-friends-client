@@ -1,0 +1,54 @@
+<ion-header>
+    <ion-navbar color="primary">        
+        <ion-title>
+            {{match.name }}
+        </ion-title>
+        <ion-buttons end>               
+            <button ion-button
+                    icon-only
+                    clear
+                    (click)="showOptions($event)">
+                <ion-icon name="more"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+<ion-content>
+    <ion-card>
+        <ion-card-header>
+            {{"MATCHPAGE.DATA_HEADER" | translate}}
+        </ion-card-header>      
+        <ion-list>
+            <ion-item>
+                <ion-icon name="calendar" item-start></ion-icon>
+                {{match.date | amDateFormat: 'DD-MM-YYYY'}}
+            </ion-item>                    
+            <ion-item color="none" on-click="goToCallUp()">
+                <ion-icon name="people" item-left></ion-icon>
+                {{ "MATCHPAGE.CALL_UP" | translate}}  ({{match.callUp?.length || 0}}/{{match.numPlayers}})
+                <ion-icon name="arrow-forward" item-right></ion-icon>
+            </ion-item>
+            <ion-item color="none" on-click="goToTeams()">
+                <ion-icon name="shirt" item-left></ion-icon>
+                {{ "MATCHPAGE.TEAMS" | translate}}
+                <ion-icon name="arrow-forward" item-right></ion-icon>
+            </ion-item>
+            <ion-item color="none">
+                <ion-icon name="football" item-left></ion-icon>
+                {{ "MATCHPAGE.SCOREBOARD" | translate}}
+                <h4 class="scoreboard">
+                    <span *ngIf="match.team1 && match.team2; else elseBlock ">
+                        {{match.team1?.color}}: {{match.team1?.goals}} - {{match.team2?.color}}: {{match.team2?.goals}}
+                    </span>
+                    <ng-template #elseBlock>
+                        {{"MATCHPAGE.NOT_PLAYED" | translate}}
+                    </ng-template>
+                </h4>
+            </ion-item>     
+            <ion-item color="none" *ngIf="match.mister">
+                <ion-icon name="build" item-left></ion-icon>
+                {{ "MATCHPAGE.MISTER" | translate}}: {{match.mister.name}}
+            </ion-item> 
+        </ion-list>
+      </ion-card>
+</ion-content>

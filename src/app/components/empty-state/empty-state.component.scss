@@ -1,0 +1,17 @@
+na-empty-state {
+
+    ion-card {
+        position: relative;
+    }
+
+    ion-card.card-md {
+        margin-top: 2rem;
+        img {
+            max-width: 6rem;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 1rem;
+        }
+    }
+
+}

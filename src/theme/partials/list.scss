@@ -1,0 +1,81 @@
+@import 'ionic.components';
+
+// Sliding item button
+ion-item-options {
+    button.button {
+        // Ensure minimum touch target
+        min-width: 6.0rem;
+        font-size: font-size($font-sizes, x-small);
+
+        ion-icon {
+            font-size: font-size($font-sizes, x-large);
+        }
+    }
+}
+
+// Void list header divider to prevent double border
+// to be displayed in consecutive lists
+ion-list + ion-list ion-list-header.list-header-md {
+    border-top: none;
+}
+
+ion-list[list-grouped].list-md {
+    &, ion-list-header.list-header-md {
+        background-color: color($colors, secondary, gray);
+    }
+
+    ion-list-header.list-header-md {
+        font-weight: 300;
+        text-transform: uppercase;
+    }
+
+    // Void inner content margin to locate header title closer to icon on the left
+    ion-list-header.item-md ion-icon[item-left] + .item-inner {
+        margin-left: 0;
+    }
+
+    &.expanded {
+        .list-header-md {
+            border-bottom: $item-md-divider-border-bottom;
+        }
+
+        .item-group {
+            background-color: white;
+
+            &.timeline {
+                position: relative;
+
+                &:before {
+                    position: absolute;
+                    top: 0;
+                    bottom: 0;
+                    left: 5rem;
+                    display: block;
+                    width: 1px;
+                    content: '';
+                    background-color: $list-md-border-color;
+                }
+            }
+            ion-item-sliding, .item-md {
+                // Sliding item and item must be transparent in order to display timeline
+                background-color: transparent;
+            }
+        }
+    }
+
+    &.expanded + &.list-header-md {
+        border-top: $item-md-divider-border-bottom;
+    }
+
+    &:last-child {
+        border-bottom: $item-md-divider-border-bottom;
+        // Add a padding so that border bottom is displayed
+        padding-bottom: 1px;
+    }
+
+    .ion-badge.badge-md {
+        background-color: $list-md-header-color;
+        color: color($colors, secondary, brightest);
+        font-weight: 300;
+    }
+}

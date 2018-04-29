@@ -1,0 +1,48 @@
+<ion-menu [content]="content" swipeEnabled="false">
+    <ion-header>
+        <ion-card>
+            <img src="assets/img/png/FWF-logo.PNG"/>
+            <!-- <ion-card-content>
+              <ion-card-title>
+                {{'MENU.TITLE' | translate}}
+                </ion-card-title>
+              <p>
+                Aquí se puede poner algo o no
+              </p>
+            </ion-card-content> -->
+          </ion-card>
+    </ion-header>
+    <ion-content>
+        <ion-list>
+            <button ion-item
+                    *ngFor="let tile of tiles1"
+                    (click)="navigateTo(tile.target)">
+                <ion-icon [name]="tile.icon"></ion-icon>
+                {{tile.title | translate}}
+            </button>
+            <!--Menu divider-->
+            <ion-item-divider>
+                {{'MENU.TITLE_DIVIDER' | translate}}
+            </ion-item-divider>
+            <button ion-item
+                    *ngFor="let tile of tiles2"
+                    (click)="navigateTo(tile.target)">
+                <ion-icon [name]="tile.icon"></ion-icon>
+                {{tile.title | translate}}
+            </button>
+        </ion-list>
+      </ion-content>
+    <ion-footer>
+        <ion-toolbar class="product-info">
+            <ion-title>
+                <h2 class="product-name">
+                    <span>{{'APPLICATION_DETAIL.NAME' | translate}}</span>
+                    <span class="version">{{'APPLICATION_DETAIL.VERSION' | translate}}</span>
+                </h2>
+                <h3 class="copyright">
+                    {{ "APPLICATION_DETAIL.COPYRIGHT" | translate }}
+                </h3>
+            </ion-title>
+        </ion-toolbar>
+    </ion-footer>
+</ion-menu>

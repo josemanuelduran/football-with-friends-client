@@ -1,0 +1,130 @@
+fwf-menu, ion-menu {
+
+    $font-weight-medium: 500;
+    // Menu menu
+    $menu-item-text-color: color($colors, secondary, dark);
+    $menu-item-height: 4.0rem;
+    $menu-item-divider-color: color($colors, secondary, light);
+    $menu-item-font-size: font-size($font-sizes, small);
+    // Menu divider
+    $menu-divider-height: 4.0rem;
+    $menu-divider-background-color: color($colors, secondary, light-2);
+    $menu-divider-text-color: color($colors, secondary, dark);
+    $menu-divider-text-shadow: color($colors, secondary, brightest);
+    $menu-divider-font-size: font-size($font-sizes, small);
+    // Product info
+    $product-info-background-color: rgba(color($colors, secondary, dark-2), 0.2);
+    $product-info-text-color: color($colors, secondary, dark);
+    $product-info-text-shadow: color($colors, secondary, brightest);
+    $product-info-name-font-size: font-size($font-sizes, small);
+    $product-info-version-font-size: font-size($font-sizes, x-small);
+    $product-info-copyright-font-size:font-size($font-sizes, xx-small);
+
+    .menu-inner  {
+        // Width spec not applied since it doesn't leave space enough to tap outside
+        // width: 32.5rem;
+
+        ion-header, ion-footer {
+            .toolbar-ios ion-title {
+                padding-left: 0;
+                padding-right: 0;
+                position: relative;
+            }
+        }
+
+        ion-content {
+            // Fix positioning of menu content.
+            // Default component style position is set as absolute.
+            position: relative;
+        }
+    }
+
+    ion-content .list-md {
+        button.item {
+            height: $menu-item-height;
+            // Override item padding to display full-width line divider
+            padding-left: 0;
+            color: $menu-item-text-color;
+            font-size: $menu-item-font-size;
+            font-weight: $font-weight-medium;
+
+            .item-inner {
+                border-color: $menu-item-divider-color;
+            }
+
+            ion-icon {
+                width: $menu-item-height;
+                text-align: center;
+                font-size: 2.4rem !important;
+                vertical-align: middle;
+            }
+        }
+
+        // Restore border bottom for last item in the list
+        button.item-block:last-child > .item-inner {
+            border-bottom: 1px solid $menu-item-divider-color;
+        }
+
+        ion-item-divider.item-divider-md {
+            height: $menu-divider-height;
+            background-color: $menu-divider-background-color;
+            color: $menu-divider-text-color;
+            font-size: $menu-divider-font-size;
+            font-weight: $font-weight-medium;
+            text-shadow: 1px 1px 1px $menu-divider-text-shadow;
+            border: none;
+        }
+    }
+
+    // Override MD footer to remove background divider
+    .footer-md:before {
+        background: none;
+    }
+
+    .product-info {
+        height: $menu-item-height;
+        padding: 1.0rem;
+
+        .toolbar-background {
+            background-color: $product-info-background-color;
+        }
+
+        .toolbar-title {
+            color: $product-info-text-color;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            flex-wrap: wrap;
+            font-weight: $font-weight-medium;
+            padding: 0;
+
+            h2, h3 {
+                margin-top: 0;
+                margin-bottom: 0;
+            }
+
+            .product-name {
+                font-size: $product-info-name-font-size;
+                text-shadow: 1px 1px 1px $product-info-text-shadow;
+
+                .version {
+                    font-size: $product-info-version-font-size;
+                    padding-left: 0.3rem;
+                }
+            }
+
+            .copyright {
+                flex-basis: auto;
+                font-size: $product-info-copyright-font-size;
+                // Allow wrapping for lengthy localised disclaimer
+                white-space: normal;
+
+                &:before {
+                    // Append copyright symbol to the beginning of the disclaimer
+                    content: "\00A9";
+                }
+            }
+        }
+    }
+
+}

@@ -1,0 +1,43 @@
+<ion-item-sliding #item>
+    <ion-item detail-push (click)="matchSelected()" text-wrap>
+        <ion-icon item-left *ngIf="matchClosed" name="lock"></ion-icon>
+        <ion-icon item-left *ngIf="matchCancelled" name="close"></ion-icon>
+        <ion-icon item-left *ngIf="matchOpen" name="thumbs-up"></ion-icon>
+        <ion-icon item-left *ngIf="matchPlayed" name="done-all"></ion-icon>
+        <h3 class="macth-name">
+            {{match.name}}
+        </h3>
+        <h4 class="match-info">
+            <span id="matchDate" *ngIf="match.date">
+                {{match.date | amDateFormat: 'DD-MM-YYYY'}}
+            </span>
+        </h4>
+    </ion-item>
+    <ion-item-options side="left" *ngIf="isAdmin">
+        <button ion-button 
+                color="danger" 
+                (click)="delete(item)">
+            <ion-icon name="trash"></ion-icon>
+            {{"DELETE_BUTTON" | translate}}
+        </button>
+        <button ion-button color="primary" (click)="edit(item)">
+            <ion-icon name="create"></ion-icon>
+            {{"EDIT_BUTTON" | translate}}
+        </button>
+    </ion-item-options>
+    <ion-item-options side="right">
+        <button ion-button color="secondary"
+                (click)="joinCallUp(item)"
+                *ngIf="match.openCallUp && !playerJoined">
+            <ion-icon name="thumbs-up"></ion-icon>
+            {{'JOIN_BUTTON' | translate}}
+        </button>
+        <button ion-button color="danger"
+                (click)="unJoinCallUp(item)"
+                *ngIf="match.openCallUp && playerJoined">
+            <ion-icon name="thumbs-down"></ion-icon>
+            {{'UNJOIN_BUTTON' | translate}}
+        </button>
+    </ion-item-options>
+  </ion-item-sliding>
+

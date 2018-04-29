@@ -1,0 +1,253 @@
+import { Component, OnInit } from '@angular/core';
+import {
+    IonicPage,
+    Refresher,
+    AlertController,
+    NavController,
+    ModalController,
+    // NavParams,
+} from 'ionic-angular';
+
+import { TranslateService } from '@ngx-translate/core';
+import * as _ from 'lodash';
+
+import * as moment from 'moment';
+
+import { Match, User, Action, PlayerCallUp} from '../../models';
+import { MatchesService } from '../../providers';
+import { ContextService } from '../../providers';
+import { AddMatchComponent } from '../../components';
+
+interface MatchesGroup {
+    group: string;
+    matches: MatchMonthYear[];
+    isExpanded: boolean;
+}
+
+interface MatchMonthYear {
+    monthYear: String;
+    match: Match;
+}
+@IonicPage({
+    name: 'MatchesPage',
+    segment: 'matches'
+})
+@Component({
+    selector: 'fwf-page-matches',
+    templateUrl: 'matches.component.html',
+})
+export class MatchesPageComponent implements OnInit {
+
+    isAdmin: boolean;
+    groupedMatches: MatchesGroup[];
+    matches: Match[] = [];
+    userLogged: User;
+
+    constructor(
+        private navCtrl: NavController,
+        // private navParams: NavParams,
+        private matchesService: MatchesService,
+        private modalCtrl: ModalController,
+        private alertCtrl: AlertController,
+        private translate: TranslateService,
+        private context: ContextService,
+    ) {
+        this.userLogged = this.context.getUserLogged();
+        this.isAdmin = this.context.userLoggedIsAdmin();
+     }
+
+    ionViewWillEnter() {
+        // It's necessary when comes here from back button'
+        this.loadListMatches();
+    }
+
+    ngOnInit() {
+
+    }
+
+    doAction(matchSelected: Match, action: Action): void {
+        switch (action) {
+            case Action.VIEW_DETAILS:
+                this.navCtrl.push('MatchPage',
+                    {
+                        matchSelected: matchSelected,
+                        user: this.userLogged
+                    }
+                );
+                break;
+            case Action.DELETE_MATCH:
+                this.delete(matchSelected);
+                break;
+            case Action.EDIT_MATCH:
+                this.edit(matchSelected);
+                break;
+            case Action.JOIN_CALL_UP:
+                this.joinCallUp(matchSelected);
+                break;
+            case Action.UNJOIN_CALL_UP:
+                this.unjoinCallUp(matchSelected);
+                break;
+        }
+    }
+
+    openSearchBox(): void {
+    }
+
+    addMatch(): void {
+        let dialog = this.modalCtrl.create(AddMatchComponent, {}, {enableBackdropDismiss: false});
+        dialog.onDidDismiss((actionOk: boolean) => {
+            if (actionOk) {
+                this.loadListMatches();
+            }
+        });
+        dialog.present();
+    }
+
+    loadListMatches(refresher?: Refresher): void {
+        this.groupedMatches = undefined;
+        this.matchesService
+            .fetchMatches()
+            .subscribe(
+                data => {
+                    let matches = data.map(match => {
+                        return <Match> {
+                            ...match,
+                            date: new Date(match.date)
+                        };
+                    });
+                    this.initializeList(matches);
+                },
+                err => {
+                    this.endAnimations(refresher);
+                    this.showError(err);
+                },
+                () => this.endAnimations(refresher)
+            );
+    }
+
+    playerJoined(callUp: PlayerCallUp[]): boolean {
+        let result = false;
+        if (callUp) {
+            result = callUp.findIndex(el => el.player.id === this.userLogged.playerId) >= 0;
+        }
+        return result;
+    }
+
+    private delete(matchSelected: Match): void {
+        let alert = this.alertCtrl.create({
+            title: this.translate.instant('MATCHESPAGE.DELETE_MATCH'),
+            subTitle: this.translate.instant('MATCHESPAGE.DELETE_SURE'),
+            buttons: [
+                {
+                    text: this.translate.instant('CANCEL_BUTTON'),
+                    role: 'cancel',
+                },
+                {
+                    text: 'OK',
+                    role: 'ok',
+                    handler: response => {
+                        this.matchesService.deleteMatch(matchSelected.id)
+                            .subscribe(
+                                data => {
+                                    this.showConfirmation();
+                                    this.loadListMatches();
+                                },
+                                error => this.showError(error)
+                            );
+                    }
+                },
+            ]
+          });
+          alert.present();
+    }
+
+    private edit(matchSelected: Match): void {
+        let dialog = this.modalCtrl.create(AddMatchComponent, {match: matchSelected}, {enableBackdropDismiss: false});
+        dialog.onDidDismiss((actionOk: boolean) => {
+            if (actionOk) {
+                this.loadListMatches();
+            }
+        });
+        dialog.present();
+    }
+
+    private joinCallUp(matchSelected: Match): void {
+        let player = this.context.getPlayerLogged();
+        this.matchesService.joinPlayerCallUp(matchSelected.id, player)
+            .subscribe(
+                data => this.loadListMatches(),
+                error => this.showError(error)
+            );
+    }
+
+    private unjoinCallUp(matchSelected: Match): void {
+        // let index = matchSelected.callUp.findIndex(el => el.player.id === this.userLogged.playerId);
+        // let prev = matchSelected.callUp.slice(0, index);
+        // let post = matchSelected.callUp.slice(index + 1);
+        // matchSelected.callUp = [...prev, ...post];
+        this.matchesService.unJoinPlayerCallUp(matchSelected.id, this.userLogged.playerId)
+            .subscribe(
+                data => this.loadListMatches(),
+                error => this.showError(error)
+            );
+    }
+
+    private endAnimations(refresher: Refresher) {
+        if (refresher) {
+            refresher.complete();
+        }
+    }
+
+    private initializeList(data: Match[]) {
+        let matchesMonthYear: MatchMonthYear[] = this.transformList(data);
+        this.groupedMatches = this.getGroupedMatches(matchesMonthYear);
+    }
+
+    private getGroupedMatches(matches: MatchMonthYear[]): MatchesGroup[] {
+        let groupedMatches: MatchesGroup[];
+        groupedMatches = _(matches).sortBy('match.date')
+            .groupBy('monthYear')
+            .toPairs()
+            .map(function (currentGroup) {
+                return _.zipObject(['monthYear', 'matches'], currentGroup);
+            })
+            .map((group: any) => {
+                return {
+                    group: group.monthYear,
+                    matches: group.matches,
+                    isExpanded: true
+                };
+            })
+            .value();
+        return groupedMatches;
+    }
+
+    private transformList(matches: Match[]): MatchMonthYear[] {
+        return matches.map(match => {
+            let month = moment(new Date(match.date)).format('MMMM');
+            let year = new Date(match.date).getFullYear();
+            return {
+                monthYear: `${month} ${year}`,
+                match: match
+            };
+        });
+    }
+
+    private showError(error: string) {
+        let alert = this.alertCtrl.create({
+          title: this.translate.instant('MATCHESPAGE.ERROR'),
+          subTitle: this.translate.instant(error),
+          buttons: ['OK']
+        });
+        alert.present();
+    }
+
+    private showConfirmation() {
+        let alert = this.alertCtrl.create({
+          title: this.translate.instant('MATCHESPAGE.CONFIRMATION'),
+          subTitle: this.translate.instant('MATCHESPAGE.ACTION_OK'),
+          buttons: ['OK']
+        });
+        alert.present();
+    }
+}

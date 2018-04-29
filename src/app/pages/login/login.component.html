@@ -1,0 +1,15 @@
+<ion-content class="login">
+    <!-- App/module name -->
+    <h1 class="app-name">
+        {{ "APPLICATION_DETAIL.NAME" | translate }}
+    </h1>
+    <!-- Login form -->
+    <fwf-login-form (submitted)="onSubmit($event)"></fwf-login-form>
+</ion-content>
+
+<ion-footer padding-horizontal>
+    <!-- <img class="logo" src="assets/img/"> -->
+    <h3 class="copyright">
+        {{ "APPLICATION_DETAIL.COPYRIGHT" | translate }}
+    </h3>
+</ion-footer>

@@ -1,0 +1,30 @@
+// Required to access component variables
+// TODO How to access to individual components under 'ionic-angular/components'?
+@import 'ionic.components';
+
+$segment-primary-color: color($colors, primary, contrast);
+
+.toolbar-ios-primary {
+    .segment-ios-primary {
+        .segment-button {
+            border-color: $segment-primary-color;
+            color: $segment-primary-color;
+
+            &.segment-activated {
+                background-color: $segment-primary-color;
+            }
+        }
+    }
+}
+
+.toolbar .segment-md {
+    .segment-button {
+        color: $segment-primary-color;
+        border-bottom-color: rgba($segment-primary-color, $segment-button-md-opacity);
+
+        &.segment-activated {
+            color: $segment-primary-color;
+            border-color: $segment-primary-color;
+        }
+    }
+}

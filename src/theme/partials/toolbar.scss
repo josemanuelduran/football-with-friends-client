@@ -1,0 +1,22 @@
+ion-toolbar ion-buttons {
+    // Button groups in a toolbar must be displayed inline
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-left: 1.6rem;
+    margin-right: 1.6rem;
+
+    // Buttons will distribute the width evenly
+    button {
+        display: flex;
+        flex-basis: 100%;
+    }
+}
+
+// .filter-container class
+// Toolbar with segments as a filter should adapt its height
+// to the content to achieve a packed display.
+ion-toolbar.filter-container {
+    // Override minimum toolbar height defined for MD toolbar
+    min-height: 4.3rem;
+}

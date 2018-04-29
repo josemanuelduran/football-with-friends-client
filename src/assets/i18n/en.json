@@ -1,0 +1,90 @@
+{
+    "APPLICATION_DETAIL": {
+        "COPYRIGHT": " 2018 Jose Manuel Durán. All rights reserved.",
+        "NAME": "Football With Friends",
+        "VERSION": "v0.1.0"
+    },
+    "INTRODUCTION": {
+        "CONTINUE": "Continue",
+        "SLIDE1_1": "Welcome to",
+        "SLIDE1_2": "The",
+        "SLIDE1_3": "to manage the football game on Tuesdays",
+        "SLIDE2_1": "What is it and what does it serve Football with friends?",
+        "SLIDE2_2": "is an high quality mobile apps with web technologies like HTML, CSS, and JavaScript.",
+        "SLIDE2_3": "allows you to manage everything related to the games of the Tuesday we have been playing for almost 10 years. At last!!",
+        "SLIDE3_1": "What do you have to do now?",
+        "SLIDE3_2": "You just have to enjoy the application and say",
+        "SLIDE3_3": "\"vaya equipito\"",
+        "SLIDE3_4": "every time the teams are made every week",
+        "SLIDE4_1": "And remember to be careful with Jero"
+    },
+    "MENU": {
+        "TITLE": "Football With Friends",
+        "MATCHES": "Matches",
+        "PROFILE": "Profile",
+        "PAYMENTS": "Payments",
+        "STATS": "Stats",
+        "SETTINGS": "Settings",
+        "INTRODUCTION": "Introduction",
+        "ABOUT": "About",
+        "LOGOUT": "Log-out",
+        "TITLE_DIVIDER": "Settings",
+        "LOCATION": "Location"
+    },
+    "TABS": {
+        "TAB1": "Matches",
+        "TAB2": "Profile",
+        "TAB3": "Payments",
+        "TAB4": "Stats"
+    },
+    "LOGIN": {
+        "LOGIN": "Login",
+        "USERNAME": "Username",
+        "PASSWORD": "Password",
+        "ERROR_LOGIN_TITLE": "Login Error",
+        "ERROR_LOGIN_MSG": "Invalid username or password"
+    },
+    "MATCHESPAGE": {
+        "TITLE": "Matches",
+        "NO_FOUND": "No matches have been found for those dates.",
+        "DELETE_MATCH": "Delete Match",
+        "DELETE_SURE": "Are you sure of delete this match?",
+        "CONFIRMATION": "Confirmation",
+        "ACTION_OK": "Action completed successfully"
+    },
+    "MATCHPAGE": {
+        "DATA_HEADER": "Match Information",
+        "CALL_UP": "Call up",
+        "TEAMS": "Teams",
+        "SCOREBOARD": "Scoreboard",
+        "MISTER": "Teams maker",
+        "NOT_PLAYED": "Not played"
+    },
+    "ADDMATCHPAGE": {
+        "TITLE": "Add new match",
+        "NAME": "Name",
+        "DATE": "Date",
+        "NUMPLAYERS": "Number of players",
+        "OPEN_CALL_UP": "Open call up",
+        "CANCELLED": "Match cancelled"
+    },
+    "PAYMENTSPAGE": {
+        "TITLE": "Payments",
+        "NO_FOUND": "No payments have been found."
+    },
+    "PROFILEPAGE": {
+        "TITLE": "Profile"
+    },
+    "STATSPAGE": {
+        "TITLE": "Stats",
+        "NO_FOUND": "No stats have been found."
+    },
+    "REFRESHER_COMPONENT": {
+        "PULL_TO_REFRESH": "Pull to refresh"
+    },
+    "CANCEL_BUTTON": "Cancel",
+    "DELETE_BUTTON": "Delete",
+    "EDIT_BUTTON": "Edit",
+    "JOIN_BUTTON": "Join",
+    "UNJOIN_BUTTON": "Unjoin"
+}
