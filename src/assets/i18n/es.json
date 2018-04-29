@@ -58,7 +58,15 @@
         "TEAMS": "Equipos",
         "SCOREBOARD": "Marcador",
         "MISTER": "Creador de los equipos",
-        "NOT_PLAYED": "No jugado"
+        "NOT_PLAYED": "No jugado",
+        "ACTION": {
+            "EDIT_TEAMS": "Modificar Equipos",
+            "EDIT_MATCH": "Modificar Partido",
+            "DELETE_MATCH": "Eliminar Partido",
+            "SCOREBOARD": "Guardar Resultado",
+            "JOIN_CALL_UP": "Unirse al Partido",
+            "UNJOIN_CALL_UP": "Salirse del Partido"
+        }
     },
     "ADDMATCHPAGE": {
         "TITLE": "Añadir nuevo partido",

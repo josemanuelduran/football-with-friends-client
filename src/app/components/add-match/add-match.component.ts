@@ -30,7 +30,7 @@ export class AddMatchComponent implements OnInit {
         if (this.match) {
             this.matchForm = this.formBuilder.group({
                 name: [this.match.name, Validators.required],
-                date: [this.match.date.toISOString(), Validators.required],
+                date: [this.match.date, Validators.required],
                 numPlayers: [this.match.numPlayers, Validators.required],
                 openCallUp: [this.match.openCallUp],
                 cancelled: [this.match.cancelled]
@@ -51,7 +51,7 @@ export class AddMatchComponent implements OnInit {
             this.match = {
                 ...this.match,
                 name: this.matchForm.controls['name'].value,
-                date: this.matchForm.controls['date'].value,
+                date: (<Date>this.matchForm.controls['date'].value).toISOString(),
                 numPlayers: this.matchForm.controls['numPlayers'].value,
                 openCallUp: this.matchForm.controls['openCallUp'].value,
                 cancelled: this.matchForm.controls['cancelled'].value

@@ -24,37 +24,37 @@ const AVAILABLE_OPTIONS: Option[] = [
     {
         action: Action.EDIT_TEAMS,
         roles: [Role.ADMIN, Role.COACH],
-        token: 'MATHCPAGE.ACTION.EDIT_TEAMS',
+        token: 'MATCHPAGE.ACTION.EDIT_TEAMS',
         icon: 'build'
     },
     {
         action: Action.EDIT_MATCH,
         roles: [Role.ADMIN],
-        token: 'MATHCPAGE.ACTION.EDIT_MATCH',
+        token: 'MATCHPAGE.ACTION.EDIT_MATCH',
         icon: 'create'
     },
     {
         action: Action.DELETE_MATCH,
         roles: [Role.ADMIN],
-        token: 'MATHCPAGE.ACTION.DELETE_MATCH',
+        token: 'MATCHPAGE.ACTION.DELETE_MATCH',
         icon: 'trash'
     },
     {
         action: Action.SET_SCOREBOARD,
         roles: [Role.ADMIN],
-        token: 'MATHCPAGE.ACTION.SCOREBOARD',
+        token: 'MATCHPAGE.ACTION.SCOREBOARD',
         icon: 'football'
     },
     {
         action: Action.JOIN_CALL_UP,
         roles: [Role.PLAYER],
-        token: 'MATHCPAGE.ACTION.JOIN_CALL_UP',
+        token: 'MATCHPAGE.ACTION.JOIN_CALL_UP',
         icon: 'thumbs-up'
     },
     {
         action: Action.UNJOIN_CALL_UP,
         roles: [Role.PLAYER],
-        token: 'MATHCPAGE.ACTION.UNJOIN_CALL_UP',
+        token: 'MATCHPAGE.ACTION.UNJOIN_CALL_UP',
         icon: 'thumbs-down'
     }
 ];
@@ -129,10 +129,14 @@ export class MatchPageComponent extends BasePageComponent implements OnInit {
     }
 
     private getOptionsAllowed(): Option[] {
-        return AVAILABLE_OPTIONS
+        let result = AVAILABLE_OPTIONS
             .filter(
-                action => action.roles.filter(rol => this.user.roles.indexOf(rol) > -1).length > 0
+                action => {
+                    let arrayResult = action.roles.filter(rol => this.user.roles.indexOf(rol) > -1);
+                    return arrayResult.length > 0;
+                }
             );
+        return result;
     }
 
     private editTeams(): void {

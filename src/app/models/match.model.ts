@@ -5,7 +5,7 @@ export enum TeamColor {
 export interface Match {
     id?: string;
     name: string;
-    date: Date;
+    date: string;
     team1?: Team;
     team2?: Team;
     callUp?: PlayerCallUp[];

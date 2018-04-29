@@ -3,7 +3,7 @@ import { IonicPage, AlertController, App  } from 'ionic-angular';
 
 import { TranslateService } from '@ngx-translate/core';
 
-import { Authenticate } from '../../models';
+import { Authenticate, Role } from '../../models';
 import { GlobalService, ContextService, PlayersService } from '../../providers';
 import { LoginService } from './services/login.service';
 
@@ -37,6 +37,10 @@ export class LoginPageComponent implements OnInit {
         this.loginService.login($event.username, $event.password)
             .subscribe(
                 user => {
+                    user = {
+                        ...user,
+                        roles: user.roles.map(rol => (<any>Role)[rol])
+                    };
                     this.context.setUserLogged(user);
                     if (user.playerId) {
                         this.playersService.getPlayer(user.playerId)

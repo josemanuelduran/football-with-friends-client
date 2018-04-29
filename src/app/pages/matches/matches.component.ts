@@ -110,9 +110,11 @@ export class MatchesPageComponent implements OnInit {
             .subscribe(
                 data => {
                     let matches = data.map(match => {
+                        let dateString = match.date;
+                        dateString = dateString.split('.')[0] + 'Z';
                         return <Match> {
                             ...match,
-                            date: new Date(match.date)
+                            date: dateString
                         };
                     });
                     this.initializeList(matches);
@@ -181,10 +183,6 @@ export class MatchesPageComponent implements OnInit {
     }
 
     private unjoinCallUp(matchSelected: Match): void {
-        // let index = matchSelected.callUp.findIndex(el => el.player.id === this.userLogged.playerId);
-        // let prev = matchSelected.callUp.slice(0, index);
-        // let post = matchSelected.callUp.slice(index + 1);
-        // matchSelected.callUp = [...prev, ...post];
         this.matchesService.unJoinPlayerCallUp(matchSelected.id, this.userLogged.playerId)
             .subscribe(
                 data => this.loadListMatches(),
@@ -224,7 +222,7 @@ export class MatchesPageComponent implements OnInit {
 
     private transformList(matches: Match[]): MatchMonthYear[] {
         return matches.map(match => {
-            let month = moment(new Date(match.date)).format('MMMM');
+            let month = moment(match.date).format('MMMM');
             let year = new Date(match.date).getFullYear();
             return {
                 monthYear: `${month} ${year}`,

@@ -58,7 +58,15 @@
         "TEAMS": "Teams",
         "SCOREBOARD": "Scoreboard",
         "MISTER": "Teams maker",
-        "NOT_PLAYED": "Not played"
+        "NOT_PLAYED": "Not played",
+        "ACTION": {
+            "EDIT_TEAMS": "Edit Teams",
+            "EDIT_MATCH": "Edit Match",
+            "DELETE_MATCH": "Delete Match",
+            "SCOREBOARD": "Set Scoreboard",
+            "JOIN_CALL_UP": "Join Match",
+            "UNJOIN_CALL_UP": "Unjoin Match"
+        }
     },
     "ADDMATCHPAGE": {
         "TITLE": "Add new match",

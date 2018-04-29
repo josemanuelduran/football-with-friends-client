@@ -23,8 +23,8 @@ export class MatchesListItemComponent implements OnInit {
 
     ngOnInit() {
         let currentDate = Date.now();
-        let matchaDate = this.match.date.getTime();
-        this.matchPlayed = !this.match.cancelled && matchaDate < currentDate;
+        let matchDate = new Date(this.match.date).getTime();
+        this.matchPlayed = !this.match.cancelled && matchDate < currentDate;
         this.matchClosed = !this.match.openCallUp && !this.match.cancelled && !this.matchPlayed;
         this.matchCancelled = this.match.cancelled;
         this.matchOpen = !this.matchCancelled && !this.matchClosed && !this.matchPlayed;
