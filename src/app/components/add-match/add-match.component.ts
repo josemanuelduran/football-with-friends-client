@@ -51,7 +51,7 @@ export class AddMatchComponent implements OnInit {
             this.match = {
                 ...this.match,
                 name: this.matchForm.controls['name'].value,
-                date: (<Date>this.matchForm.controls['date'].value).toISOString(),
+                date: this.matchForm.controls['date'].value,
                 numPlayers: this.matchForm.controls['numPlayers'].value,
                 openCallUp: this.matchForm.controls['openCallUp'].value,
                 cancelled: this.matchForm.controls['cancelled'].value
