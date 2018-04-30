@@ -30,7 +30,7 @@ export class ContextService {
     userLoggedIsAdmin(): boolean {
         let roleAdmin: boolean;
         if (this.userLogged) {
-            roleAdmin = this.userLogged.roles.findIndex(el => el.toString() === Role[Role.ADMIN]) >= 0;
+            roleAdmin = this.userLogged.roles.findIndex(role => role === Role.ADMIN) >= 0;
         }
         return roleAdmin;
     }
