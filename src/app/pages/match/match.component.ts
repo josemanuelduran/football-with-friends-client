@@ -164,12 +164,40 @@ export class MatchPageComponent extends BasePageComponent implements OnInit {
     }
 
     private deleteMatch(): void {
-
+        let alert = this.alertCtrl.create({
+          title: this.translate.instant('MATCHESPAGE.DELETE_MATCH'),
+          subTitle: this.translate.instant('MATCHESPAGE.DELETE_SURE'),
+          buttons: [
+              {
+                  text: this.translate.instant('CANCEL_BUTTON'),
+                  role: 'cancel',
+              },
+              {
+                  text: 'OK',
+                  role: 'ok',
+                  handler: response => {
+                      this.matchesService.deleteMatch(this.match.id)
+                          .subscribe(
+                              data => {
+                                  this.showConfirmation();
+                                  this.navCtrl.pop();
+                              },
+                              error => this.showError(error)
+                          );
+                  }
+              },
+          ]
+        });
+        alert.present();
     }
 
     private editMatch(): void {
         let dialog = this.modalCtrl.create(AddMatchComponent, {match: this.match}, {enableBackdropDismiss: false});
-        dialog.onDidDismiss(() => {});
+        dialog.onDidDismiss((actionOk: boolean) => {
+            if (actionOk) {
+                this.showConfirmation();
+            }
+        });
         dialog.present();
     }
 
