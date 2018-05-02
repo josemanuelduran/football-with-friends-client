@@ -1,5 +1,5 @@
 export enum TeamColor {
-    BLACK, WHITE
+    WHITE, BLACK
 }
 
 export interface Match {
@@ -12,14 +12,14 @@ export interface Match {
     numPlayers: number;
     openCallUp: boolean;
     mvp?: string;
-    mister?: string;
+    mister?: SimplyPlayer;
     cancelled: boolean;
 }
 
 export interface Team {
     players: SimplyPlayer[];
     color: TeamColor;
-    goals: number;
+    goals?: number;
 }
 
 export interface PlayerCallUp {

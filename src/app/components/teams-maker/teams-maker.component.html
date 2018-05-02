@@ -1,3 +1,62 @@
-<p>
-  teams-maker works!
-</p>
+<ion-header>
+    <ion-navbar color="primary">   
+        <ion-buttons left>
+            <button ion-button 
+                    icon-only
+                    clear
+                    (click)="cancel()">
+                <ion-icon name="close-circle"></ion-icon>
+            </button>
+        </ion-buttons>     
+        <ion-title>
+            {{match.name}} {{"MATCHPAGE.TEAMS_MAKER" | translate}}
+        </ion-title>
+        <ion-buttons end>
+            <button ion-button
+                    icon-only
+                    clear
+                    (click)="saveTeams()">
+                <ion-icon name="checkmark-circle"></ion-icon>
+            </button>        
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+<ion-content>
+    <ion-card>
+        <ion-grid>
+            <ion-row>
+                <ion-col>                    
+                    <ion-list>
+                        <ion-list-header>
+                            {{'WHITE' | translate}}
+                        </ion-list-header>
+                        <ion-item *ngFor="let whitePlayer of listPlayersWhite; let i = index;">
+                            {{i+1}}. {{whitePlayer?.player.name}} <span *ngIf="!whitePlayer?.player.fixed">(s)</span>
+                        </ion-item>
+                    </ion-list>
+                </ion-col>
+                <ion-col>
+                    <ion-list>
+                        <ion-list-header>
+                            {{'BLACK' | translate}}
+                        </ion-list-header>
+                        <ion-item *ngFor="let blackPlayer of listPlayersBlack; let i = index;">
+                                {{i+1}}. {{blackPlayer?.player.name}} <span *ngIf="!blackPlayer?.player.fixed">(s)</span>
+                            </ion-item>
+                    </ion-list>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-card>  
+    <ion-card>        
+        <ion-list>
+            <ion-item #item *ngFor="let playerTeam of listPlayers; let i = index;">
+                <ion-label>{{i+1}}. {{playerTeam.player.name}} <span *ngIf="!playerTeam.player.fixed">(s)</span></ion-label>
+                <ion-select #select [(ngModel)]="playerTeam.team" (ionChange)="onSelectChange($event, select)">
+                    <ion-option [value]=0>{{'WHITE' | translate}}</ion-option>
+                    <ion-option [value]=1>{{'BLACK' | translate}}</ion-option>
+                </ion-select>
+            </ion-item>
+        </ion-list>        
+    </ion-card>
+</ion-content>

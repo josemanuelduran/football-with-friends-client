@@ -71,7 +71,9 @@ export class MatchesPageComponent implements OnInit {
                 this.navCtrl.push('MatchPage',
                     {
                         matchSelected: matchSelected,
-                        user: this.userLogged
+                        user: this.userLogged,
+                        player: this.context.getPlayerLogged(),
+                        playerJoined: this.playerJoined(matchSelected.callUp)
                     }
                 );
                 break;

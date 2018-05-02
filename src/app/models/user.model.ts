@@ -8,7 +8,7 @@ export enum Role {
 
 export interface User {
     id: string;
-    fullname: string;
+    fullName: string;
     roles?: Role[];
     playerId: string;
     username: string;

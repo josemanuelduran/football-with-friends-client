@@ -37,8 +37,8 @@
                 <ion-icon name="football" item-left></ion-icon>
                 {{ "MATCHPAGE.SCOREBOARD" | translate}}
                 <h4 class="scoreboard">
-                    <span *ngIf="match.team1 && match.team2; else elseBlock ">
-                        {{match.team1?.color}}: {{match.team1?.goals}} - {{match.team2?.color}}: {{match.team2?.goals}}
+                    <span *ngIf="match.team1?.goals && match.team2?.goals; else elseBlock ">
+                        {{'WHITE' | translate}}: {{match.team1.goals}} - {{'BLACK' | translate}}: {{match.team2.goals}}
                     </span>
                     <ng-template #elseBlock>
                         {{"MATCHPAGE.NOT_PLAYED" | translate}}

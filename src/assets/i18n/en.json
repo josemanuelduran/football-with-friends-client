@@ -59,6 +59,7 @@
         "SCOREBOARD": "Scoreboard",
         "MISTER": "Teams maker",
         "NOT_PLAYED": "Not played",
+        "CALL_UP_INCOMPLETED": "The call up is not completed",
         "ACTION": {
             "EDIT_TEAMS": "Edit Teams",
             "EDIT_MATCH": "Edit Match",

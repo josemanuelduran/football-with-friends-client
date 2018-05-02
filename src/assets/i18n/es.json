@@ -59,6 +59,7 @@
         "SCOREBOARD": "Marcador",
         "MISTER": "Creador de los equipos",
         "NOT_PLAYED": "No jugado",
+        "CALL_UP_INCOMPLETED": "La convocatiria no está completa",
         "ACTION": {
             "EDIT_TEAMS": "Modificar Equipos",
             "EDIT_MATCH": "Modificar Partido",

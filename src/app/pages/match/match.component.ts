@@ -10,7 +10,7 @@ import {
 
 import { TranslateService } from '@ngx-translate/core';
 
-import { Match, Role, User, Option, Action, Team } from '../../models';
+import { Match, Role, User, Option, Action, Team, Player } from '../../models';
 import {
     OverflowMenuComponent,
     AddMatchComponent,
@@ -70,6 +70,8 @@ export class MatchPageComponent extends BasePageComponent implements OnInit {
 
     match: Match;
     user: User;
+    player: Player;
+    playerJoined: boolean;
 
     constructor(
         public navCtrl: NavController,
@@ -86,6 +88,8 @@ export class MatchPageComponent extends BasePageComponent implements OnInit {
     ngOnInit() {
         this.match = this.navParams.get('matchSelected');
         this.user = this.navParams.get('user');
+        this.player = this.navParams.get('player');
+        this.playerJoined = this.navParams.get('playerJoined');
     }
 
     showOptions(clickEvent: Event): void {
@@ -136,6 +140,8 @@ export class MatchPageComponent extends BasePageComponent implements OnInit {
                     return arrayResult.length > 0;
                 }
             );
+        let indexRemove = result.findIndex(option => option.action === (this.playerJoined ? Action.JOIN_CALL_UP : Action.UNJOIN_CALL_UP));
+        result.splice(indexRemove, 1);
         return result;
     }
 
@@ -143,7 +149,11 @@ export class MatchPageComponent extends BasePageComponent implements OnInit {
         if (this.match.callUp.length < this.match.numPlayers) {
             this.showInfo('MATCHPAGE.CALL_UP_INCOMPLETED');
         } else {
-            let dialog = this.modalCtrl.create(TeamsMakerComponent, {match: this.match}, {enableBackdropDismiss: false});
+            let dialog =
+                this.modalCtrl.create(
+                    TeamsMakerComponent,
+                    {match: this.match, player: this.player},
+                    {enableBackdropDismiss: false});
             dialog.onDidDismiss(
                 ( result:
                     {
@@ -202,11 +212,23 @@ export class MatchPageComponent extends BasePageComponent implements OnInit {
     }
 
     private joinCallUp(): void {
-
+        if (this.match.callUp.length === this.match.numPlayers) {
+            this.showError('MATCHPAGE.CALL_UP_COMPLETED');
+        } else {
+            this.matchesService.joinPlayerCallUp(this.match.id, this.player)
+                .subscribe(
+                    data => this.showConfirmation(),
+                    error => this.showError(error)
+                );
+        }
     }
 
     private unjoinCallUp(): void {
-
+        this.matchesService.unJoinPlayerCallUp(this.match.id, this.player.id)
+            .subscribe(
+                data => this.showConfirmation(),
+                error => this.showError(error)
+            );
     }
 
     private setScoreBoard(): void {

@@ -20,7 +20,7 @@
                 <ion-col>                    
                     <ion-list>
                         <ion-list-header>
-                            {{match.team1.color}}
+                            {{match.team1.color | translate}}
                         </ion-list-header>
                         <ion-item *ngFor="let player of match.team1.players; let i = index;">
                             {{i+1}}. {{player.name}} <span *ngIf="!player.fixed">(s)</span>
@@ -30,7 +30,7 @@
                 <ion-col>
                     <ion-list>
                         <ion-list-header>
-                            {{match.team2.color}}
+                            {{match.team2.color | translate}}
                         </ion-list-header>
                         <ion-item *ngFor="let player of match.team2.players; let i = index;">
                             {{i+1}}. {{player.name}} <span *ngIf="!player.fixed">(s)</span>
