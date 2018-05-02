@@ -13,7 +13,7 @@ import * as _ from 'lodash';
 
 import * as moment from 'moment';
 
-import { Match, User, Action, PlayerCallUp} from '../../models';
+import { Match, User, Action, PlayerCallUp, Player} from '../../models';
 import { MatchesService } from '../../providers';
 import { ContextService } from '../../providers';
 import { AddMatchComponent } from '../../components';
@@ -42,6 +42,7 @@ export class MatchesPageComponent implements OnInit {
     groupedMatches: MatchesGroup[];
     matches: Match[] = [];
     userLogged: User;
+    playerLogged: Player;
 
     constructor(
         private navCtrl: NavController,
@@ -54,6 +55,7 @@ export class MatchesPageComponent implements OnInit {
     ) {
         this.userLogged = this.context.getUserLogged();
         this.isAdmin = this.context.userLoggedIsAdmin();
+        this.playerLogged = this.context.getPlayerLogged();
      }
 
     ionViewWillEnter() {
@@ -72,7 +74,7 @@ export class MatchesPageComponent implements OnInit {
                     {
                         matchSelected: matchSelected,
                         user: this.userLogged,
-                        player: this.context.getPlayerLogged(),
+                        player: this.playerLogged,
                         playerJoined: this.playerJoined(matchSelected.callUp)
                     }
                 );
@@ -88,6 +90,9 @@ export class MatchesPageComponent implements OnInit {
                 break;
             case Action.UNJOIN_CALL_UP:
                 this.unjoinCallUp(matchSelected);
+                break;
+            case Action.DISCARD_CALL_UP:
+                this.discardCallUp(matchSelected);
                 break;
         }
     }
@@ -176,8 +181,7 @@ export class MatchesPageComponent implements OnInit {
     }
 
     private joinCallUp(matchSelected: Match): void {
-        let player = this.context.getPlayerLogged();
-        this.matchesService.joinPlayerCallUp(matchSelected.id, player)
+        this.matchesService.joinPlayerCallUp(matchSelected.id, this.playerLogged)
             .subscribe(
                 data => this.loadListMatches(),
                 error => this.showError(error)
@@ -185,7 +189,15 @@ export class MatchesPageComponent implements OnInit {
     }
 
     private unjoinCallUp(matchSelected: Match): void {
-        this.matchesService.unJoinPlayerCallUp(matchSelected.id, this.userLogged.playerId)
+        this.matchesService.unjoinPlayerCallUp(matchSelected.id, this.userLogged.playerId)
+            .subscribe(
+                data => this.loadListMatches(),
+                error => this.showError(error)
+            );
+    }
+
+    private discardCallUp(matchSelected: Match): void {
+        this.matchesService.discardPlayerCallUp(matchSelected.id, this.playerLogged)
             .subscribe(
                 data => this.loadListMatches(),
                 error => this.showError(error)

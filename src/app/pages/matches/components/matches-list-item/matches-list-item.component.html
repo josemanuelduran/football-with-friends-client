@@ -33,10 +33,16 @@
             {{'JOIN_BUTTON' | translate}}
         </button>
         <button ion-button color="danger"
-                (click)="unJoinCallUp(item)"
+                (click)="unjoinCallUp(item)"
                 *ngIf="match.openCallUp && playerJoined">
             <ion-icon name="thumbs-down"></ion-icon>
             {{'UNJOIN_BUTTON' | translate}}
+        </button>
+        <button ion-button color="danger"
+                (click)="discardCallUp(item)"
+                *ngIf="match.openCallUp && !playerJoined">
+            <ion-icon name="close"></ion-icon>
+            {{'DISCARD_BUTTON' | translate}}
         </button>
     </ion-item-options>
   </ion-item-sliding>

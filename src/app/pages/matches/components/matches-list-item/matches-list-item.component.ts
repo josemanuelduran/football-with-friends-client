@@ -49,9 +49,14 @@ export class MatchesListItemComponent implements OnInit {
         this.action.emit(Action.JOIN_CALL_UP);
     }
 
-    unJoinCallUp(slidingItem: ItemSliding): void {
+    unjoinCallUp(slidingItem: ItemSliding): void {
         slidingItem.close();
         this.action.emit(Action.UNJOIN_CALL_UP);
+    }
+
+    discardCallUp(slidingItem: ItemSliding): void {
+        slidingItem.close();
+        this.action.emit(Action.DISCARD_CALL_UP);
     }
 
 }

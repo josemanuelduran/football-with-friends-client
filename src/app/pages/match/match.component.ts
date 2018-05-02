@@ -224,7 +224,7 @@ export class MatchPageComponent extends BasePageComponent implements OnInit {
     }
 
     private unjoinCallUp(): void {
-        this.matchesService.unJoinPlayerCallUp(this.match.id, this.player.id)
+        this.matchesService.unjoinPlayerCallUp(this.match.id, this.player.id)
             .subscribe(
                 data => this.showConfirmation(),
                 error => this.showError(error)

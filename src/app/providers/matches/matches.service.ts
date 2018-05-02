@@ -34,8 +34,12 @@ export class MatchesService {
         return this.http.put(`${MATCH_URL}/${matchId}/player`, player);
     }
 
-    public unJoinPlayerCallUp(matchId: string, playerId: string): Observable<Object> {
+    public unjoinPlayerCallUp(matchId: string, playerId: string): Observable<Object> {
         return this.http.put(`${MATCH_URL}/${matchId}/player/${playerId}`, {});
+    }
+
+    public discardPlayerCallUp(matchId: string, player: Player): Observable<Object> {
+        return this.http.put(`${MATCH_URL}/${matchId}/player/discards`, player);
     }
 
     public updateTeams(matchId: string, teams: Team[]): Observable<Object> {
