@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavParams, AlertController, ViewController, Select } from 'ionic-angular';
+import { NavParams, AlertController, ViewController } from 'ionic-angular';
 
 import { TranslateService } from '@ngx-translate/core';
 
@@ -54,15 +54,12 @@ export class TeamsMakerComponent extends BasePageComponent implements OnInit {
         this.filterTeams();
     }
 
-    onSelectChange(selected: any, select: Select): boolean {
-        if ((selected === 0 && this.listPlayersWhite.length === this.numPlayersTeam)
-            || (selected === 1 && this.listPlayersBlack.length === this.numPlayersTeam)) {
-            this.showError('TEAM_MAKER.TEAM_COMPLETED');
-            select.setValue(undefined);
-            return false;
+    onSelectChange(selected: any, playerId: string): void {
+        if (selected === '---') {
+            let index = this.listPlayers.findIndex(el => el.player.id === playerId);
+            this.listPlayers[index].team = undefined;
         }
         this.filterTeams();
-        return true;
     }
 
     saveTeams() {
