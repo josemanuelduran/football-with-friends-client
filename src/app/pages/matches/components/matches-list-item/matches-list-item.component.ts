@@ -12,12 +12,14 @@ export class MatchesListItemComponent implements OnInit {
     @Input() match: Match;
     @Input() isAdmin: boolean;
     @Input() playerJoined: boolean;
+    @Input() playerId: string;
     @Output() action: EventEmitter<Action> = new EventEmitter<Action>();
 
     matchClosed: boolean;
     matchCancelled: boolean;
     matchPlayed: boolean;
     matchOpen: boolean;
+    playerDiscarded: boolean;
 
     constructor() { }
 
@@ -28,6 +30,7 @@ export class MatchesListItemComponent implements OnInit {
         this.matchClosed = !this.match.openCallUp && !this.match.cancelled && !this.matchPlayed;
         this.matchCancelled = this.match.cancelled;
         this.matchOpen = !this.matchCancelled && !this.matchClosed && !this.matchPlayed;
+        this.setPlayerDiscarded();
     }
 
     matchSelected(): void {
@@ -56,7 +59,16 @@ export class MatchesListItemComponent implements OnInit {
 
     discardCallUp(slidingItem: ItemSliding): void {
         slidingItem.close();
-        this.action.emit(Action.DISCARD_CALL_UP);
+        this.action.emit(Action.DISCARD_ME_CALL_UP);
+    }
+
+    private setPlayerDiscarded(): void {
+        let discards = this.match.discards;
+        if (discards) {
+            this.playerDiscarded = discards.findIndex(el => el.player.player.id === this.playerId) >= 0;
+        } else {
+            this.playerDiscarded = false;
+        }
     }
 
 }

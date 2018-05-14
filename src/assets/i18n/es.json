@@ -58,6 +58,7 @@
         "TEAMS": "Equipos",
         "SCOREBOARD": "Marcador",
         "MISTER": "Creador de los equipos",
+        "DISCARDS": "Descartados",
         "NOT_PLAYED": "No jugado",
         "CALL_UP_INCOMPLETED": "La convocatiria no está completa",
         "ACTION": {
@@ -67,6 +68,8 @@
             "SCOREBOARD": "Guardar Resultado",
             "JOIN_CALL_UP": "Unirse al Partido",
             "UNJOIN_CALL_UP": "Salirse del Partido"
+            "DISCARD_ME_CALL_UP": "No puedo jugar",
+            "EXIT_FROM_DISCARDS": "Salir de los descartes",
         }
     },
     "ADDMATCHPAGE": {
@@ -99,4 +102,5 @@
     "EDIT_BUTTON": "Edit",
     "JOIN_BUTTON": "Unirse",
     "UNJOIN_BUTTON": "Salirse"
+    "DISCARD_BUTTON": "Me descarto"
 }

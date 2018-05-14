@@ -7,6 +7,8 @@ export enum Action {
     JOIN_CALL_UP,
     UNJOIN_CALL_UP,
     DISCARD_CALL_UP,
+    DISCARD_ME_CALL_UP,
+    EXIT_FROM_DISCARDS,
     EDIT_TEAMS,
     SET_SCOREBOARD
 }

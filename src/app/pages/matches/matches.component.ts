@@ -91,8 +91,8 @@ export class MatchesPageComponent implements OnInit {
             case Action.UNJOIN_CALL_UP:
                 this.unjoinCallUp(matchSelected);
                 break;
-            case Action.DISCARD_CALL_UP:
-                this.discardCallUp(matchSelected);
+            case Action.DISCARD_ME_CALL_UP:
+                this.discardMeCallUp(matchSelected);
                 break;
         }
     }
@@ -196,8 +196,19 @@ export class MatchesPageComponent implements OnInit {
             );
     }
 
-    private discardCallUp(matchSelected: Match): void {
-        this.matchesService.discardPlayerCallUp(matchSelected.id, this.playerLogged)
+    private discardMeCallUp(matchSelected: Match): void {
+        let playerDiscard: PlayerDiscard = {
+            player: {
+                player: {
+                    id: this.playerLogged.id,
+                    fixed: this.playerLogged.fixed,
+                    name: this.playerLogged.alias
+                },
+                dateCallUp: new Date()
+            },
+            canPlay: false
+        };
+        this.matchesService.discardPlayerCallUp(matchSelected.id, playerDiscard)
             .subscribe(
                 data => this.loadListMatches(),
                 error => this.showError(error)

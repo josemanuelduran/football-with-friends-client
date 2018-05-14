@@ -40,7 +40,7 @@
         </button>
         <button ion-button color="danger"
                 (click)="discardCallUp(item)"
-                *ngIf="match.openCallUp && !playerJoined">
+                *ngIf="match.openCallUp && !playerJoined && !playerDiscarded">
             <ion-icon name="close"></ion-icon>
             {{'DISCARD_BUTTON' | translate}}
         </button>

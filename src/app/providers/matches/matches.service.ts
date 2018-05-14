@@ -38,8 +38,12 @@ export class MatchesService {
         return this.http.put(`${MATCH_URL}/${matchId}/player/${playerId}`, {});
     }
 
-    public discardPlayerCallUp(matchId: string, player: Player): Observable<Object> {
-        return this.http.put(`${MATCH_URL}/${matchId}/player/discards`, player);
+    public discardPlayerCallUp(matchId: string, player: PlayerDiscard): Observable<Object> {
+        return this.http.put(`${MATCH_URL}/${matchId}/discards`, player);
+    }
+
+    public exitFromDiscards(matchId: string, playerId: string): Observable<Object> {
+        return this.http.put(`${MATCH_URL}/${matchId}/discards/player/${playerId}`, {});
     }
 
     public updateTeams(matchId: string, teams: Team[]): Observable<Object> {

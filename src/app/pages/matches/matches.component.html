@@ -43,7 +43,7 @@
                     *ngFor="let matchMonthYear of group.matches"
                     [match]="matchMonthYear.match"
                     [isAdmin]="isAdmin"
-                    [playerJoined]="matchMonthYear.match.openCallUp && playerJoined(matchMonthYear.match.callUp)"
+                    [playerId]="userLogged.playerId"
                     (action)="doAction(matchMonthYear.match, $event)">
             </fwf-matches-list-item>
         </div>

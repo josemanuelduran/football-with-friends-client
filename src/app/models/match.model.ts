@@ -14,6 +14,7 @@ export interface Match {
     mvp?: string;
     mister?: SimplyPlayer;
     cancelled: boolean;
+    discards?: PlayerDiscard[];
 }
 
 export interface Team {
@@ -29,6 +30,11 @@ export interface PlayerCallUp {
 
 export interface SimplyPlayer {
     name: string;
-    id: string;
+    id?: string;
     fixed: boolean;
+}
+
+export interface PlayerDiscard {
+    player: PlayerCallUp;
+    canPlay: boolean;
 }

@@ -56,6 +56,19 @@ const AVAILABLE_OPTIONS: Option[] = [
         roles: [Role.PLAYER],
         token: 'MATCHPAGE.ACTION.UNJOIN_CALL_UP',
         icon: 'thumbs-down'
+    },
+    {
+        action: Action.DISCARD_ME_CALL_UP,
+        roles: [Role.PLAYER],
+        token: 'MATCHPAGE.ACTION.DISCARD_ME_CALL_UP',
+        icon: 'remove-circle'
+    },
+    {
+        action: Action.EXIT_FROM_DISCARDS,
+        roles: [Role.PLAYER],
+        token: 'MATCHPAGE.ACTION.EXIT_FROM_DISCARDS',
+        icon: 'checkmark-circle'
+    },
     }
 ];
 
@@ -72,6 +85,7 @@ export class MatchPageComponent extends BasePageComponent implements OnInit {
     user: User;
     player: Player;
     playerJoined: boolean;
+    discardedPlayer: boolean;
 
     constructor(
         public navCtrl: NavController,
@@ -90,6 +104,7 @@ export class MatchPageComponent extends BasePageComponent implements OnInit {
         this.user = this.navParams.get('user');
         this.player = this.navParams.get('player');
         this.playerJoined = this.navParams.get('playerJoined');
+        this.setDiscardedPlayer();
     }
 
     showOptions(clickEvent: Event): void {
@@ -113,6 +128,12 @@ export class MatchPageComponent extends BasePageComponent implements OnInit {
                     case Action.UNJOIN_CALL_UP:
                         this.unjoinCallUp();
                         break;
+                    case Action.DISCARD_ME_CALL_UP:
+                        this.discardMeCallUp();
+                        break;
+                    case Action.EXIT_FROM_DISCARDS:
+                        this.exitFromDiscards();
+                        break;
                     case Action.SET_SCOREBOARD:
                         this.setScoreBoard();
                         break;
@@ -132,6 +153,9 @@ export class MatchPageComponent extends BasePageComponent implements OnInit {
         this.navCtrl.push('TeamsPage', {match: this.match});
     }
 
+    goToDiscards(): void {
+        this.navCtrl.push('DiscardsPage', {match: this.match});
+    }
     private getOptionsAllowed(): Option[] {
         let result = AVAILABLE_OPTIONS
             .filter(
@@ -226,12 +250,243 @@ export class MatchPageComponent extends BasePageComponent implements OnInit {
     private unjoinCallUp(): void {
         this.matchesService.unjoinPlayerCallUp(this.match.id, this.player.id)
             .subscribe(
-                data => this.showConfirmation(),
+                data => {
+                    this.joinedPlayer = false;
+                    this.showConfirmation();
+                    this.reloadMatch();
+                },
+                error => this.showError(error)
+            );
+    }
+
+    private discardMeCallUp(): void {
+        let playerDiscard: PlayerDiscard = {
+            player: {
+                player: {
+                    id: this.player.id,
+                    fixed: this.player.fixed,
+                    name: this.player.alias
+                },
+                dateCallUp: new Date()
+            },
+            canPlay: false
+        };
+        this.matchesService.discardPlayerCallUp(this.match.id, playerDiscard)
+            .subscribe(
+                data => {
+                    this.discardedPlayer = true;
+                    this.showConfirmation();
+                    this.reloadMatch();
+                },
+                error => this.showError(error)
+            );
+    }
+
+    private exitFromDiscards(): void {
+        this.matchesService.exitFromDiscards(this.match.id, this.player.id)
+            .subscribe(
+                data => {
+                    this.discardedPlayer = false;
+                    this.showConfirmation();
+                    this.reloadMatch();
+                },
                 error => this.showError(error)
             );
     }
 
     private setScoreBoard(): void {
+        let actionsPopover =
+            this.popoverCtrl.create(ScoreboardComponent,
+                {
+                    scoreWhite: this.match.team1.goals || 0,
+                    scoreBlack: this.match.team2.goals || 0
+                });
+        actionsPopover.onDidDismiss((data) => {
+            if (data && data.actionOk) {
+                this.match.team1.goals = data.scoreWhite;
+                this.match.team2.goals = data.scoreBlack;
+                this.matchesService.updateMatch(this.match)
+                    .subscribe(
+                        ok => {
+                            this.reloadMatch();
+                            this.showConfirmation();
+                        },
+                        error => this.showError(error)
+                    );
+            }
+        });
+        actionsPopover.present();
+    }
 
+    private setJoinedPlayer(): void {
+        let callUp = this.match.callUp;
+        if (callUp) {
+            this.joinedPlayer = callUp.findIndex(el => el.player.id === this.player.id) >= 0;
+        } else {
+            this.joinedPlayer = false;
+        }
+    }
+
+    private setDiscardedPlayer(): void {
+        let discards = this.match.discards;
+        if (discards) {
+            this.discardedPlayer = discards.findIndex(el => el.player.player.id === this.player.id) >= 0;
+        } else {
+            this.discardedPlayer = false;
+        }
+    }
+
+    private editCallUp(): void {
+        this.playerService.fetchPlayers()
+            .subscribe(
+                players => this.showListPlayers(players),
+                error => this.showError(error)
+            );
+    }
+
+    private addExtraPlayer(): void {
+        let prompt = this.alertCtrl.create({
+            title: this.translate.instant('MATCHPAGE.ACTION.ADD_EXTRA_PLAYER'),
+            inputs: [
+                {
+                    name: 'name',
+                    placeholder: this.translate.instant('MATCHPAGE.NAME')
+                },
+            ],
+            buttons: [
+                {
+                    text: this.translate.instant('CANCEL_BUTTON')
+                },
+                {
+                    text: this.translate.instant('OK_BUTTON'),
+                    handler: data => {
+                        let extraPlayer: Player = {
+                            id: `extraPlayer${this.getNumExtraPlayers() + 1}`,
+                            alias: data.name,
+                            fixed: false
+                        };
+                        this.matchesService.joinPlayerCallUp(this.match.id, extraPlayer)
+                            .subscribe(
+                                ok => {
+                                    this.showConfirmation();
+                                    this.reloadMatch();
+                                },
+                                error => this.showError(error)
+                            );
+                    }
+                }
+            ]
+        });
+        prompt.present();
+    }
+
+    private removeExtraPlayer(): void {
+        let prompt = this.alertCtrl.create({
+            title: this.translate.instant('MATCHPAGE.ACTION.ADD_EXTRA_PLAYER'),
+            inputs: [
+                {
+                    name: 'name',
+                    placeholder: this.translate.instant('MATCHPAGE.NAME')
+                },
+            ],
+            buttons: [
+                {
+                    text: this.translate.instant('CANCEL_BUTTON')
+                },
+                {
+                    text: this.translate.instant('OK_BUTTON'),
+                    handler: data => {
+                        let extraPlayer =
+                            this.match.callUp.find(el => el.player.id.startsWith('extraPlayer') && el.player.name === data.name);
+                        this.matchesService.unjoinPlayerCallUp(this.match.id, extraPlayer.player.id)
+                            .subscribe(
+                                ok => {
+                                    this.showConfirmation();
+                                    this.reloadMatch();
+                                },
+                                error => this.showError(error)
+                            );
+                    }
+                }
+            ]
+        });
+        prompt.present();
+    }
+
+    private getNumExtraPlayers(): number {
+        return this.match.callUp ?
+            this.match.callUp.filter(el => el.player.id.startsWith('extraPlayer')).length
+            : 0;
+    }
+
+    private showListPlayers(players: Player[]) {
+        let alert = this.alertCtrl.create();
+        alert.setTitle(this.translate.instant('MATCHPAGE.ADD_PLAYER'));
+        players.forEach(player => {
+            let checked = this.match.callUp && this.match.callUp.findIndex(el => el.player.id === player.id) >= 0;
+            alert.addInput({
+                type: 'checkbox',
+                label: player.alias,
+                value: player.id,
+                checked: checked
+            });
+        });
+        alert.addButton(this.translate.instant('CANCEL_BUTTON'));
+        alert.addButton({
+        text: this.translate.instant('OK_BUTTON'),
+        handler: selecteds => {
+            this.includePlayersCallUp(players, selecteds);
+            this.excludePlayersCallUp(players, selecteds);
+        }
+        });
+        alert.present();
+    }
+
+    private includePlayersCallUp(players: Player[], playersId: string[]): void {
+        let playersSelected = players.filter(player => {
+            let isPlayerSelected = playersId.findIndex(el => el === player.id) >= 0;
+            let isPlayerCallUp = this.match.callUp && this.match.callUp.findIndex(el => el.player.id === player.id) >= 0;
+            return !isPlayerCallUp && isPlayerSelected;
+        });
+        playersSelected.forEach((player, index) => {
+            this.matchesService.joinPlayerCallUp(this.match.id, player)
+                .subscribe(
+                    data => {
+                        if (index === playersSelected.length - 1) {
+                            this.showConfirmation();
+                            this.reloadMatch();
+                        }
+                    },
+                    error => this.showError(error)
+                );
+        });
+    }
+
+    private excludePlayersCallUp(players: Player[], playersId: string[]): void {
+        let playersNoSelected = players.filter(player => {
+            let isPlayerNoSelected = playersId.findIndex(el => el === player.id) < 0;
+            let isPlayerCallUp = this.match.callUp && this.match.callUp.findIndex(el => el.player.id === player.id) >= 0;
+            return isPlayerCallUp && isPlayerNoSelected;
+        });
+        playersNoSelected.forEach((player, index) => {
+            this.matchesService.unjoinPlayerCallUp(this.match.id, player.id)
+                .subscribe(
+                    data => {
+                        if (index === playersNoSelected.length - 1) {
+                            this.showConfirmation();
+                            this.reloadMatch();
+                        }
+                    },
+                    error => this.showError(error)
+                );
+        });
+    }
+
+    private reloadMatch() {
+        this.matchesService.getMatch(this.match.id)
+            .subscribe(
+                match => this.match = match,
+                error => this.showError(error)
+            );
     }
 }
