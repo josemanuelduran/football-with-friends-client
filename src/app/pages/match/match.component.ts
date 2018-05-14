@@ -10,14 +10,14 @@ import {
 
 import { TranslateService } from '@ngx-translate/core';
 
-import { Match, Role, User, Option, Action, Team, Player } from '../../models';
+import { Match, Role, User, Option, Action, Team, Player, PlayerDiscard } from '../../models';
 import {
     OverflowMenuComponent,
     AddMatchComponent,
     TeamsMakerComponent,
 } from '../../components';
 import { BasePageComponent } from '../base/base-page.component';
-import { MatchesService } from '../../providers';
+import { MatchesService, PlayersService } from '../../providers';
 
 
 const AVAILABLE_OPTIONS: Option[] = [
@@ -69,7 +69,25 @@ const AVAILABLE_OPTIONS: Option[] = [
         token: 'MATCHPAGE.ACTION.EXIT_FROM_DISCARDS',
         icon: 'checkmark-circle'
     },
+    {
+        action: Action.EDIT_CALL_UP,
+        roles: [Role.ADMIN],
+        token: 'MATCHPAGE.ACTION.EDIT_CALL_UP',
+        icon: 'people'
+    },
+    {
+        action: Action.ADD_EXTRA_PLAYER,
+        roles: [Role.ADMIN],
+        token: 'MATCHPAGE.ACTION.ADD_EXTRA_PLAYER',
+        icon: 'add'
+    },
+    {
+        action: Action.REMOVE_EXTRA_PLAYER,
+        roles: [Role.ADMIN],
+        token: 'MATCHPAGE.ACTION.REMOVE_EXTRA_PLAYER',
+        icon: 'remove'
     }
+
 ];
 
 @IonicPage({
@@ -84,7 +102,7 @@ export class MatchPageComponent extends BasePageComponent implements OnInit {
     match: Match;
     user: User;
     player: Player;
-    playerJoined: boolean;
+    joinedPlayer: boolean;
     discardedPlayer: boolean;
 
     constructor(
@@ -95,6 +113,7 @@ export class MatchPageComponent extends BasePageComponent implements OnInit {
         protected alertCtrl: AlertController,
         protected translate: TranslateService,
         private matchesService: MatchesService,
+        private playerService: PlayersService,
     ) {
         super(translate, alertCtrl);
     }
@@ -103,7 +122,7 @@ export class MatchPageComponent extends BasePageComponent implements OnInit {
         this.match = this.navParams.get('matchSelected');
         this.user = this.navParams.get('user');
         this.player = this.navParams.get('player');
-        this.playerJoined = this.navParams.get('playerJoined');
+        this.setJoinedPlayer();
         this.setDiscardedPlayer();
     }
 
@@ -137,6 +156,15 @@ export class MatchPageComponent extends BasePageComponent implements OnInit {
                     case Action.SET_SCOREBOARD:
                         this.setScoreBoard();
                         break;
+                    case Action.EDIT_CALL_UP:
+                        this.editCallUp();
+                        break;
+                    case Action.ADD_EXTRA_PLAYER:
+                        this.addExtraPlayer();
+                        break;
+                    case Action.REMOVE_EXTRA_PLAYER:
+                        this.removeExtraPlayer();
+                        break;
                 }
             }
         });
@@ -146,7 +174,7 @@ export class MatchPageComponent extends BasePageComponent implements OnInit {
     }
 
     goToCallUp(): void {
-        this.navCtrl.push('CallUpPage', {match: this.match});
+        this.navCtrl.push('CallUpPage', {match: this.match, reserves: false});
     }
 
     goToTeams(): void {
@@ -156,6 +184,11 @@ export class MatchPageComponent extends BasePageComponent implements OnInit {
     goToDiscards(): void {
         this.navCtrl.push('DiscardsPage', {match: this.match});
     }
+
+    goToReserves(): void {
+        this.navCtrl.push('CallUpPage', {match: this.match, reserves: true});
+    }
+
     private getOptionsAllowed(): Option[] {
         let result = AVAILABLE_OPTIONS
             .filter(
@@ -164,8 +197,19 @@ export class MatchPageComponent extends BasePageComponent implements OnInit {
                     return arrayResult.length > 0;
                 }
             );
-        let indexRemove = result.findIndex(option => option.action === (this.playerJoined ? Action.JOIN_CALL_UP : Action.UNJOIN_CALL_UP));
-        result.splice(indexRemove, 1);
+        if (this.joinedPlayer) {
+            result.splice(result.findIndex(option => option.action === Action.JOIN_CALL_UP), 1);
+            result.splice(result.findIndex(option => option.action === Action.DISCARD_ME_CALL_UP), 1);
+            result.splice(result.findIndex(option => option.action === Action.EXIT_FROM_DISCARDS), 1);
+        } else {
+            result.splice(result.findIndex(option => option.action === Action.UNJOIN_CALL_UP), 1);
+            if (this.discardedPlayer) {
+                result.splice(result.findIndex(option => option.action === Action.JOIN_CALL_UP), 1);
+                result.splice(result.findIndex(option => option.action === Action.DISCARD_ME_CALL_UP), 1);
+            } else {
+                result.splice(result.findIndex(option => option.action === Action.EXIT_FROM_DISCARDS), 1);
+            }
+        }
         return result;
     }
 
@@ -188,7 +232,10 @@ export class MatchPageComponent extends BasePageComponent implements OnInit {
                     if (result.actionOk) {
                         this.matchesService.updateTeams(this.match.id, result.teams)
                             .subscribe(
-                                data => {},
+                                data => {
+                                    this.showConfirmation();
+                                    this.reloadMatch();
+                                },
                                 error => this.showError(error)
                             );
                     }
@@ -230,18 +277,23 @@ export class MatchPageComponent extends BasePageComponent implements OnInit {
         dialog.onDidDismiss((actionOk: boolean) => {
             if (actionOk) {
                 this.showConfirmation();
+                this.reloadMatch();
             }
         });
         dialog.present();
     }
 
     private joinCallUp(): void {
-        if (this.match.callUp.length === this.match.numPlayers) {
+        if (this.match.callUp && this.match.callUp.length === this.match.numPlayers) {
             this.showError('MATCHPAGE.CALL_UP_COMPLETED');
         } else {
             this.matchesService.joinPlayerCallUp(this.match.id, this.player)
                 .subscribe(
-                    data => this.showConfirmation(),
+                    data => {
+                        this.joinedPlayer = true;
+                        this.showConfirmation();
+                        this.reloadMatch();
+                    },
                     error => this.showError(error)
                 );
         }

@@ -45,11 +45,13 @@ export class LoginPageComponent implements OnInit {
                     if (user.playerId) {
                         this.playersService.getPlayer(user.playerId)
                             .subscribe(
-                                player => this.context.setPlayerLogged(player),
+                                player => {
+                                    this.context.setPlayerLogged(player);
+                                    this.app.getActiveNav().setRoot('TabsController');
+                                },
                                 error => this.showError()
                             );
                     }
-                    this.app.getActiveNav().setRoot('TabsController');
                 },
                 err => this.showError()
             );

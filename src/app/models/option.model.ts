@@ -6,11 +6,13 @@ export enum Action {
     EDIT_MATCH,
     JOIN_CALL_UP,
     UNJOIN_CALL_UP,
-    DISCARD_CALL_UP,
     DISCARD_ME_CALL_UP,
     EXIT_FROM_DISCARDS,
     EDIT_TEAMS,
-    SET_SCOREBOARD
+    SET_SCOREBOARD,
+    EDIT_CALL_UP,
+    ADD_EXTRA_PLAYER,
+    REMOVE_EXTRA_PLAYER,
 }
 
 export interface Option {

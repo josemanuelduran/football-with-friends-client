@@ -13,6 +13,7 @@ import { Match } from '../../models';
 export class CallUpPageComponent implements OnInit {
 
     match: Match;
+    reserves: boolean;
 
     constructor(
             public navCtrl: NavController,
@@ -21,6 +22,7 @@ export class CallUpPageComponent implements OnInit {
 
     ngOnInit() {
         this.match = this.navParams.get('match');
+        this.reserves = this.navParams.get('reserves');
     }
 
 }

@@ -67,9 +67,12 @@
             "DELETE_MATCH": "Eliminar Partido",
             "SCOREBOARD": "Guardar Resultado",
             "JOIN_CALL_UP": "Unirse al Partido",
-            "UNJOIN_CALL_UP": "Salirse del Partido"
+            "UNJOIN_CALL_UP": "Salirse del Partido",
             "DISCARD_ME_CALL_UP": "No puedo jugar",
             "EXIT_FROM_DISCARDS": "Salir de los descartes",
+            "EDIT_CALL_UP": "Modificar Convocatoria",
+            "ADD_EXTRA_PLAYER": "Añadir Jugador extra",
+            "REMOVE_EXTRA_PLAYER": "Eliminar Jugador extra"
         }
     },
     "ADDMATCHPAGE": {
@@ -97,10 +100,11 @@
     "BUSY_INDICATOR": {
         "PLEASE_WAIT": "Por favor, espere..." 
     },
+    "OK_BUTTON": "Ok",
     "CANCEL_BUTTON": "Cancel",
     "DELETE_BUTTON": "Delete",
     "EDIT_BUTTON": "Edit",
     "JOIN_BUTTON": "Unirse",
-    "UNJOIN_BUTTON": "Salirse"
+    "UNJOIN_BUTTON": "Salirse",
     "DISCARD_BUTTON": "Me descarto"
 }

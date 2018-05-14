@@ -15,6 +15,7 @@ export interface Match {
     mister?: SimplyPlayer;
     cancelled: boolean;
     discards?: PlayerDiscard[];
+    reserves?: PlayerCallUp[];
 }
 
 export interface Team {

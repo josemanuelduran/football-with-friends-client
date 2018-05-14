@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { Observable } from 'rxjs/Observable';
 
-import { Match, Player, Team } from '../../models';
+import { Match, Player, Team, PlayerDiscard } from '../../models';
 
 const MATCH_URL = 'fwf/match';
 
@@ -14,6 +14,9 @@ export class MatchesService {
         private http: HttpClient
     ) { }
 
+    public getMatch(matchId: string): Observable<Match> {
+        return this.http.get<Match>(`${MATCH_URL}/${matchId}`);
+    }
     public fetchMatches(): Observable<Match[]> {
         return this.http.get<Match[]>(MATCH_URL);
     }

@@ -53,6 +53,11 @@
                 <ion-icon name="thumbs-down" item-left></ion-icon>
                 {{ "MATCHPAGE.DISCARDS" | translate}}  ({{match.discards?.length || 0}})
                 <ion-icon name="arrow-forward" item-right></ion-icon>
+            </ion-item>
+            <ion-item color="none" on-click="goToReserves()">
+                <ion-icon name="cut" item-left></ion-icon>
+                {{ "MATCHPAGE.RESERVES" | translate}}  ({{match.reserves?.length || 0}})
+                <ion-icon name="arrow-forward" item-right></ion-icon>
             </ion-item> 
         </ion-list>
       </ion-card>

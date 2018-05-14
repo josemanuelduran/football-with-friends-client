@@ -11,7 +11,6 @@ export class MatchesListItemComponent implements OnInit {
 
     @Input() match: Match;
     @Input() isAdmin: boolean;
-    @Input() playerJoined: boolean;
     @Input() playerId: string;
     @Output() action: EventEmitter<Action> = new EventEmitter<Action>();
 
@@ -19,6 +18,7 @@ export class MatchesListItemComponent implements OnInit {
     matchCancelled: boolean;
     matchPlayed: boolean;
     matchOpen: boolean;
+    playerJoined: boolean;
     playerDiscarded: boolean;
 
     constructor() { }
@@ -30,6 +30,7 @@ export class MatchesListItemComponent implements OnInit {
         this.matchClosed = !this.match.openCallUp && !this.match.cancelled && !this.matchPlayed;
         this.matchCancelled = this.match.cancelled;
         this.matchOpen = !this.matchCancelled && !this.matchClosed && !this.matchPlayed;
+        this.setPlayerJoined();
         this.setPlayerDiscarded();
     }
 
@@ -60,6 +61,15 @@ export class MatchesListItemComponent implements OnInit {
     discardCallUp(slidingItem: ItemSliding): void {
         slidingItem.close();
         this.action.emit(Action.DISCARD_ME_CALL_UP);
+    }
+
+    private setPlayerJoined(): void {
+        let callUp = this.match.callUp;
+        if (callUp) {
+            this.playerJoined = callUp.findIndex(el => el.player.id === this.playerId) >= 0;
+        } else {
+            this.playerJoined = false;
+        }
     }
 
     private setPlayerDiscarded(): void {

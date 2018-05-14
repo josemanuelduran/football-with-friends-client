@@ -13,7 +13,7 @@ import * as _ from 'lodash';
 
 import * as moment from 'moment';
 
-import { Match, User, Action, PlayerCallUp, Player} from '../../models';
+import { Match, User, Action, Player, PlayerDiscard} from '../../models';
 import { MatchesService } from '../../providers';
 import { ContextService } from '../../providers';
 import { AddMatchComponent } from '../../components';
@@ -74,8 +74,7 @@ export class MatchesPageComponent implements OnInit {
                     {
                         matchSelected: matchSelected,
                         user: this.userLogged,
-                        player: this.playerLogged,
-                        playerJoined: this.playerJoined(matchSelected.callUp)
+                        player: this.playerLogged
                     }
                 );
                 break;
@@ -132,14 +131,6 @@ export class MatchesPageComponent implements OnInit {
                 },
                 () => this.endAnimations(refresher)
             );
-    }
-
-    playerJoined(callUp: PlayerCallUp[]): boolean {
-        let result = false;
-        if (callUp) {
-            result = callUp.findIndex(el => el.player.id === this.userLogged.playerId) >= 0;
-        }
-        return result;
     }
 
     private delete(matchSelected: Match): void {
