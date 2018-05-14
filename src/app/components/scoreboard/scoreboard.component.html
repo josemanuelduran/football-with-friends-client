@@ -1,0 +1,18 @@
+<ion-card>
+    <ion-item>        
+        <ion-label>{{'WHITE' | translate}}</ion-label>
+        <ion-icon item-right name="remove-circle" color="primary" (click)="subWhite()">{{scoreWhite}}</ion-icon>
+        <!-- <ion-label item-right>  </ion-label> -->
+        <ion-icon item-right name="add-circle" color="primary" (click)="addWhite()"></ion-icon>
+    </ion-item>
+    <ion-item>
+        <ion-label>{{'BLACK' | translate}}</ion-label>
+        <ion-icon item-right name="remove-circle" color="primary" (click)="subBlack()">{{scoreBlack}}</ion-icon>
+        <!-- <ion-label item-right>  </ion-label> -->
+        <ion-icon item-right name="add-circle" color="primary" (click)="addBlack()"></ion-icon>
+    </ion-item>
+    <ion-buttons>
+        <button ion-button (click)="save()">OK</button>
+        <button ion-button (click)="cancel()">Cancel</button>
+    </ion-buttons>
+</ion-card>

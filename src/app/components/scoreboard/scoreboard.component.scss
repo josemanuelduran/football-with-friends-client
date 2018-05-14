@@ -1,0 +1,16 @@
+fwf-scoreboard {
+    .red:before {
+        color: red;
+    }
+    
+    .green:before {
+        color: green;
+    }
+    
+    .flex_row {
+        display: -webkit-flex;
+        display: flex;
+        -webkit-flex-direction: row; 
+        flex-direction: row;
+    }
+}

@@ -18,6 +18,7 @@ import {
 } from '../../components';
 import { BasePageComponent } from '../base/base-page.component';
 import { MatchesService, PlayersService } from '../../providers';
+import { ScoreboardComponent } from '../../components/scoreboard/scoreboard.component';
 
 
 const AVAILABLE_OPTIONS: Option[] = [
