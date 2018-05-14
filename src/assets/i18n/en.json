@@ -91,6 +91,9 @@
     "REFRESHER_COMPONENT": {
         "PULL_TO_REFRESH": "Pull to refresh"
     },
+    "BUSY_INDICATOR": {
+        "PLEASE_WAIT": "Please wait..." 
+    },
     "CANCEL_BUTTON": "Cancel",
     "DELETE_BUTTON": "Delete",
     "EDIT_BUTTON": "Edit",

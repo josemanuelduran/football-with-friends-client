@@ -22,6 +22,8 @@ import {
     TokenInterceptor,
     UrlInterceptor,
     HeaderInterceptor,
+    BusyIndicatorInterceptor,
+    BusyIndicatorService,
 } from './providers';
 import { ComponentsModule } from './components/components.module';
 
@@ -58,6 +60,7 @@ import { ComponentsModule } from './components/components.module';
         ContextService,
         MatchesService,
         PlayersService,
+        BusyIndicatorService,
         {
             provide: HTTP_INTERCEPTORS,
             useClass: TokenInterceptor,
@@ -71,6 +74,11 @@ import { ComponentsModule } from './components/components.module';
           {
             provide: HTTP_INTERCEPTORS,
             useClass: HeaderInterceptor,
+            multi: true,
+          },
+          {
+            provide: HTTP_INTERCEPTORS,
+            useClass: BusyIndicatorInterceptor,
             multi: true,
           }
     ]
