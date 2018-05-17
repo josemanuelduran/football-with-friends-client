@@ -14,10 +14,10 @@ import { Storage } from '@ionic/storage';
 export class IntroductionPageComponent {
 
     showSkip = true;
-    image1 = 'assets/img/png/cup.png';
-    image2 = 'assets/img/png/kick.png';
-    image3 = 'assets/img/png/goal.png';
-    image4 = 'assets/img/png/foul.png';
+    image1 = '../assets/img/png/cup.png';
+    image2 = '../assets/img/png/kick.png';
+    image3 = '../assets/img/png/goal.png';
+    image4 = '../assets/img/png/foul.png';
 
     @ViewChild('slides') slides: Slides;
 
