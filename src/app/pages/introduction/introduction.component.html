@@ -10,7 +10,7 @@
     <ion-slides #slides (ionSlideWillChange)="onSlideChangeStart($event)" pager>
 
         <ion-slide>
-            <img [src]="image1"/>
+            <img [src]="image1" class="slide-image"/>
             <h2 class="slide-title">
                 {{'INTRODUCTION.SLIDE1_1' | translate}} <b>{{'APPLICATION_DETAIL.NAME' | translate}}</b>
             </h2>
@@ -20,7 +20,7 @@
         </ion-slide>
 
         <ion-slide>
-            <img [src]="image2"/>
+            <img [src]="image2" class="slide-image"/>
             <h2 class="slide-title" >
                 {{'INTRODUCTION.SLIDE2_1' | translate}}
             </h2>
@@ -30,7 +30,7 @@
         </ion-slide>
 
         <ion-slide>
-            <img [src]="image3"/>
+            <img [src]="image3" class="slide-image"/>
             <h2 class="slide-title">
                 {{'INTRODUCTION.SLIDE3_1' | translate}}
             </h2>
@@ -38,7 +38,7 @@
         </ion-slide>
 
         <ion-slide>
-            <img [src]="image4"/>
+            <img [src]="image4" class="slide-image"/>
             <h2 class="slide-title">
                 {{'INTRODUCTION.SLIDE4_1' | translate}}
             </h2>
