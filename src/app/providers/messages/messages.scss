@@ -1,0 +1,40 @@
+// @import "../../theme/app.variables";
+
+$toast-warning: color($colors, warning);
+$toast-success: color($colors, success);
+$toast-danger:  color($colors, danger);
+$toast-info:    color($colors, info);
+
+.toast {
+  .toast-button {
+    color: color($colors, secondary, brightest);
+  }
+}
+
+.toast-success {
+  @extend .toast;
+  .toast-wrapper {
+    background: $toast-success;
+  }
+}
+
+.toast-error {
+  @extend .toast;
+  .toast-wrapper {
+    background: $toast-danger;
+  }
+}
+
+.toast-info {
+  @extend .toast;
+  .toast-wrapper {
+    background: $toast-info;
+  }
+}
+
+.toast-warning {
+  @extend .toast;
+  .toast-wrapper {
+    background: $toast-warning;
+  }
+}

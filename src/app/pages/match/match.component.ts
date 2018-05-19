@@ -16,8 +16,7 @@ import {
     AddMatchComponent,
     TeamsMakerComponent,
 } from '../../components';
-import { BasePageComponent } from '../base/base-page.component';
-import { MatchesService, PlayersService } from '../../providers';
+import { MatchesService, PlayersService, ContextService, MessagesService } from '../../providers';
 import { ScoreboardComponent } from '../../components/scoreboard/scoreboard.component';
 
 
@@ -111,13 +110,13 @@ export class MatchPageComponent extends BasePageComponent implements OnInit {
         public navParams: NavParams,
         private popoverCtrl: PopoverController,
         private modalCtrl: ModalController,
-        protected alertCtrl: AlertController,
-        protected translate: TranslateService,
+        private alertCtrl: AlertController,
+        private translate: TranslateService,
         private matchesService: MatchesService,
         private playerService: PlayersService,
-    ) {
-        super(translate, alertCtrl);
-    }
+        private context: ContextService,
+        private messages: MessagesService
+    ) {}
 
     ngOnInit() {
         this.match = this.navParams.get('matchSelected');
@@ -216,7 +215,7 @@ export class MatchPageComponent extends BasePageComponent implements OnInit {
 
     private editTeams(): void {
         if (this.match.callUp.length < this.match.numPlayers) {
-            this.showInfo('MATCHPAGE.CALL_UP_INCOMPLETED');
+            this.messages.showInfo('MATCHPAGE.CALL_UP_INCOMPLETED');
         } else {
             let dialog =
                 this.modalCtrl.create(
@@ -234,10 +233,10 @@ export class MatchPageComponent extends BasePageComponent implements OnInit {
                         this.matchesService.updateTeams(this.match.id, result.teams)
                             .subscribe(
                                 data => {
-                                    this.showConfirmation();
+                                    this.messages.showSuccess('ACTION_OK', 'CONFIRMATION');
                                     this.reloadMatch();
                                 },
-                                error => this.showError(error)
+                                error => this.messages.showError(error)
                             );
                     }
                 });
@@ -261,10 +260,10 @@ export class MatchPageComponent extends BasePageComponent implements OnInit {
                       this.matchesService.deleteMatch(this.match.id)
                           .subscribe(
                               data => {
-                                  this.showConfirmation();
+                                  this.messages.showSuccess('ACTION_OK', 'CONFIRMATION');
                                   this.navCtrl.pop();
                               },
-                              error => this.showError(error)
+                              error => this.messages.showError(error)
                           );
                   }
               },
@@ -277,7 +276,7 @@ export class MatchPageComponent extends BasePageComponent implements OnInit {
         let dialog = this.modalCtrl.create(AddMatchComponent, {match: this.match}, {enableBackdropDismiss: false});
         dialog.onDidDismiss((actionOk: boolean) => {
             if (actionOk) {
-                this.showConfirmation();
+                this.messages.showSuccess('ACTION_OK', 'CONFIRMATION');
                 this.reloadMatch();
             }
         });
@@ -286,16 +285,16 @@ export class MatchPageComponent extends BasePageComponent implements OnInit {
 
     private joinCallUp(): void {
         if (this.match.callUp && this.match.callUp.length === this.match.numPlayers) {
-            this.showError('MATCHPAGE.CALL_UP_COMPLETED');
+            this.messages.showError('MATCHPAGE.CALL_UP_COMPLETED');
         } else {
             this.matchesService.joinPlayerCallUp(this.match.id, this.player)
                 .subscribe(
                     data => {
                         this.joinedPlayer = true;
-                        this.showConfirmation();
+                        this.messages.showSuccess('ACTION_OK', 'CONFIRMATION');
                         this.reloadMatch();
                     },
-                    error => this.showError(error)
+                    error => this.messages.showError(error)
                 );
         }
     }
@@ -305,10 +304,10 @@ export class MatchPageComponent extends BasePageComponent implements OnInit {
             .subscribe(
                 data => {
                     this.joinedPlayer = false;
-                    this.showConfirmation();
+                    this.messages.showSuccess('ACTION_OK', 'CONFIRMATION');
                     this.reloadMatch();
                 },
-                error => this.showError(error)
+                error => this.messages.showError(error)
             );
     }
 
@@ -328,10 +327,10 @@ export class MatchPageComponent extends BasePageComponent implements OnInit {
             .subscribe(
                 data => {
                     this.discardedPlayer = true;
-                    this.showConfirmation();
+                    this.messages.showSuccess('ACTION_OK', 'CONFIRMATION');
                     this.reloadMatch();
                 },
-                error => this.showError(error)
+                error => this.messages.showError(error)
             );
     }
 
@@ -340,10 +339,10 @@ export class MatchPageComponent extends BasePageComponent implements OnInit {
             .subscribe(
                 data => {
                     this.discardedPlayer = false;
-                    this.showConfirmation();
+                    this.messages.showSuccess('ACTION_OK', 'CONFIRMATION');
                     this.reloadMatch();
                 },
-                error => this.showError(error)
+                error => this.messages.showError(error)
             );
     }
 
@@ -362,9 +361,9 @@ export class MatchPageComponent extends BasePageComponent implements OnInit {
                     .subscribe(
                         ok => {
                             this.reloadMatch();
-                            this.showConfirmation();
+                            this.messages.showSuccess('ACTION_OK', 'CONFIRMATION');
                         },
-                        error => this.showError(error)
+                        error => this.messages.showError(error)
                     );
             }
         });
@@ -393,7 +392,7 @@ export class MatchPageComponent extends BasePageComponent implements OnInit {
         this.playerService.fetchPlayers()
             .subscribe(
                 players => this.showListPlayers(players),
-                error => this.showError(error)
+                error => this.messages.showError(error)
             );
     }
 
@@ -421,10 +420,10 @@ export class MatchPageComponent extends BasePageComponent implements OnInit {
                         this.matchesService.joinPlayerCallUp(this.match.id, extraPlayer)
                             .subscribe(
                                 ok => {
-                                    this.showConfirmation();
+                                    this.messages.showSuccess('ACTION_OK', 'CONFIRMATION');
                                     this.reloadMatch();
                                 },
-                                error => this.showError(error)
+                                error => this.messages.showError(error)
                             );
                     }
                 }
@@ -454,10 +453,10 @@ export class MatchPageComponent extends BasePageComponent implements OnInit {
                         this.matchesService.unjoinPlayerCallUp(this.match.id, extraPlayer.player.id)
                             .subscribe(
                                 ok => {
-                                    this.showConfirmation();
+                                    this.messages.showSuccess('ACTION_OK', 'CONFIRMATION');
                                     this.reloadMatch();
                                 },
-                                error => this.showError(error)
+                                error => this.messages.showError(error)
                             );
                     }
                 }
@@ -506,11 +505,11 @@ export class MatchPageComponent extends BasePageComponent implements OnInit {
                 .subscribe(
                     data => {
                         if (index === playersSelected.length - 1) {
-                            this.showConfirmation();
+                            this.messages.showSuccess('ACTION_OK', 'CONFIRMATION');
                             this.reloadMatch();
                         }
                     },
-                    error => this.showError(error)
+                    error => this.messages.showError(error)
                 );
         });
     }
@@ -526,11 +525,11 @@ export class MatchPageComponent extends BasePageComponent implements OnInit {
                 .subscribe(
                     data => {
                         if (index === playersNoSelected.length - 1) {
-                            this.showConfirmation();
+                            this.messages.showSuccess('ACTION_OK', 'CONFIRMATION');
                             this.reloadMatch();
                         }
                     },
-                    error => this.showError(error)
+                    error => this.messages.showError(error)
                 );
         });
     }
@@ -539,7 +538,7 @@ export class MatchPageComponent extends BasePageComponent implements OnInit {
         this.matchesService.getMatch(this.match.id)
             .subscribe(
                 match => this.match = match,
-                error => this.showError(error)
+                error => this.messages.showError(error)
             );
     }
 }

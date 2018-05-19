@@ -10,7 +10,7 @@
         "SLIDE1_2": "The",
         "SLIDE1_3": "to manage the football game on Tuesdays",
         "SLIDE2_1": "What is it and what does it serve Football with friends?",
-        "SLIDE2_2": "is an high quality mobile apps with web technologies like HTML, CSS, and JavaScript.",
+        "SLIDE2_2": "is an high quality mobile apps available for both iOS and Android.",
         "SLIDE2_3": "allows you to manage everything related to the games of the Tuesday we have been playing for almost 10 years. At last!!",
         "SLIDE3_1": "What do you have to do now?",
         "SLIDE3_2": "You just have to enjoy the application and say",
@@ -48,9 +48,7 @@
         "TITLE": "Matches",
         "NO_FOUND": "No matches have been found for those dates.",
         "DELETE_MATCH": "Delete Match",
-        "DELETE_SURE": "Are you sure of delete this match?",
-        "CONFIRMATION": "Confirmation",
-        "ACTION_OK": "Action completed successfully"
+        "DELETE_SURE": "Are you sure of delete this match?"
     },
     "MATCHPAGE": {
         "DATA_HEADER": "Match Information",
@@ -59,6 +57,8 @@
         "SCOREBOARD": "Scoreboard",
         "MISTER": "Teams maker",
         "DISCARDS": "Discards",
+        "RESERVES": "Reserves",
+        "VALUATIONS": "Valuations",
         "NOT_PLAYED": "Not played",
         "CALL_UP_INCOMPLETED": "The call up is not completed",
         "ACTION": {
@@ -100,11 +100,20 @@
     "BUSY_INDICATOR": {
         "PLEASE_WAIT": "Please wait..." 
     },
+    "TOAST": {
+        "CLOSE": "Close"
+    },
     "OK_BUTTON": "Ok",
     "CANCEL_BUTTON": "Cancel",
     "DELETE_BUTTON": "Delete",
     "EDIT_BUTTON": "Edit",
     "JOIN_BUTTON": "Join",
     "UNJOIN_BUTTON": "Unjoin",
-    "DISCARD_BUTTON": "Discard me"
+    "DISCARD_BUTTON": "Discard me",
+    "CONFIRMATION": "Confirmation",
+    "ACTION_OK": "Action completed successfully",
+    "INFORMATION": "Information",
+    "ERROR": "Error",
+    "BLACK": "Black",
+    "WHITE": "White"
 }

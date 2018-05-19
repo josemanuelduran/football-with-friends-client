@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { IonicPage, AlertController, App  } from 'ionic-angular';
-
-import { TranslateService } from '@ngx-translate/core';
+import { IonicPage, App  } from 'ionic-angular';
 
 import { Authenticate, Role } from '../../models';
-import { GlobalService, ContextService, PlayersService } from '../../providers';
+import { GlobalService, ContextService, PlayersService, MessagesService } from '../../providers';
 import { LoginService } from './services/login.service';
 
 @IonicPage({
@@ -20,11 +18,10 @@ export class LoginPageComponent implements OnInit {
     constructor(
       private global: GlobalService,
       private loginService: LoginService,
-      private translate: TranslateService,
       private app: App,
-      private alertCtrl: AlertController,
       private context: ContextService,
       private playersService: PlayersService,
+      private messages: MessagesService,
     ) { }
 
     ngOnInit() {
@@ -49,20 +46,11 @@ export class LoginPageComponent implements OnInit {
                                     this.context.setPlayerLogged(player);
                                     this.app.getActiveNav().setRoot('TabsController');
                                 },
-                                error => this.showError()
+                                error => this.messages.showError('LOGIN.ERROR_LOGIN_MSG', 'LOGIN.ERROR_LOGIN_TITLE')
                             );
                     }
                 },
-                err => this.showError()
+                err => this.messages.showError('LOGIN.ERROR_LOGIN_MSG', 'LOGIN.ERROR_LOGIN_TITLE')
             );
-    }
-
-    private showError() {
-        let alert = this.alertCtrl.create({
-          title: this.translate.instant('LOGIN.ERROR_LOGIN_TITLE'),
-          subTitle: this.translate.instant('LOGIN.ERROR_LOGIN_MSG'),
-          buttons: ['OK']
-        });
-        alert.present();
     }
 }

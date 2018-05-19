@@ -4,8 +4,7 @@ import { NavParams, AlertController, ViewController } from 'ionic-angular';
 import { TranslateService } from '@ngx-translate/core';
 
 import { Match, TeamColor, SimplyPlayer, Player } from '../../models';
-import { MatchesService } from '../../providers';
-import { BasePageComponent } from '../../pages/base/base-page.component';
+import { MatchesService, MessagesService } from '../../providers';
 
 interface PlayerTeam {
     player: SimplyPlayer;
@@ -16,7 +15,7 @@ interface PlayerTeam {
   selector: 'fwf-teams-maker',
   templateUrl: './teams-maker.component.html'
 })
-export class TeamsMakerComponent extends BasePageComponent implements OnInit {
+export class TeamsMakerComponent implements OnInit {
 
     listPlayers: PlayerTeam[];
     listPlayersWhite: PlayerTeam[];
@@ -28,12 +27,11 @@ export class TeamsMakerComponent extends BasePageComponent implements OnInit {
     constructor(
             private viewCtrl: ViewController,
             public navParams: NavParams,
-            protected alertCtrl: AlertController,
-            protected translate: TranslateService,
+            private alertCtrl: AlertController,
+            private translate: TranslateService,
             private matchesService: MatchesService,
-    ) {
-        super(translate, alertCtrl);
-    }
+            private messages: MessagesService,
+    ) { }
 
     ngOnInit() {
         this.match = this.navParams.get('match');
@@ -79,7 +77,7 @@ export class TeamsMakerComponent extends BasePageComponent implements OnInit {
         this.matchesService.updateMatch(this.match)
             .subscribe(
                 data => this.viewCtrl.dismiss(true),
-                error => this.showError(error)
+                error => this.messages.showError(error)
             );
     }
 

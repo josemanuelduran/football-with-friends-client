@@ -10,9 +10,9 @@
         "SLIDE1_2": "La",
         "SLIDE1_3": "para gestionar el partido de fútbol de los martes",
         "SLIDE2_1": "¿Qué es y para que sirve Fútbol con Amigos?",
-        "SLIDE2_2": "es una aplicación móvil de alta calidad con tecnologías web como HTML, CSS y JavaScript",
+        "SLIDE2_2": "es una aplicación móvil de alta calidad disponible tanto para iOS como para Android.",
         "SLIDE2_3": "te permite administrar todo lo relacionado con los partidos del martes que llevamos jugando desde hace casi 10 años. ¡¡Por fin!!",
-        "SLIDE3_1": "Qué tengo que hacer ahora?",
+        "SLIDE3_1": "¿Qué tengo que hacer ahora?",
         "SLIDE3_2": "Sólo tienes que disfrutar de la aplicación y decir",
         "SLIDE3_3": "\"vaya equipito\"",
         "SLIDE3_4": "cada vez que se hagan los equipos cada semana",
@@ -48,9 +48,7 @@
         "TITLE": "Partidos",
         "NO_FOUND": "No se han encontrado partidos para esas fechas.",
         "DELETE_MATCH": "Borrar Partido",
-        "DELETE_SURE": "¿Estás seguro de eliminar este partido?",
-        "CONFIRMATION": "Confirmación",
-        "ACTION_OK": "Acción completada con éxito"
+        "DELETE_SURE": "¿Estás seguro de eliminar este partido?"
     },
     "MATCHPAGE": {
         "DATA_HEADER": "Información del Partido",
@@ -59,6 +57,8 @@
         "SCOREBOARD": "Marcador",
         "MISTER": "Creador de los equipos",
         "DISCARDS": "Descartados",
+        "RESERVES": "Reservas",
+        "VALUATIONS": "Valoraciones",
         "NOT_PLAYED": "No jugado",
         "CALL_UP_INCOMPLETED": "La convocatiria no está completa",
         "ACTION": {
@@ -100,11 +100,20 @@
     "BUSY_INDICATOR": {
         "PLEASE_WAIT": "Por favor, espere..." 
     },
+    "TOAST": {
+        "CLOSE": "Cerrar"
+    },
     "OK_BUTTON": "Ok",
     "CANCEL_BUTTON": "Cancel",
     "DELETE_BUTTON": "Delete",
     "EDIT_BUTTON": "Edit",
     "JOIN_BUTTON": "Unirse",
     "UNJOIN_BUTTON": "Salirse",
-    "DISCARD_BUTTON": "Me descarto"
+    "DISCARD_BUTTON": "Me descarto",
+    "CONFIRMATION": "Confirmación",
+    "ACTION_OK": "Acción completada con éxito",
+    "INFORMATION": "Información",
+    "ERROR": "Error",
+    "BLACK": "Negro",
+    "WHITE": "Blanco"
 }
