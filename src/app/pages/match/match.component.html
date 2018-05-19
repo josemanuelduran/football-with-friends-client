@@ -7,6 +7,7 @@
             <button ion-button
                     icon-only
                     clear
+                    [disabled]="menuDisable"
                     (click)="showOptions($event)">
                 <ion-icon name="more"></ion-icon>
             </button>
@@ -37,7 +38,7 @@
                 <ion-icon name="football" item-left></ion-icon>
                 {{ "MATCHPAGE.SCOREBOARD" | translate}}
                 <h4 class="scoreboard">
-                    <span *ngIf="match.team1?.goals && match.team2?.goals; else elseBlock ">
+                    <span *ngIf="matchPlayed; else elseBlock ">
                         {{'WHITE' | translate}}: {{match.team1.goals}} - {{'BLACK' | translate}}: {{match.team2.goals}}
                     </span>
                     <ng-template #elseBlock>
@@ -57,6 +58,11 @@
             <ion-item color="none" on-click="goToReserves()">
                 <ion-icon name="cut" item-left></ion-icon>
                 {{ "MATCHPAGE.RESERVES" | translate}}  ({{match.reserves?.length || 0}})
+                <ion-icon name="arrow-forward" item-right></ion-icon>
+            </ion-item>
+            <ion-item *ngIf="matchPlayed" color="none" on-click="goToValuations()">
+                <ion-icon name="stats" item-left></ion-icon>
+                {{ "MATCHPAGE.VALUATIONS" | translate}}
                 <ion-icon name="arrow-forward" item-right></ion-icon>
             </ion-item> 
         </ion-list>

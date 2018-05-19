@@ -18,6 +18,7 @@ import {
 } from '../../components';
 import { MatchesService, PlayersService, ContextService, MessagesService } from '../../providers';
 import { ScoreboardComponent } from '../../components/scoreboard/scoreboard.component';
+import { isUndefined } from 'ionic-angular/util/util';
 
 
 const AVAILABLE_OPTIONS: Option[] = [
@@ -97,13 +98,15 @@ const AVAILABLE_OPTIONS: Option[] = [
   selector: 'fwf-page-match',
   templateUrl: 'match.component.html',
 })
-export class MatchPageComponent extends BasePageComponent implements OnInit {
+export class MatchPageComponent implements OnInit {
 
     match: Match;
     user: User;
     player: Player;
     joinedPlayer: boolean;
     discardedPlayer: boolean;
+    menuDisable: boolean;
+    matchPlayed: boolean;
 
     constructor(
         public navCtrl: NavController,
@@ -124,6 +127,8 @@ export class MatchPageComponent extends BasePageComponent implements OnInit {
         this.player = this.navParams.get('player');
         this.setJoinedPlayer();
         this.setDiscardedPlayer();
+        this.setMenuDisable();
+        this.setMatchPlayed();
     }
 
     showOptions(clickEvent: Event): void {
@@ -189,6 +194,10 @@ export class MatchPageComponent extends BasePageComponent implements OnInit {
         this.navCtrl.push('CallUpPage', {match: this.match, reserves: true});
     }
 
+    goToValuations(): void {
+        this.navCtrl.push('ValuationsPage', {match: this.match});
+    }
+
     private getOptionsAllowed(): Option[] {
         let result = AVAILABLE_OPTIONS
             .filter(
@@ -197,20 +206,29 @@ export class MatchPageComponent extends BasePageComponent implements OnInit {
                     return arrayResult.length > 0;
                 }
             );
+        if (this.match.openCallUp) {
         if (this.joinedPlayer) {
-            result.splice(result.findIndex(option => option.action === Action.JOIN_CALL_UP), 1);
-            result.splice(result.findIndex(option => option.action === Action.DISCARD_ME_CALL_UP), 1);
-            result.splice(result.findIndex(option => option.action === Action.EXIT_FROM_DISCARDS), 1);
+                let actions = [Action.JOIN_CALL_UP, Action.DISCARD_ME_CALL_UP, Action.EXIT_FROM_DISCARDS];
+                result = this.removeOptions(result, actions);
         } else {
-            result.splice(result.findIndex(option => option.action === Action.UNJOIN_CALL_UP), 1);
+                let actions = [Action.UNJOIN_CALL_UP];
             if (this.discardedPlayer) {
-                result.splice(result.findIndex(option => option.action === Action.JOIN_CALL_UP), 1);
-                result.splice(result.findIndex(option => option.action === Action.DISCARD_ME_CALL_UP), 1);
+                    actions.push(Action.JOIN_CALL_UP, Action.DISCARD_ME_CALL_UP);
             } else {
-                result.splice(result.findIndex(option => option.action === Action.EXIT_FROM_DISCARDS), 1);
+                    actions.push(Action.EXIT_FROM_DISCARDS);
+                }
+                result = this.removeOptions(result, actions);
             }
+        } else {
+            let actions = [Action.JOIN_CALL_UP, Action.UNJOIN_CALL_UP, Action.DISCARD_ME_CALL_UP, Action.EXIT_FROM_DISCARDS];
+            result = this.removeOptions(result, actions);
         }
         return result;
+    }
+
+    private removeOptions(options: Option[], actions: Action[]): Option[] {
+        actions.forEach(action => options.splice(options.findIndex(option => option.action === action), 1));
+        return options;
     }
 
     private editTeams(): void {
@@ -386,6 +404,16 @@ export class MatchPageComponent extends BasePageComponent implements OnInit {
         } else {
             this.discardedPlayer = false;
         }
+    }
+
+    private setMenuDisable(): void {
+        this.menuDisable = !(this.match.openCallUp || this.context.userLoggedIsAdmin());
+    }
+
+    private setMatchPlayed(): void {
+        this.matchPlayed =
+            this.match.team1 && !isUndefined(this.match.team1.goals)
+            && this.match.team2 && !isUndefined(this.match.team2.goals);
     }
 
     private editCallUp(): void {

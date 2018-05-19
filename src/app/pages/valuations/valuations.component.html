@@ -1,10 +1,7 @@
 <ion-header>
     <ion-navbar color="primary">        
-        <ion-title *ngIf=!reserves>
-            {{match.name}} {{"MATCHPAGE.CALL_UP" | translate}}
-        </ion-title>
-        <ion-title *ngIf=reserves>
-            {{match.name}} {{"MATCHPAGE.RESERVES" | translate}}
+        <ion-title>
+            {{match.name}} {{"MATCHPAGE.VALUATIONS" | translate}}
         </ion-title>
         <ion-buttons end>               
             <button ion-button
@@ -17,14 +14,8 @@
     </ion-navbar>
 </ion-header>
 
-
 <ion-content padding>
-    <ion-list *ngIf="reserves">
-        <ion-item *ngFor="let item of match.reserves; let i = index;">
-            {{i+1}}. {{item.player.name}} <span *ngIf="!item.player.fixed">(s)</span>
-        </ion-item>
-    </ion-list>
-    <ion-list *ngIf="!reserves">
+    <ion-list>
         <ion-item *ngFor="let item of match.callUp; let i = index;">
             {{i+1}}. {{item.player.name}} <span *ngIf="!item.player.fixed">(s)</span>
         </ion-item>
