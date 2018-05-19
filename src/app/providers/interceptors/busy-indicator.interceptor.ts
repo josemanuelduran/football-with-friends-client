@@ -4,7 +4,8 @@ import {
   HttpHandler,
   HttpEvent,
   HttpInterceptor,
-  HttpResponse
+  HttpResponse,
+  HttpErrorResponse
 } from '@angular/common/http';
 import 'rxjs/add/operator/do';
 import { Observable } from 'rxjs/Observable';
@@ -19,12 +20,18 @@ export class BusyIndicatorInterceptor implements HttpInterceptor {
         if (!request.url.includes('assets/') && !this.busyService.isBusyIndicatorVisible()) {
             this.busyService.loadingAnimationStart();
         }
-        return next.handle(request).do(evt => {
-            if (evt instanceof HttpResponse) {
-                if (!evt.url.includes('assets/') && this.busyService.isBusyIndicatorVisible()) {
+        return next.handle(request).do(
+            evt => {
+                if (evt instanceof HttpResponse) {
+                    if (!evt.url.includes('assets/') && this.busyService.isBusyIndicatorVisible()) {
+                        this.busyService.loadingAnimationEnd();
+                    }
+                }
+            },
+            err => {
+                if (err instanceof HttpErrorResponse) {
                     this.busyService.loadingAnimationEnd();
                 }
-            }
-        });
+            });
     }
 }
