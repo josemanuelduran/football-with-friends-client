@@ -11,6 +11,7 @@ import 'rxjs/add/operator/do';
 import { Observable } from 'rxjs/Observable';
 
 import { BusyIndicatorService } from '../busy-indicator/busy-indicator.service';
+import { _throw } from 'rxjs/observable/throw';
 
 @Injectable()
 export class BusyIndicatorInterceptor implements HttpInterceptor {
@@ -20,18 +21,26 @@ export class BusyIndicatorInterceptor implements HttpInterceptor {
         if (!request.url.includes('assets/') && !this.busyService.isBusyIndicatorVisible()) {
             this.busyService.loadingAnimationStart();
         }
-        return next.handle(request).do(
-            evt => {
-                if (evt instanceof HttpResponse) {
-                    if (!evt.url.includes('assets/') && this.busyService.isBusyIndicatorVisible()) {
+        return next.handle(request)
+            .do(
+                evt => {
+                    if (evt instanceof HttpResponse) {
+                        if (!evt.url.includes('assets/') && this.busyService.isBusyIndicatorVisible()) {
+                            this.busyService.loadingAnimationEnd();
+                        }
+                    }
+                },
+                err => {
+                    if (err instanceof HttpErrorResponse) {
                         this.busyService.loadingAnimationEnd();
                     }
                 }
-            },
-            err => {
-                if (err instanceof HttpErrorResponse) {
+            )
+            .catch(
+                errorResponse => {
                     this.busyService.loadingAnimationEnd();
+                    return _throw(errorResponse);
                 }
-            });
+            );
     }
 }

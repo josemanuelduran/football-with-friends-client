@@ -24,7 +24,8 @@ import {
     HeaderInterceptor,
     BusyIndicatorInterceptor,
     BusyIndicatorService,
-    MessagesService
+    MessagesService,
+    ErrorInterceptor
 } from './providers';
 import { ComponentsModule } from './components/components.module';
 
@@ -81,6 +82,11 @@ import { ComponentsModule } from './components/components.module';
           {
             provide: HTTP_INTERCEPTORS,
             useClass: BusyIndicatorInterceptor,
+            multi: true,
+          },
+          {
+            provide: HTTP_INTERCEPTORS,
+            useClass: ErrorInterceptor,
             multi: true,
           }
     ]
