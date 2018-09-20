@@ -11,6 +11,7 @@ export enum Action {
     EDIT_TEAMS,
     SET_SCOREBOARD,
     EDIT_CALL_UP,
+    EDIT_DISCARDS,
     ADD_EXTRA_PLAYER,
     REMOVE_EXTRA_PLAYER,
 }

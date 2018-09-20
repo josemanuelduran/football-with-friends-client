@@ -18,7 +18,7 @@
 <ion-content padding>
     <ion-list>
         <ion-item *ngFor="let item of match.discards; let i = index;">
-            {{i+1}}. {{item.player.player.name}} <span *ngIf="!item.player.player.fixed">(s)</span>
+            {{i+1}}. {{item.player.name}} <span *ngIf="!item.player.fixed">(s)</span>
         </ion-item>
     </ion-list>
     

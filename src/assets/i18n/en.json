@@ -61,6 +61,7 @@
         "VALUATIONS": "Valuations",
         "NOT_PLAYED": "Not played",
         "CALL_UP_INCOMPLETED": "The call up is not completed",
+        "NAME_NEW_PLAYER": "Name",
         "ACTION": {
             "EDIT_TEAMS": "Edit Teams",
             "EDIT_MATCH": "Edit Match",
@@ -71,6 +72,7 @@
             "DISCARD_ME_CALL_UP": "I can't play",
             "EXIT_FROM_DISCARDS": "Exit from discards",
             "EDIT_CALL_UP": "Edit Call up",
+            "EDIT_DISCARDS": "Edit discards",
             "ADD_EXTRA_PLAYER": "Add extra Player",
             "REMOVE_EXTRA_PLAYER": "Remove extra Player"
         }

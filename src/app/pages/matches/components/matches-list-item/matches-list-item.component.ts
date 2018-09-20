@@ -75,7 +75,7 @@ export class MatchesListItemComponent implements OnInit {
     private setPlayerDiscarded(): void {
         let discards = this.match.discards;
         if (discards) {
-            this.playerDiscarded = discards.findIndex(el => el.player.player.id === this.playerId) >= 0;
+            this.playerDiscarded = discards.findIndex(el => el.player.id === this.playerId) >= 0;
         } else {
             this.playerDiscarded = false;
         }

@@ -191,14 +191,11 @@ export class MatchesPageComponent implements OnInit {
     private discardMeCallUp(matchSelected: Match): void {
         let playerDiscard: PlayerDiscard = {
             player: {
-                player: {
-                    id: this.playerLogged.id,
-                    fixed: this.playerLogged.fixed,
-                    name: this.playerLogged.alias
-                },
-                dateCallUp: new Date()
+                id: this.playerLogged.id,
+                fixed: this.playerLogged.fixed,
+                name: this.playerLogged.alias
             },
-            canPlay: false
+            dateDiscard: new Date()
         };
         this.matchesService.discardPlayerCallUp(matchSelected.id, playerDiscard)
             .subscribe(
@@ -220,7 +217,7 @@ export class MatchesPageComponent implements OnInit {
 
     private getGroupedMatches(matches: MatchMonthYear[]): MatchesGroup[] {
         let groupedMatches: MatchesGroup[];
-        groupedMatches = _(matches).sortBy('match.date')
+        groupedMatches = _(matches).sortBy('match.date', 'desc')
             .groupBy('monthYear')
             .toPairs()
             .map(function (currentGroup) {

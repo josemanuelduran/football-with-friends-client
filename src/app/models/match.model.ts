@@ -36,6 +36,6 @@ export interface SimplyPlayer {
 }
 
 export interface PlayerDiscard {
-    player: PlayerCallUp;
-    canPlay: boolean;
+    player: SimplyPlayer;
+    dateDiscard: Date;
 }

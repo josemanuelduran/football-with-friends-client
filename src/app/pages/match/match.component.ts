@@ -77,6 +77,12 @@ const AVAILABLE_OPTIONS: Option[] = [
         icon: 'people'
     },
     {
+        action: Action.EDIT_DISCARDS,
+        roles: [Role.ADMIN],
+        token: 'MATCHPAGE.ACTION.EDIT_DISCARDS',
+        icon: 'close-circle'
+    },
+    {
         action: Action.ADD_EXTRA_PLAYER,
         roles: [Role.ADMIN],
         token: 'MATCHPAGE.ACTION.ADD_EXTRA_PLAYER',
@@ -163,6 +169,9 @@ export class MatchPageComponent implements OnInit {
                         break;
                     case Action.EDIT_CALL_UP:
                         this.editCallUp();
+                        break;
+                    case Action.EDIT_DISCARDS:
+                        this.editDiscards();
                         break;
                     case Action.ADD_EXTRA_PLAYER:
                         this.addExtraPlayer();
@@ -302,19 +311,15 @@ export class MatchPageComponent implements OnInit {
     }
 
     private joinCallUp(): void {
-        if (this.match.callUp && this.match.callUp.length === this.match.numPlayers) {
-            this.messages.showError('MATCHPAGE.CALL_UP_COMPLETED');
-        } else {
-            this.matchesService.joinPlayerCallUp(this.match.id, this.player)
-                .subscribe(
-                    data => {
-                        this.joinedPlayer = true;
-                        this.messages.showSuccess('ACTION_OK', 'CONFIRMATION');
-                        this.reloadMatch();
-                    },
-                    error => this.messages.showError(error)
-                );
-        }
+        this.matchesService.joinPlayerCallUp(this.match.id, this.player)
+            .subscribe(
+                data => {
+                    this.joinedPlayer = true;
+                    this.messages.showSuccess('ACTION_OK', 'CONFIRMATION');
+                    this.reloadMatch();
+                },
+                error => this.messages.showError(error)
+            );
     }
 
     private unjoinCallUp(): void {
@@ -332,14 +337,11 @@ export class MatchPageComponent implements OnInit {
     private discardMeCallUp(): void {
         let playerDiscard: PlayerDiscard = {
             player: {
-                player: {
-                    id: this.player.id,
-                    fixed: this.player.fixed,
-                    name: this.player.alias
-                },
-                dateCallUp: new Date()
+                id: this.player.id,
+                fixed: this.player.fixed,
+                name: this.player.alias
             },
-            canPlay: false
+            dateDiscard: new Date()
         };
         this.matchesService.discardPlayerCallUp(this.match.id, playerDiscard)
             .subscribe(
@@ -400,7 +402,7 @@ export class MatchPageComponent implements OnInit {
     private setDiscardedPlayer(): void {
         let discards = this.match.discards;
         if (discards) {
-            this.discardedPlayer = discards.findIndex(el => el.player.player.id === this.player.id) >= 0;
+            this.discardedPlayer = discards.findIndex(el => el.player.id === this.player.id) >= 0;
         } else {
             this.discardedPlayer = false;
         }
@@ -419,7 +421,15 @@ export class MatchPageComponent implements OnInit {
     private editCallUp(): void {
         this.playerService.fetchPlayers()
             .subscribe(
-                players => this.showListPlayers(players),
+                players => this.showListPlayersCallUp(players),
+                error => this.messages.showError(error)
+            );
+    }
+
+    private editDiscards(): void {
+        this.playerService.fetchPlayers()
+            .subscribe(
+                players => this.showListPlayersDiscards(players),
                 error => this.messages.showError(error)
             );
     }
@@ -430,7 +440,7 @@ export class MatchPageComponent implements OnInit {
             inputs: [
                 {
                     name: 'name',
-                    placeholder: this.translate.instant('MATCHPAGE.NAME')
+                    placeholder: this.translate.instant('MATCHPAGE.NAME_NEW_PLAYER')
                 },
             ],
             buttons: [
@@ -466,7 +476,7 @@ export class MatchPageComponent implements OnInit {
             inputs: [
                 {
                     name: 'name',
-                    placeholder: this.translate.instant('MATCHPAGE.NAME')
+                    placeholder: this.translate.instant('MATCHPAGE.NAME_NEW_PLAYER')
                 },
             ],
             buttons: [
@@ -499,7 +509,7 @@ export class MatchPageComponent implements OnInit {
             : 0;
     }
 
-    private showListPlayers(players: Player[]) {
+    private showListPlayersCallUp(players: Player[]) {
         let alert = this.alertCtrl.create();
         alert.setTitle(this.translate.instant('MATCHPAGE.ADD_PLAYER'));
         players.forEach(player => {
@@ -517,6 +527,29 @@ export class MatchPageComponent implements OnInit {
         handler: selecteds => {
             this.includePlayersCallUp(players, selecteds);
             this.excludePlayersCallUp(players, selecteds);
+        }
+        });
+        alert.present();
+    }
+
+    private showListPlayersDiscards(players: Player[]) {
+        let alert = this.alertCtrl.create();
+        alert.setTitle(this.translate.instant('MATCHPAGE.DISCARD_PLAYER'));
+        players.forEach(player => {
+            let checked = this.match.discards && this.match.discards.findIndex(el => el.player.id === player.id) >= 0;
+            alert.addInput({
+                type: 'checkbox',
+                label: player.alias,
+                value: player.id,
+                checked: checked
+            });
+        });
+        alert.addButton(this.translate.instant('CANCEL_BUTTON'));
+        alert.addButton({
+        text: this.translate.instant('OK_BUTTON'),
+        handler: selecteds => {
+            this.includePlayersDiscards(players, selecteds);
+            this.excludePlayersDiscards(players, selecteds);
         }
         });
         alert.present();
@@ -550,6 +583,54 @@ export class MatchPageComponent implements OnInit {
         });
         playersNoSelected.forEach((player, index) => {
             this.matchesService.unjoinPlayerCallUp(this.match.id, player.id)
+                .subscribe(
+                    data => {
+                        if (index === playersNoSelected.length - 1) {
+                            this.messages.showSuccess('ACTION_OK', 'CONFIRMATION');
+                            this.reloadMatch();
+                        }
+                    },
+                    error => this.messages.showError(error)
+                );
+        });
+    }
+
+    private includePlayersDiscards(players: Player[], playersId: string[]): void {
+        let playersSelected = players.filter(player => {
+            let isPlayerSelected = playersId.findIndex(el => el === player.id) >= 0;
+            let isPlayerDiscarded = this.match.discards && this.match.discards.findIndex(el => el.player.id === player.id) >= 0;
+            return !isPlayerDiscarded && isPlayerSelected;
+        });
+        playersSelected.forEach((player, index) => {
+            let playerDiscarded: PlayerDiscard = {
+                player: {
+                    id: player.id,
+                    fixed: player.fixed,
+                    name: player.alias
+                },
+                dateDiscard: new Date()
+            };
+            this.matchesService.discardPlayerCallUp(this.match.id, playerDiscarded)
+                .subscribe(
+                    data => {
+                        if (index === playersSelected.length - 1) {
+                            this.messages.showSuccess('ACTION_OK', 'CONFIRMATION');
+                            this.reloadMatch();
+                        }
+                    },
+                    error => this.messages.showError(error)
+                );
+        });
+    }
+
+    private excludePlayersDiscards(players: Player[], playersId: string[]): void {
+        let playersNoSelected = players.filter(player => {
+            let isPlayerNoSelected = playersId.findIndex(el => el === player.id) < 0;
+            let isPlayerDiscarded = this.match.discards && this.match.discards.findIndex(el => el.player.id === player.id) >= 0;
+            return isPlayerDiscarded && isPlayerNoSelected;
+        });
+        playersNoSelected.forEach((player, index) => {
+            this.matchesService.exitFromDiscards(this.match.id, player.id)
                 .subscribe(
                     data => {
                         if (index === playersNoSelected.length - 1) {
