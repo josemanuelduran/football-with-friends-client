@@ -20,7 +20,6 @@ import { MatchesService, PlayersService, ContextService, MessagesService } from 
 import { ScoreboardComponent } from '../../components/scoreboard/scoreboard.component';
 import { isUndefined } from 'ionic-angular/util/util';
 
-
 const AVAILABLE_OPTIONS: Option[] = [
     {
         action: Action.EDIT_TEAMS,
@@ -204,7 +203,7 @@ export class MatchPageComponent implements OnInit {
     }
 
     goToValuations(): void {
-        this.navCtrl.push('ValuationsPage', {match: this.match});
+        this.navCtrl.push('ValuationsPage', {match: this.match, player: this.player});
     }
 
     private getOptionsAllowed(): Option[] {

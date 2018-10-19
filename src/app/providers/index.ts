@@ -10,3 +10,4 @@ export * from './context/context.service';
 export * from './players/players.service';
 export * from './busy-indicator/busy-indicator.service';
 export * from './messages/messages.service';
+export * from './valuations/valuations.service';
