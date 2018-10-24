@@ -1,0 +1,57 @@
+<ion-header>
+        <ion-navbar color="primary" hideBackButton>
+            <ion-buttons left>
+                <button ion-button 
+                        icon-only
+                        clear
+                        (click)="cancel()">
+                    <ion-icon name="close-circle"></ion-icon>
+                </button>
+            </ion-buttons>
+            <ion-title>
+                {{ "EDIT_PROFILE_PAGE.TITLE" | translate}}
+            </ion-title>
+            <ion-buttons end>
+                <button ion-button
+                        icon-only
+                        clear
+                        (click)="saveProfile()"
+                        [disabled]="!profileForm.valid">
+                    <ion-icon name="checkmark-circle"></ion-icon>
+                </button>        
+            </ion-buttons>
+        </ion-navbar>
+    </ion-header>
+
+<ion-content padding>
+    <form [formGroup]="profileForm">
+        <ion-item>
+            <ion-label floating>{{'EDIT_PROFILE_PAGE.NAME' | translate}}</ion-label>
+            <ion-input [formControl]="profileForm.controls['name']" type="text"></ion-input>
+            <div *ngIf="!profileForm.controls.name.valid && profileForm.controls.name.dirty" class="validator-error">
+                {{'EDIT_PROFILE_PAGE.ENTER_NAME' | translate}}
+            </div>
+        </ion-item>
+            
+        <ion-item>
+            <ion-label floating>{{'EDIT_PROFILE_PAGE.ALIAS' | translate}}</ion-label>
+            <ion-input [formControl]="profileForm.controls['alias']" type="text"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label floating>{{'EDIT_PROFILE_PAGE.EMAIL' | translate}}</ion-label>
+            <ion-input [formControl]="profileForm.controls['email']" type="email"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label floating>{{'EDIT_PROFILE_PAGE.PHONE' | translate}}</ion-label>
+            <ion-input [formControl]="profileForm.controls['phone']" type="number"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>{{'EDIT_PROFILE_PAGE.USERNAME' | translate}}</ion-label>
+            <ion-input [formControl]="profileForm.controls['username']" type="text"></ion-input>
+        </ion-item>
+    </form>
+
+</ion-content>

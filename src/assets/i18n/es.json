@@ -91,8 +91,30 @@
         "TITLE": "Pagos",
         "NO_FOUND": "No se han encontrado pagos."
     },
-    "PROFILEPAGE": {
-        "TITLE": "Perfil"
+    "PROFILE_PAGE": {
+        "TITLE": "Perfil",
+        "DATA_HEADER": "Información del Jugador",
+        "NAME": "Nombre y apellidos",
+        "ALIAS": "Alias",
+        "EMAIL": "Correo electrónico",
+        "PHONE": "Teléfono",
+        "USERNAME": "Nombre de usuario (acceso a la aplicación)",
+        "STATUS": "Estado",
+        "CHANGE_PASSWORD": "Cambiar la contraseña",
+        "FIXED": "Fijo",
+        "NO_FIXED": "No Fijo"
+    },
+    "EDIT_PROFILE_PAGE": {
+        "TITLE": "Modificar Perfil",
+        "NAME" : "Nombre y apellidos",
+        "ENTER_NAME": "Introduzca su nombre y apellidos",
+        "ALIAS": "Alias",
+        "EMAIL": "Correo electrónico",
+        "PHONE": "Teléfono",
+        "USERNAME": "Nombre de usuario (acceso a la aplicación)",
+        "SURE": "¿Está seguro de que quiere cancelar el proceso?",
+        "CANCEL": "Cancelar modificación",
+        "ERROR": "Se ha producido un error al guardar los cambios"
     },
     "STATS_PAGE": {
         "TITLE": "Estadísticas",

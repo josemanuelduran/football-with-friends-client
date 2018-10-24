@@ -10,6 +10,7 @@ import { AddMatchComponent } from './add-match/add-match.component';
 import { OverflowMenuComponent } from './overflow-menu/overflow-menu.component';
 import { TeamsMakerComponent } from './teams-maker/teams-maker.component';
 import { ScoreboardComponent } from './scoreboard/scoreboard.component';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
 
 @NgModule({
     imports: [
@@ -25,6 +26,7 @@ import { ScoreboardComponent } from './scoreboard/scoreboard.component';
         OverflowMenuComponent,
         TeamsMakerComponent,
         ScoreboardComponent,
+        EditProfileComponent,
     ],
     entryComponents: [
     //     // A list of components that are not referenced in a reachable component template.
@@ -34,6 +36,7 @@ import { ScoreboardComponent } from './scoreboard/scoreboard.component';
         OverflowMenuComponent,
         TeamsMakerComponent,
         ScoreboardComponent,
+        EditProfileComponent,
     ],
     exports: [
         // A list of declarations — component, directive, and pipe classes — that an importing module can use.

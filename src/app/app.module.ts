@@ -27,6 +27,7 @@ import {
     MessagesService,
     ErrorInterceptor,
     ValuationsService,
+    ProfileService,
 } from './providers';
 import { ComponentsModule } from './components/components.module';
 
@@ -66,6 +67,7 @@ import { ComponentsModule } from './components/components.module';
         BusyIndicatorService,
         MessagesService,
         ValuationsService,
+        ProfileService,
         {
             provide: HTTP_INTERCEPTORS,
             useClass: TokenInterceptor,
