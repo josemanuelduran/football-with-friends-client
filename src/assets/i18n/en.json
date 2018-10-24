@@ -44,13 +44,13 @@
         "ERROR_LOGIN_TITLE": "Login Error",
         "ERROR_LOGIN_MSG": "Invalid username or password"
     },
-    "MATCHESPAGE": {
+    "MATCHES_PAGE": {
         "TITLE": "Matches",
         "NO_FOUND": "No matches have been found for those dates.",
         "DELETE_MATCH": "Delete Match",
         "DELETE_SURE": "Are you sure of delete this match?"
     },
-    "MATCHPAGE": {
+    "MATCH_PAGE": {
         "DATA_HEADER": "Match Information",
         "CALL_UP": "Call up",
         "TEAMS": "Teams",
@@ -77,22 +77,24 @@
             "REMOVE_EXTRA_PLAYER": "Remove extra Player"
         }
     },
-    "ADDMATCHPAGE": {
+    "ADD_MATCH_PAGE": {
         "TITLE": "Add new match",
         "NAME": "Name",
         "DATE": "Date",
         "NUMPLAYERS": "Number of players",
         "OPEN_CALL_UP": "Open call up",
-        "CANCELLED": "Match cancelled"
+        "CANCELLED": "Match cancelled",
+        "SURE": "Are you sure you want to cancel the process?",
+        "CANCEL": "Cancel modification"
     },
-    "PAYMENTSPAGE": {
+    "PAYMENTS_PAGE": {
         "TITLE": "Payments",
         "NO_FOUND": "No payments have been found."
     },
     "PROFILEPAGE": {
         "TITLE": "Profile"
     },
-    "STATSPAGE": {
+    "STATS_PAGE": {
         "TITLE": "Stats",
         "NO_FOUND": "No stats have been found."
     },

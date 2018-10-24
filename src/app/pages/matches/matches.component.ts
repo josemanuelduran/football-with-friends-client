@@ -136,8 +136,8 @@ export class MatchesPageComponent implements OnInit {
 
     private delete(matchSelected: Match): void {
         let alert = this.alertCtrl.create({
-            title: this.translate.instant('MATCHESPAGE.DELETE_MATCH'),
-            subTitle: this.translate.instant('MATCHESPAGE.DELETE_SURE'),
+            title: this.translate.instant('MATCHES_PAGE.DELETE_MATCH'),
+            subTitle: this.translate.instant('MATCHES_PAGE.DELETE_SURE'),
             buttons: [
                 {
                     text: this.translate.instant('CANCEL_BUTTON'),

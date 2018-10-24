@@ -44,13 +44,13 @@
         "ERROR_LOGIN_TITLE": "Error de acceso",
         "ERROR_LOGIN_MSG": "Nombre de usuario o contraseña invalidos"
     },
-    "MATCHESPAGE": {
+    "MATCHES_PAGE": {
         "TITLE": "Partidos",
         "NO_FOUND": "No se han encontrado partidos para esas fechas.",
         "DELETE_MATCH": "Borrar Partido",
         "DELETE_SURE": "¿Estás seguro de eliminar este partido?"
     },
-    "MATCHPAGE": {
+    "MATCH_PAGE": {
         "DATA_HEADER": "Información del Partido",
         "CALL_UP": "Convocatoria",
         "TEAMS": "Equipos",
@@ -77,22 +77,24 @@
             "REMOVE_EXTRA_PLAYER": "Eliminar Jugador extra"
         }
     },
-    "ADDMATCHPAGE": {
+    "ADD_MATCH_PAGE": {
         "TITLE": "Añadir nuevo partido",
         "NAME": "Nombre",
         "DATE": "Fecha",
         "NUMPLAYERS": "Número de jugadores",
         "OPEN_CALL_UP": "Abrir convocatoria",
-        "CANCELLED": "Partido cancelado"
+        "CANCELLED": "Partido cancelado",
+        "SURE": "¿Está seguro de que quiere cancelar el proceso?",
+        "CANCEL": "Cancelar modificación"
     },
-    "PAYMENTSPAGE": {
+    "PAYMENTS_PAGE": {
         "TITLE": "Pagos",
         "NO_FOUND": "No se han encontrado pagos."
     },
     "PROFILEPAGE": {
         "TITLE": "Perfil"
     },
-    "STATSPAGE": {
+    "STATS_PAGE": {
         "TITLE": "Estadísticas",
         "NO_FOUND": "No se han encontrado estadísticas."
     },
