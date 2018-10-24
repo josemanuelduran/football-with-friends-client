@@ -24,73 +24,73 @@ const AVAILABLE_OPTIONS: Option[] = [
     {
         action: Action.EDIT_TEAMS,
         roles: [Role.ADMIN, Role.COACH],
-        token: 'MATCHPAGE.ACTION.EDIT_TEAMS',
+        token: 'MATCH_PAGE.ACTION.EDIT_TEAMS',
         icon: 'build'
     },
     {
         action: Action.EDIT_MATCH,
         roles: [Role.ADMIN],
-        token: 'MATCHPAGE.ACTION.EDIT_MATCH',
+        token: 'MATCH_PAGE.ACTION.EDIT_MATCH',
         icon: 'create'
     },
     {
         action: Action.DELETE_MATCH,
         roles: [Role.ADMIN],
-        token: 'MATCHPAGE.ACTION.DELETE_MATCH',
+        token: 'MATCH_PAGE.ACTION.DELETE_MATCH',
         icon: 'trash'
     },
     {
         action: Action.SET_SCOREBOARD,
         roles: [Role.ADMIN],
-        token: 'MATCHPAGE.ACTION.SCOREBOARD',
+        token: 'MATCH_PAGE.ACTION.SCOREBOARD',
         icon: 'football'
     },
     {
         action: Action.JOIN_CALL_UP,
         roles: [Role.PLAYER],
-        token: 'MATCHPAGE.ACTION.JOIN_CALL_UP',
+        token: 'MATCH_PAGE.ACTION.JOIN_CALL_UP',
         icon: 'thumbs-up'
     },
     {
         action: Action.UNJOIN_CALL_UP,
         roles: [Role.PLAYER],
-        token: 'MATCHPAGE.ACTION.UNJOIN_CALL_UP',
+        token: 'MATCH_PAGE.ACTION.UNJOIN_CALL_UP',
         icon: 'thumbs-down'
     },
     {
         action: Action.DISCARD_ME_CALL_UP,
         roles: [Role.PLAYER],
-        token: 'MATCHPAGE.ACTION.DISCARD_ME_CALL_UP',
+        token: 'MATCH_PAGE.ACTION.DISCARD_ME_CALL_UP',
         icon: 'remove-circle'
     },
     {
         action: Action.EXIT_FROM_DISCARDS,
         roles: [Role.PLAYER],
-        token: 'MATCHPAGE.ACTION.EXIT_FROM_DISCARDS',
+        token: 'MATCH_PAGE.ACTION.EXIT_FROM_DISCARDS',
         icon: 'checkmark-circle'
     },
     {
         action: Action.EDIT_CALL_UP,
         roles: [Role.ADMIN],
-        token: 'MATCHPAGE.ACTION.EDIT_CALL_UP',
+        token: 'MATCH_PAGE.ACTION.EDIT_CALL_UP',
         icon: 'people'
     },
     {
         action: Action.EDIT_DISCARDS,
         roles: [Role.ADMIN],
-        token: 'MATCHPAGE.ACTION.EDIT_DISCARDS',
+        token: 'MATCH_PAGE.ACTION.EDIT_DISCARDS',
         icon: 'close-circle'
     },
     {
         action: Action.ADD_EXTRA_PLAYER,
         roles: [Role.ADMIN],
-        token: 'MATCHPAGE.ACTION.ADD_EXTRA_PLAYER',
+        token: 'MATCH_PAGE.ACTION.ADD_EXTRA_PLAYER',
         icon: 'add'
     },
     {
         action: Action.REMOVE_EXTRA_PLAYER,
         roles: [Role.ADMIN],
-        token: 'MATCHPAGE.ACTION.REMOVE_EXTRA_PLAYER',
+        token: 'MATCH_PAGE.ACTION.REMOVE_EXTRA_PLAYER',
         icon: 'remove'
     }
 
@@ -241,7 +241,7 @@ export class MatchPageComponent implements OnInit {
 
     private editTeams(): void {
         if (this.match.callUp.length < this.match.numPlayers) {
-            this.messages.showInfo('MATCHPAGE.CALL_UP_INCOMPLETED');
+            this.messages.showInfo('MATCH_PAGE.CALL_UP_INCOMPLETED');
         } else {
             let dialog =
                 this.modalCtrl.create(
@@ -272,8 +272,8 @@ export class MatchPageComponent implements OnInit {
 
     private deleteMatch(): void {
         let alert = this.alertCtrl.create({
-          title: this.translate.instant('MATCHESPAGE.DELETE_MATCH'),
-          subTitle: this.translate.instant('MATCHESPAGE.DELETE_SURE'),
+          title: this.translate.instant('MATCHES_PAGE.DELETE_MATCH'),
+          subTitle: this.translate.instant('MATCHES_PAGE.DELETE_SURE'),
           buttons: [
               {
                   text: this.translate.instant('CANCEL_BUTTON'),
@@ -435,11 +435,11 @@ export class MatchPageComponent implements OnInit {
 
     private addExtraPlayer(): void {
         let prompt = this.alertCtrl.create({
-            title: this.translate.instant('MATCHPAGE.ACTION.ADD_EXTRA_PLAYER'),
+            title: this.translate.instant('MATCH_PAGE.ACTION.ADD_EXTRA_PLAYER'),
             inputs: [
                 {
                     name: 'name',
-                    placeholder: this.translate.instant('MATCHPAGE.NAME_NEW_PLAYER')
+                    placeholder: this.translate.instant('MATCH_PAGE.NAME_NEW_PLAYER')
                 },
             ],
             buttons: [
@@ -471,11 +471,11 @@ export class MatchPageComponent implements OnInit {
 
     private removeExtraPlayer(): void {
         let prompt = this.alertCtrl.create({
-            title: this.translate.instant('MATCHPAGE.ACTION.ADD_EXTRA_PLAYER'),
+            title: this.translate.instant('MATCH_PAGE.ACTION.ADD_EXTRA_PLAYER'),
             inputs: [
                 {
                     name: 'name',
-                    placeholder: this.translate.instant('MATCHPAGE.NAME_NEW_PLAYER')
+                    placeholder: this.translate.instant('MATCH_PAGE.NAME_NEW_PLAYER')
                 },
             ],
             buttons: [
@@ -510,7 +510,7 @@ export class MatchPageComponent implements OnInit {
 
     private showListPlayersCallUp(players: Player[]) {
         let alert = this.alertCtrl.create();
-        alert.setTitle(this.translate.instant('MATCHPAGE.ADD_PLAYER'));
+        alert.setTitle(this.translate.instant('MATCH_PAGE.ADD_PLAYER'));
         players.forEach(player => {
             let checked = this.match.callUp && this.match.callUp.findIndex(el => el.player.id === player.id) >= 0;
             alert.addInput({
@@ -533,7 +533,7 @@ export class MatchPageComponent implements OnInit {
 
     private showListPlayersDiscards(players: Player[]) {
         let alert = this.alertCtrl.create();
-        alert.setTitle(this.translate.instant('MATCHPAGE.DISCARD_PLAYER'));
+        alert.setTitle(this.translate.instant('MATCH_PAGE.DISCARD_PLAYER'));
         players.forEach(player => {
             let checked = this.match.discards && this.match.discards.findIndex(el => el.player.id === player.id) >= 0;
             alert.addInput({

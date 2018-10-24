@@ -8,7 +8,7 @@
             <ion-icon name="menu"></ion-icon>
         </button>
         <ion-title>
-            {{ "MATCHESPAGE.TITLE" | translate}}
+            {{ "MATCHES_PAGE.TITLE" | translate}}
         </ion-title>
         <ion-buttons end>
             <button ion-button
@@ -50,7 +50,7 @@
     </ion-list>
     <!--No treatments available to display-->
     <fwf-empty-state *ngIf="groupedMatches?.length === 0">
-        {{'MATCHESPAGE.NO_FOUND' | translate}}
+        {{'MATCHES_PAGE.NO_FOUND' | translate}}
     </fwf-empty-state>
     <ion-fab right bottom *ngIf="isAdmin">
         <button ion-fab color="primary" (click)="addMatch()">

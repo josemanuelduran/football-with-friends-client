@@ -83,8 +83,8 @@ export class TeamsMakerComponent implements OnInit {
 
     cancel(): void {
         let alert = this.alertCtrl.create({
-            title: this.translate.instant('ADDMATCHPAGE.CANCEL'),
-            subTitle: this.translate.instant('ADDMATCHPAGE.SURE'),
+            title: this.translate.instant('ADD_MATCH_PAGE.CANCEL'),
+            subTitle: this.translate.instant('ADD_MATCH_PAGE.SURE'),
             buttons: [
                 {
                     text: this.translate.instant('CANCEL_BUTTON'),

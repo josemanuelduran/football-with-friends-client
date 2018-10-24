@@ -17,7 +17,7 @@
 <ion-content>
     <ion-card>
         <ion-card-header>
-            {{"MATCHPAGE.DATA_HEADER" | translate}}
+            {{"MATCH_PAGE.DATA_HEADER" | translate}}
         </ion-card-header>      
         <ion-list>
             <ion-item>
@@ -26,43 +26,43 @@
             </ion-item>                    
             <ion-item color="none" on-click="goToCallUp()">
                 <ion-icon name="people" item-left></ion-icon>
-                {{ "MATCHPAGE.CALL_UP" | translate}}  ({{match.callUp?.length || 0}}/{{match.numPlayers}})
+                {{ "MATCH_PAGE.CALL_UP" | translate}}  ({{match.callUp?.length || 0}}/{{match.numPlayers}})
                 <ion-icon name="arrow-forward" item-right></ion-icon>
             </ion-item>
             <ion-item color="none" on-click="goToTeams()">
                 <ion-icon name="shirt" item-left></ion-icon>
-                {{ "MATCHPAGE.TEAMS" | translate}}
+                {{ "MATCH_PAGE.TEAMS" | translate}}
                 <ion-icon name="arrow-forward" item-right></ion-icon>
             </ion-item>
             <ion-item color="none">
                 <ion-icon name="football" item-left></ion-icon>
-                {{ "MATCHPAGE.SCOREBOARD" | translate}}
+                {{ "MATCH_PAGE.SCOREBOARD" | translate}}
                 <h4 class="scoreboard">
                     <span *ngIf="matchPlayed; else elseBlock ">
                         {{'WHITE' | translate}}: {{match.team1.goals}} - {{'BLACK' | translate}}: {{match.team2.goals}}
                     </span>
                     <ng-template #elseBlock>
-                        {{"MATCHPAGE.NOT_PLAYED" | translate}}
+                        {{"MATCH_PAGE.NOT_PLAYED" | translate}}
                     </ng-template>
                 </h4>
             </ion-item>     
             <ion-item color="none" *ngIf="match.mister">
                 <ion-icon name="build" item-left></ion-icon>
-                {{ "MATCHPAGE.MISTER" | translate}}: {{match.mister.name}}
+                {{ "MATCH_PAGE.MISTER" | translate}}: {{match.mister.name}}
             </ion-item>
             <ion-item color="none" on-click="goToDiscards()">
                 <ion-icon name="thumbs-down" item-left></ion-icon>
-                {{ "MATCHPAGE.DISCARDS" | translate}}  ({{match.discards?.length || 0}})
+                {{ "MATCH_PAGE.DISCARDS" | translate}}  ({{match.discards?.length || 0}})
                 <ion-icon name="arrow-forward" item-right></ion-icon>
             </ion-item>
             <ion-item color="none" on-click="goToReserves()">
                 <ion-icon name="cut" item-left></ion-icon>
-                {{ "MATCHPAGE.RESERVES" | translate}}  ({{match.reserves?.length || 0}})
+                {{ "MATCH_PAGE.RESERVES" | translate}}  ({{match.reserves?.length || 0}})
                 <ion-icon name="arrow-forward" item-right></ion-icon>
             </ion-item>
             <ion-item *ngIf="matchPlayed" color="none" on-click="goToValuations()">
                 <ion-icon name="stats" item-left></ion-icon>
-                {{ "MATCHPAGE.VALUATIONS" | translate}}
+                {{ "MATCH_PAGE.VALUATIONS" | translate}}
                 <ion-icon name="arrow-forward" item-right></ion-icon>
             </ion-item> 
         </ion-list>

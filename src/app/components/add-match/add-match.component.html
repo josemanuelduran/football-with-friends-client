@@ -9,7 +9,7 @@
                 </button>
             </ion-buttons>
             <ion-title>
-                {{ "ADDMATCHPAGE.TITLE" | translate}}
+                {{ "ADD_MATCH_PAGE.TITLE" | translate}}
             </ion-title>
             <ion-buttons end>
                 <button ion-button
@@ -26,7 +26,7 @@
 <ion-content padding>
     <form [formGroup]="matchForm">
         <ion-item>
-            <ion-label floating>{{'ADDMATCHPAGE.NAME' | translate}}</ion-label>
+            <ion-label floating>{{'ADD_MATCH_PAGE.NAME' | translate}}</ion-label>
             <ion-input [formControl]="matchForm.controls['name']" type="text"></ion-input>
             <div *ngIf="!matchForm.controls.name.valid && matchForm.controls.name.dirty" class="validator-error">
                 Please enter a name.
@@ -34,22 +34,22 @@
         </ion-item>
             
         <ion-item>
-            <ion-label floating>{{'ADDMATCHPAGE.DATE' | translate}}</ion-label>
+            <ion-label floating>{{'ADD_MATCH_PAGE.DATE' | translate}}</ion-label>
             <ion-datetime [formControl]="matchForm.controls['date']" displayFormat="DD/MM/YYYY"></ion-datetime>
         </ion-item>
 
         <ion-item>
-            <ion-label floating>{{'ADDMATCHPAGE.NUMPLAYERS' | translate}}</ion-label>
+            <ion-label floating>{{'ADD_MATCH_PAGE.NUMPLAYERS' | translate}}</ion-label>
             <ion-input [formControl]="matchForm.controls['numPlayers']" type="number"></ion-input>
         </ion-item>
 
         <ion-item>
-            <ion-label>{{'ADDMATCHPAGE.OPEN_CALL_UP' | translate}}</ion-label>
+            <ion-label>{{'ADD_MATCH_PAGE.OPEN_CALL_UP' | translate}}</ion-label>
             <ion-checkbox [formControl]="matchForm.controls['openCallUp']"></ion-checkbox>
         </ion-item>
 
         <ion-item *ngIf="match?.id">
-            <ion-label>{{'ADDMATCHPAGE.CANCELLED' | translate}}</ion-label>
+            <ion-label>{{'ADD_MATCH_PAGE.CANCELLED' | translate}}</ion-label>
             <ion-checkbox [formControl]="matchForm.controls['cancelled']"></ion-checkbox>
         </ion-item>
     </form>
