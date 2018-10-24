@@ -36,7 +36,8 @@ export class LoginPageComponent implements OnInit {
                 user => {
                     user = {
                         ...user,
-                        roles: user.roles.map(rol => (<any>Role)[rol])
+                        roles: user.roles.map(rol => (<any>Role)[rol]),
+                        active: true
                     };
                     this.context.setUserLogged(user);
                     if (user.playerId) {

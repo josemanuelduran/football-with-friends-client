@@ -20,6 +20,6 @@ export interface Player {
     registerDate?: Date;
     fixedDate?: Date;
     user?: string;
-    phone?: string;
+    phoneNumber?: string;
     email?: string;
 }

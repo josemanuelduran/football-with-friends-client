@@ -91,8 +91,29 @@
         "TITLE": "Payments",
         "NO_FOUND": "No payments have been found."
     },
-    "PROFILEPAGE": {
-        "TITLE": "Profile"
+    "PROFILE_PAGE": {
+        "TITLE": "Profile",
+        "DATA_HEADER": "Player Data",
+        "NAME": "Full name",
+        "ALIAS": "Nickname",
+        "EMAIL": "Email",
+        "PHONE": "Phone Number",
+        "USERNAME": "Username",
+        "STATUS": "Status",
+        "CHANGE_PASSWORD": "Change password",
+        "FIXED": "Fixed",
+        "NO_FIXED": "No Fixed"
+    },
+    "EDIT_PROFILE_PAGE": {
+        "TITLE": "Modificar Perfil",
+        "NAME": "Full name",
+        "ALIAS": "Nickname",
+        "EMAIL": "Email",
+        "PHONE": "Phone Number",
+        "USERNAME": "Username",
+        "SURE": "Are you sure you want to cancel the process?",
+        "CANCEL": "Cancel modification",
+        "ERROR": "An error occurred when saving the changes"
     },
     "STATS_PAGE": {
         "TITLE": "Stats",

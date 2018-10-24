@@ -8,10 +8,82 @@
             <ion-icon name="menu"></ion-icon>
         </button>
         <ion-title>
-            {{ "PROFILEPAGE.TITLE" | translate}}
+            {{ "PROFILE_PAGE.TITLE" | translate}}
         </ion-title>
+        <ion-buttons end>               
+            <button ion-button
+                    icon-only
+                    clear
+                    (click)="editProfile()">
+                <ion-icon name="create"></ion-icon>
+            </button>
+        </ion-buttons>
     </ion-navbar>
 </ion-header>
 <ion-content padding>
-
+    <!-- <ion-card> -->
+        <ion-card-header>
+            {{"PROFILE_PAGE.DATA_HEADER" | translate}}
+        </ion-card-header>      
+        <ion-list>         
+            <ion-item color="none">
+                <ion-icon name="person" item-left></ion-icon>
+                {{ "PROFILE_PAGE.NAME" | translate}}
+                <h4>
+                    {{profile.fullName}}
+                </h4>
+            </ion-item>
+            <ion-item color="none">
+                <ion-icon name="shirt" item-left></ion-icon>
+                {{ "PROFILE_PAGE.ALIAS" | translate}}
+                <h4>
+                    {{profile.alias}}
+                </h4>
+            </ion-item>
+            <ion-item color="none">
+                <ion-icon name="mail" item-left></ion-icon>
+                {{ "PROFILE_PAGE.EMAIL" | translate}}
+                <h4>
+                    <span *ngIf="profile.email; else elseBlock">
+                        {{profile.email}}
+                    </span>
+                    <ng-template #elseBlock>
+                        {{ "NOT_AVAILABLE" | translate}}
+                    </ng-template>
+                </h4>
+            </ion-item>     
+            <ion-item color="none">
+                <ion-icon name="call" item-left></ion-icon>
+                {{ "PROFILE_PAGE.PHONE" | translate}}
+                <h4>
+                    <span *ngIf="profile.phoneNumber; else elseBlock1">
+                        {{profile.phoneNumber}}
+                    </span>
+                    <ng-template #elseBlock1>
+                        {{ "NOT_AVAILABLE" | translate}}
+                    </ng-template>
+                </h4>
+            </ion-item>
+            <ion-item color="none">
+                <ion-icon name="cash" item-left></ion-icon>
+                {{ "PROFILE_PAGE.STATUS" | translate}}
+                <h4>
+                    <span *ngIf="profile.fixed; else elseBlock2">
+                        {{ "PROFILE_PAGE.FIXED" | translate}}
+                    </span>
+                    <ng-template #elseBlock2>
+                        {{ "PROFILE_PAGE.NO_FIXED" | translate}}
+                    </ng-template>
+                </h4>
+            </ion-item>
+            <ion-item color="none">
+                <ion-icon name="key" item-left></ion-icon>
+                {{ "PROFILE_PAGE.USERNAME" | translate}}
+                <h4>
+                    {{profile.username}}
+                </h4>
+            </ion-item>
+        </ion-list>
+        <button ion-button full (click)="changePassword()">{{ "PROFILE_PAGE.CHANGE_PASSWORD" | translate}}</button>
+      <!-- </ion-card> -->
 </ion-content>

@@ -11,3 +11,4 @@ export * from './players/players.service';
 export * from './busy-indicator/busy-indicator.service';
 export * from './messages/messages.service';
 export * from './valuations/valuations.service';
+export * from './profile/profile.service';
