@@ -30,7 +30,7 @@
         "INTRODUCTION": "Introduction",
         "ABOUT": "About",
         "LOGOUT": "Log-out",
-        "TITLE_DIVIDER": "Settings",
+        "TITLE_DIVIDER": "Actions",
         "LOCATION": "Location"
     },
     "TABS": {
@@ -147,5 +147,6 @@
     "INFORMATION": "Information",
     "ERROR": "Error",
     "BLACK": "Black",
-    "WHITE": "White"
+    "WHITE": "White",
+    "NOT_AVAILABLE": "Not available"
 }

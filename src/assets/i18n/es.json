@@ -36,7 +36,7 @@
         "INTRODUCTION": "Introducción",
         "ABOUT": "Acerca de",
         "LOGOUT": "Salir",
-        "TITLE_DIVIDER": "Ajustes",
+        "TITLE_DIVIDER": "Acciones",
         "LOCATION": "Localización"
     },
     "LOGIN": {
@@ -148,5 +148,6 @@
     "INFORMATION": "Información",
     "ERROR": "Error",
     "BLACK": "Negro",
-    "WHITE": "Blanco"
+    "WHITE": "Blanco",
+    "NOT_AVAILABLE": "No disponible"
 }
