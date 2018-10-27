@@ -2,7 +2,9 @@
     "APPLICATION_DETAIL": {
         "COPYRIGHT": " 2018 Jose Manuel Durán. Todos los derechos reservados.",
         "NAME": "Fútbol Con Amigos",
-        "VERSION": "v0.1.0"
+        "VERSION": "v0.1.0",
+        "IMAGE_SOURCE": "assets/img/png/FWF-logo_es.PNG",
+        "AUTHOR": "Jose Manuel Durán"
     },
     "INTRODUCTION": {
         "CONTINUE": "Continuar",
@@ -34,7 +36,7 @@
         "INTRODUCTION": "Introducción",
         "ABOUT": "Acerca de",
         "LOGOUT": "Salir",
-        "TITLE_DIVIDER": "Ajustes",
+        "TITLE_DIVIDER": "Acciones",
         "LOCATION": "Localización"
     },
     "LOGIN": {
@@ -43,6 +45,11 @@
         "PASSWORD": "Contraseña",
         "ERROR_LOGIN_TITLE": "Error de acceso",
         "ERROR_LOGIN_MSG": "Nombre de usuario o contraseña invalidos"
+    },
+    "ABOUT_PAGE": {
+        "TITLE": "Acerca de FWF",
+        "VERSION": "Versión",
+        "AUTHOR": "Autor"
     },
     "MATCHES_PAGE": {
         "TITLE": "Partidos",
@@ -141,5 +148,6 @@
     "INFORMATION": "Información",
     "ERROR": "Error",
     "BLACK": "Negro",
-    "WHITE": "Blanco"
+    "WHITE": "Blanco",
+    "NOT_AVAILABLE": "No disponible"
 }

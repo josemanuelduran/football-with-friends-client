@@ -1,6 +1,8 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { MenuController, Content } from 'ionic-angular';
 
+import { TranslateService } from '@ngx-translate/core';
+
 @Component({
   selector: 'fwf-menu',
   templateUrl: 'menu.component.html'
@@ -16,6 +18,7 @@ export class MenuComponent implements OnInit {
 
     constructor(
         private menu: MenuController,
+        private translate: TranslateService,
     ) { }
 
     ngOnInit(): void {
@@ -24,6 +27,10 @@ export class MenuComponent implements OnInit {
 
     navigateTo(target): void {
         this.menuItemSelected(target);
+    }
+
+    getImageSource(): string {
+        return this.translate.instant('APPLICATION_DETAIL.IMAGE_SOURCE');
     }
 
     private menuItemSelected(item: string) {
@@ -55,16 +62,16 @@ export class MenuComponent implements OnInit {
             }
         ];
         this.tiles2 = [
-            {
-                title: 'MENU.SETTINGS',
-                target: 'tiles.settings',
-                icon: 'settings'
-            },
-            {
-                title: 'MENU.LOCATION',
-                target: 'tiles.location',
-                icon: 'pin'
-            },
+            // {
+            //     title: 'MENU.SETTINGS',
+            //     target: 'tiles.settings',
+            //     icon: 'settings'
+            // },
+            // {
+            //     title: 'MENU.LOCATION',
+            //     target: 'tiles.location',
+            //     icon: 'pin'
+            // },
             {
                 title: 'MENU.INTRODUCTION',
                 target: 'tiles.introduction',

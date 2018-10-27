@@ -1,0 +1,40 @@
+<ion-header>
+    <ion-navbar color="primary">
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>
+            {{"ABOUT_PAGE.TITLE" | translate}}
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content padding>
+    <ion-card>
+        <img [src]="imageSource"/>
+        <ion-card-content>
+            <ion-card-title>
+                {{"APPLICATION_DETAIL.NAME" | translate}}
+            </ion-card-title>
+            <ion-list>
+                <ion-list-header>
+                    {{"ABOUT_PAGE.VERSION" | translate}}
+                </ion-list-header>
+                <ion-item>
+                    <ion-icon name="bookmark" item-start></ion-icon>
+                    {{"APPLICATION_DETAIL.VERSION" | translate}}
+                </ion-item>
+            </ion-list>
+            <ion-list>
+                <ion-list-header>
+                    {{"ABOUT_PAGE.AUTHOR" | translate}}
+                </ion-list-header>
+                <ion-item>
+                    <ion-avatar item-start>
+                        <img src="assets/img/jpg/author.jpg">
+                    </ion-avatar>
+                    {{"APPLICATION_DETAIL.AUTHOR" | translate}}
+                </ion-item>
+            </ion-list>
+        </ion-card-content>
+      </ion-card>
+</ion-content>
