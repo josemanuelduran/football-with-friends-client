@@ -2,7 +2,9 @@
     "APPLICATION_DETAIL": {
         "COPYRIGHT": " 2018 Jose Manuel Durán. All rights reserved.",
         "NAME": "Football With Friends",
-        "VERSION": "v0.1.0"
+        "VERSION": "v0.1.0",
+        "IMAGE_SOURCE": "assets/img/png/FWF-logo.PNG",
+        "AUTHOR": "Jose Manuel Durán"
     },
     "INTRODUCTION": {
         "CONTINUE": "Continue",
@@ -43,6 +45,11 @@
         "PASSWORD": "Password",
         "ERROR_LOGIN_TITLE": "Login Error",
         "ERROR_LOGIN_MSG": "Invalid username or password"
+    },
+    "ABOUT_PAGE": {
+        "TITLE": "About FWF",
+        "VERSION": "Version",
+        "AUTHOR": "Author"
     },
     "MATCHES_PAGE": {
         "TITLE": "Matches",

@@ -75,7 +75,11 @@ export class FootballWithFriendsAppComponent implements OnInit, OnDestroy {
         } else if (item === 'tiles.introduction') {
             this.nav.setRoot('IntroductionPage');
             return;
+        } else if (item === 'tiles.about') {
+            this.nav.setRoot('AboutPage');
+            return;
         }
+
 
         let index: number;
         switch (item) {
@@ -91,8 +95,6 @@ export class FootballWithFriendsAppComponent implements OnInit, OnDestroy {
             case 'tiles.stats':
                 index = 3;
                 break;
-            case 'tiles.introduction':
-
             default:
                 index = 0;
                 break;
