@@ -23,6 +23,11 @@ export class ProfileService {
         );
     }
 
+    public changePassword(userId: string, oldPassword: string, newPassword: string): Observable<any> {
+        let token = btoa(oldPassword + ':' + newPassword);
+        return this.http.put(`${USER_URL}/${userId}/changePassword`, token);
+    }
+
     private updatePlayer(player: Player): Observable<Object> {
         return this.http.put(PLAYER_URL, player);
     }

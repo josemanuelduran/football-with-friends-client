@@ -109,7 +109,14 @@
         "STATUS": "Estado",
         "CHANGE_PASSWORD": "Cambiar la contraseña",
         "FIXED": "Fijo",
-        "NO_FIXED": "No Fijo"
+        "NO_FIXED": "No Fijo",
+        "CURRENT_PASSWORD": "Contraseña actual",
+        "NEW_PASSWORD": "Nueva contraseña",
+        "REPIT_PASSWORD": "Repita la contraseña",
+        "BAD_NEW_PASSWORD": "Error en la nueva contraseña",
+        "BAD_NEW_PASSWORD_EXPLANATION": "La nueva contraseña introducida no coincide con la repetición",
+        "ERROR_CHANGE_PASSWORD": "Error en el cambio de contraseña",
+        "CURRENT_PASSWORD_INVALID": "Contraseña actual invalida"
     },
     "EDIT_PROFILE_PAGE": {
         "TITLE": "Modificar Perfil",
@@ -143,11 +150,13 @@
     "JOIN_BUTTON": "Unirse",
     "UNJOIN_BUTTON": "Salirse",
     "DISCARD_BUTTON": "Me descarto",
+    "SAVE_BUTTON": "Guardar",
     "CONFIRMATION": "Confirmación",
     "ACTION_OK": "Acción completada con éxito",
     "INFORMATION": "Información",
     "ERROR": "Error",
     "BLACK": "Negro",
     "WHITE": "Blanco",
-    "NOT_AVAILABLE": "No disponible"
+    "NOT_AVAILABLE": "No disponible",
+    "EXPIRED_SESSION": "Sesión Caducada"
 }
