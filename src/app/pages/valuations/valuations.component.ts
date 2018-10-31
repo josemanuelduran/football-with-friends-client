@@ -32,6 +32,16 @@ export class ValuationsPageComponent implements OnInit {
 
     saveScores(): void {
         this.matchScore.date = new Date();
+        this.matchScore.scores = this.matchScore.scores.map(score => {
+            let result = score;
+            if (isNaN(score.score)) {
+                result = {
+                    ...score,
+                    score: undefined
+                };
+            }
+            return result;
+        });
         if (this.matchScore.id) {
             this.valuationsService.updateMatchScore(this.matchScore)
                 .subscribe(
