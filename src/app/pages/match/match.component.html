@@ -60,7 +60,7 @@
                 {{ "MATCH_PAGE.RESERVES" | translate}}  ({{match.reserves?.length || 0}})
                 <ion-icon name="arrow-forward" item-right></ion-icon>
             </ion-item>
-            <ion-item *ngIf="matchPlayed" color="none" on-click="goToValuations()">
+            <ion-item *ngIf="showValidations" color="none" on-click="goToValuations()">
                 <ion-icon name="stats" item-left></ion-icon>
                 {{ "MATCH_PAGE.VALUATIONS" | translate}}
                 <ion-icon name="arrow-forward" item-right></ion-icon>
