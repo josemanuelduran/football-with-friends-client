@@ -112,6 +112,7 @@ export class MatchPageComponent implements OnInit {
     discardedPlayer: boolean;
     menuDisable: boolean;
     matchPlayed: boolean;
+    showValidations: boolean;
 
     constructor(
         public navCtrl: NavController,
@@ -134,6 +135,7 @@ export class MatchPageComponent implements OnInit {
         this.setDiscardedPlayer();
         this.setMenuDisable();
         this.setMatchPlayed();
+        this.setShowValidations();
     }
 
     showOptions(clickEvent: Event): void {
@@ -415,6 +417,15 @@ export class MatchPageComponent implements OnInit {
         this.matchPlayed =
             this.match.team1 && !isUndefined(this.match.team1.goals)
             && this.match.team2 && !isUndefined(this.match.team2.goals);
+    }
+
+    private setShowValidations(): void {
+        this.showValidations = this.matchPlayed && this.userLoggedHasPlayed();
+    }
+
+    private userLoggedHasPlayed(): boolean {
+        const index = this.match.callUp.findIndex(playerCallUp => playerCallUp.player.id === this.player.id);
+        return index > 0;
     }
 
     private editCallUp(): void {
