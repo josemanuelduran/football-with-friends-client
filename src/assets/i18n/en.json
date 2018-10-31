@@ -109,7 +109,14 @@
         "STATUS": "Status",
         "CHANGE_PASSWORD": "Change password",
         "FIXED": "Fixed",
-        "NO_FIXED": "No Fixed"
+        "NO_FIXED": "No Fixed",
+        "CURRENT_PASSWORD": "Current password",
+        "NEW_PASSWORD": "New password",
+        "REPIT_PASSWORD": "Repit password",
+        "BAD_NEW_PASSWORD": "New Password Error",
+        "BAD_NEW_PASSWORD_EXPLANATION": "The new password entered doesn't match the repeat",
+        "ERROR_CHANGE_PASSWORD": "Change Password Error",
+        "CURRENT_PASSWORD_INVALID": "Current password invalid"
     },
     "EDIT_PROFILE_PAGE": {
         "TITLE": "Modificar Perfil",
@@ -142,11 +149,13 @@
     "JOIN_BUTTON": "Join",
     "UNJOIN_BUTTON": "Unjoin",
     "DISCARD_BUTTON": "Discard me",
+    "SAVE_BUTTON": "Save",
     "CONFIRMATION": "Confirmation",
     "ACTION_OK": "Action completed successfully",
     "INFORMATION": "Information",
     "ERROR": "Error",
     "BLACK": "Black",
     "WHITE": "White",
-    "NOT_AVAILABLE": "Not available"
+    "NOT_AVAILABLE": "Not available",
+    "EXPIRED_SESSION": "Expired session"
 }
