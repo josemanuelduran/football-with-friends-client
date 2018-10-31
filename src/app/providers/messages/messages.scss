@@ -11,6 +11,10 @@ $toast-info:    color($colors, info);
   }
 }
 
+.toast-message {
+    max-width: 80%;
+}
+
 .toast-success {
   @extend .toast;
   .toast-wrapper {
