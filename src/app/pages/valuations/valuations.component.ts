@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
+import * as moment from 'moment';
+
 import { Match, Player, MatchScore, Score } from '../../models';
 import { ValuationsService, MessagesService } from '../../providers';
 
@@ -16,6 +18,7 @@ export class ValuationsPageComponent implements OnInit {
     match: Match;
     matchScore: MatchScore;
     playerConnected: Player;
+    valuationDisabled: boolean;
 
     constructor(
             public navCtrl: NavController,
@@ -28,6 +31,9 @@ export class ValuationsPageComponent implements OnInit {
         this.match = this.navParams.get('match');
         this.playerConnected = this.navParams.get('player');
         this.loadScores();
+        let fechaPartido = moment(this.match.date);
+        let fechaActual = moment();
+        this.valuationDisabled = fechaActual.diff(fechaPartido, 'days') > 2;
     }
 
     saveScores(): void {
