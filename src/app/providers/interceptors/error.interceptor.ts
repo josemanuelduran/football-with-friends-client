@@ -33,7 +33,7 @@ export class ErrorInterceptor implements HttpInterceptor {
                         this.app.getRootNav().setRoot('LoginPage');
                         errMsg = this.translate.instant('EXPIRED_SESSION');
                     } else if (errorResponse.status === 409) {
-                        errMsg = 'PROFILE_PAGE.CURRENT_PASSWORD_INVALID';
+                        errMsg = errorResponse.error.message;
                     } else {
                         const err = errorResponse.message || JSON.stringify(errorResponse.error);
                         errMsg = `${errorResponse.status} - ${errorResponse.statusText || ''} Details: ${err}`;

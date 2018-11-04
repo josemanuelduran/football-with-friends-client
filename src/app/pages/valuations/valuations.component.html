@@ -18,8 +18,7 @@
     <ion-list *ngIf="matchScore">
         <ion-item *ngFor="let item of matchScore.scores; let i = index;">
             <ion-label>{{i+1}}. {{item.namePlayer}}</ion-label>
-                <ion-select 
-                        [(ngModel)]="item.score">
+                <ion-select [(ngModel)]="item.score" [disabled]="valuationDisabled">
                     <ion-option selected=true>---</ion-option>
                     <ion-option 
                         *ngFor="let score of [0,1,2,3,4,5,6,7,8,9,10]">
