@@ -217,7 +217,7 @@ export class MatchesPageComponent implements OnInit {
 
     private getGroupedMatches(matches: MatchMonthYear[]): MatchesGroup[] {
         let groupedMatches: MatchesGroup[];
-        groupedMatches = _(matches).sortBy('match.date', 'desc')
+        groupedMatches = _(matches).sortBy('match.date').reverse()
             .groupBy('monthYear')
             .toPairs()
             .map(function (currentGroup) {
