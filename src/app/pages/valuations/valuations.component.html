@@ -3,7 +3,7 @@
         <ion-title>
             {{match.name}} {{"MATCH_PAGE.VALUATIONS" | translate}}
         </ion-title>
-        <ion-buttons end>               
+        <ion-buttons end *ngIf="!valuationDisabled">               
             <button ion-button
                     icon-only
                     clear

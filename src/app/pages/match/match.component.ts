@@ -425,7 +425,7 @@ export class MatchPageComponent implements OnInit {
 
     private userLoggedHasPlayed(): boolean {
         const index = this.match.callUp.findIndex(playerCallUp => playerCallUp.player.id === this.player.id);
-        return index > 0;
+        return index >= 0;
     }
 
     private editCallUp(): void {
