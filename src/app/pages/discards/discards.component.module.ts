@@ -14,4 +14,4 @@ import { DiscardsPageComponent } from './discards.component';
         TranslateModule
     ],
 })
-export class CallUpPageModule {}
+export class DiscardsPageModule {}

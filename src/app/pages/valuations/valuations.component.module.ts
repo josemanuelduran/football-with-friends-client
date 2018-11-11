@@ -14,4 +14,4 @@ import { ValuationsPageComponent } from './valuations.component';
         TranslateModule
     ],
 })
-export class CallUpPageModule {}
+export class ValuationsPageModule {}
