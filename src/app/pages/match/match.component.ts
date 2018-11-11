@@ -9,6 +9,7 @@ import {
 } from 'ionic-angular';
 
 import { TranslateService } from '@ngx-translate/core';
+import * as moment from 'moment';
 
 import { Match, Role, User, Option, Action, Team, Player, PlayerDiscard } from '../../models';
 import {
@@ -112,7 +113,8 @@ export class MatchPageComponent implements OnInit {
     discardedPlayer: boolean;
     menuDisable: boolean;
     matchPlayed: boolean;
-    showValidations: boolean;
+    showValuations: boolean;
+    showMyValuations: boolean;
 
     constructor(
         public navCtrl: NavController,
@@ -135,7 +137,7 @@ export class MatchPageComponent implements OnInit {
         this.setDiscardedPlayer();
         this.setMenuDisable();
         this.setMatchPlayed();
-        this.setShowValidations();
+        this.setShowValuations();
     }
 
     showOptions(clickEvent: Event): void {
@@ -204,8 +206,12 @@ export class MatchPageComponent implements OnInit {
         this.navCtrl.push('CallUpPage', {match: this.match, reserves: true});
     }
 
+    goToMyValuations(): void {
+        this.navCtrl.push('MyValuationsPage', {match: this.match, player: this.player});
+    }
+
     goToValuations(): void {
-        this.navCtrl.push('ValuationsPage', {match: this.match, player: this.player});
+        this.navCtrl.push('ValuationsPage', {match: this.match});
     }
 
     private getOptionsAllowed(): Option[] {
@@ -419,8 +425,11 @@ export class MatchPageComponent implements OnInit {
             && this.match.team2 && !isUndefined(this.match.team2.goals);
     }
 
-    private setShowValidations(): void {
-        this.showValidations = this.matchPlayed && this.userLoggedHasPlayed();
+    private setShowValuations(): void {
+        this.showMyValuations = this.matchPlayed && this.userLoggedHasPlayed();
+        let fechaPartido = moment(this.match.date);
+        let fechaActual = moment();
+        this.showValuations = fechaActual.diff(fechaPartido, 'days') > 2;
     }
 
     private userLoggedHasPlayed(): boolean {

@@ -4,28 +4,14 @@
             {{match.name}}
             <p class="subtitle">{{"MATCH_PAGE.VALUATIONS" | translate}}</p>
         </ion-title>
-        <ion-buttons end *ngIf="!valuationDisabled">               
-            <button ion-button
-                    icon-only
-                    clear
-                    (click)="saveScores()">
-                <ion-icon name="checkmark-circle"></ion-icon>
-            </button>
-        </ion-buttons>
     </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-    <ion-list *ngIf="matchScore">
-        <ion-item *ngFor="let item of matchScore.scores; let i = index;">
+    <ion-list *ngIf="scores">
+        <ion-item *ngFor="let item of scores; let i = index;">
             <ion-label>{{i+1}}. {{item.namePlayer}}</ion-label>
-                <ion-select [(ngModel)]="item.score" [disabled]="valuationDisabled">
-                    <ion-option selected=true>---</ion-option>
-                    <ion-option 
-                        *ngFor="let score of [0,1,2,3,4,5,6,7,8,9,10]">
-                            {{score}}
-                    </ion-option>
-                </ion-select>
+            <ion-label>{{item.score.toFixed(2)}}</ion-label>
         </ion-item>
     </ion-list>
     
