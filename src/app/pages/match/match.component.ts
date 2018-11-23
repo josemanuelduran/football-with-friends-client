@@ -9,6 +9,7 @@ import {
 } from 'ionic-angular';
 
 import { TranslateService } from '@ngx-translate/core';
+import * as moment from 'moment';
 
 import { Match, Role, User, Option, Action, Team, Player, PlayerDiscard } from '../../models';
 import {
@@ -22,12 +23,6 @@ import { isUndefined } from 'ionic-angular/util/util';
 
 const AVAILABLE_OPTIONS: Option[] = [
     {
-        action: Action.EDIT_TEAMS,
-        roles: [Role.ADMIN, Role.COACH],
-        token: 'MATCH_PAGE.ACTION.EDIT_TEAMS',
-        icon: 'build'
-    },
-    {
         action: Action.EDIT_MATCH,
         roles: [Role.ADMIN],
         token: 'MATCH_PAGE.ACTION.EDIT_MATCH',
@@ -38,12 +33,6 @@ const AVAILABLE_OPTIONS: Option[] = [
         roles: [Role.ADMIN],
         token: 'MATCH_PAGE.ACTION.DELETE_MATCH',
         icon: 'trash'
-    },
-    {
-        action: Action.SET_SCOREBOARD,
-        roles: [Role.ADMIN],
-        token: 'MATCH_PAGE.ACTION.SCOREBOARD',
-        icon: 'football'
     },
     {
         action: Action.JOIN_CALL_UP,
@@ -82,18 +71,23 @@ const AVAILABLE_OPTIONS: Option[] = [
         icon: 'close-circle'
     },
     {
-        action: Action.ADD_EXTRA_PLAYER,
-        roles: [Role.ADMIN],
-        token: 'MATCH_PAGE.ACTION.ADD_EXTRA_PLAYER',
-        icon: 'add'
+        action: Action.EDIT_TEAMS,
+        roles: [Role.ADMIN, Role.COACH],
+        token: 'MATCH_PAGE.ACTION.EDIT_TEAMS',
+        icon: 'build'
     },
     {
-        action: Action.REMOVE_EXTRA_PLAYER,
+        action: Action.SET_SCOREBOARD,
         roles: [Role.ADMIN],
-        token: 'MATCH_PAGE.ACTION.REMOVE_EXTRA_PLAYER',
-        icon: 'remove'
+        token: 'MATCH_PAGE.ACTION.SCOREBOARD',
+        icon: 'football'
+    },
+    {
+        action: Action.ADD_NEW_PLAYER,
+        roles: [Role.ADMIN],
+        token: 'MATCH_PAGE.ACTION.ADD_NEW_PLAYER',
+        icon: 'add'
     }
-
 ];
 
 @IonicPage({
@@ -112,7 +106,8 @@ export class MatchPageComponent implements OnInit {
     discardedPlayer: boolean;
     menuDisable: boolean;
     matchPlayed: boolean;
-    showValidations: boolean;
+    showValuations: boolean;
+    showMyValuations: boolean;
 
     constructor(
         public navCtrl: NavController,
@@ -135,7 +130,7 @@ export class MatchPageComponent implements OnInit {
         this.setDiscardedPlayer();
         this.setMenuDisable();
         this.setMatchPlayed();
-        this.setShowValidations();
+        this.setShowValuations();
     }
 
     showOptions(clickEvent: Event): void {
@@ -174,11 +169,8 @@ export class MatchPageComponent implements OnInit {
                     case Action.EDIT_DISCARDS:
                         this.editDiscards();
                         break;
-                    case Action.ADD_EXTRA_PLAYER:
-                        this.addExtraPlayer();
-                        break;
-                    case Action.REMOVE_EXTRA_PLAYER:
-                        this.removeExtraPlayer();
+                    case Action.ADD_NEW_PLAYER:
+                        this.addNewPlayer();
                         break;
                 }
             }
@@ -204,8 +196,12 @@ export class MatchPageComponent implements OnInit {
         this.navCtrl.push('CallUpPage', {match: this.match, reserves: true});
     }
 
+    goToMyValuations(): void {
+        this.navCtrl.push('MyValuationsPage', {match: this.match, player: this.player});
+    }
+
     goToValuations(): void {
-        this.navCtrl.push('ValuationsPage', {match: this.match, player: this.player});
+        this.navCtrl.push('ValuationsPage', {match: this.match});
     }
 
     private getOptionsAllowed(): Option[] {
@@ -419,13 +415,16 @@ export class MatchPageComponent implements OnInit {
             && this.match.team2 && !isUndefined(this.match.team2.goals);
     }
 
-    private setShowValidations(): void {
-        this.showValidations = this.matchPlayed && this.userLoggedHasPlayed();
+    private setShowValuations(): void {
+        this.showMyValuations = this.matchPlayed && this.userLoggedHasPlayed();
+        let fechaPartido = moment(this.match.date);
+        let fechaActual = moment();
+        this.showValuations = fechaActual.diff(fechaPartido, 'days') > 2;
     }
 
     private userLoggedHasPlayed(): boolean {
         const index = this.match.callUp.findIndex(playerCallUp => playerCallUp.player.id === this.player.id);
-        return index > 0;
+        return index >= 0;
     }
 
     private editCallUp(): void {
@@ -444,9 +443,9 @@ export class MatchPageComponent implements OnInit {
             );
     }
 
-    private addExtraPlayer(): void {
+    private addNewPlayer(): void {
         let prompt = this.alertCtrl.create({
-            title: this.translate.instant('MATCH_PAGE.ACTION.ADD_EXTRA_PLAYER'),
+            title: this.translate.instant('MATCH_PAGE.ACTION.ADD_NEW_PLAYER'),
             inputs: [
                 {
                     name: 'name',
@@ -461,7 +460,7 @@ export class MatchPageComponent implements OnInit {
                     text: this.translate.instant('OK_BUTTON'),
                     handler: data => {
                         let extraPlayer: Player = {
-                            id: `extraPlayer${this.getNumExtraPlayers() + 1}`,
+                            id: 'newPlayer',
                             alias: data.name,
                             fixed: false
                         };
@@ -478,45 +477,6 @@ export class MatchPageComponent implements OnInit {
             ]
         });
         prompt.present();
-    }
-
-    private removeExtraPlayer(): void {
-        let prompt = this.alertCtrl.create({
-            title: this.translate.instant('MATCH_PAGE.ACTION.ADD_EXTRA_PLAYER'),
-            inputs: [
-                {
-                    name: 'name',
-                    placeholder: this.translate.instant('MATCH_PAGE.NAME_NEW_PLAYER')
-                },
-            ],
-            buttons: [
-                {
-                    text: this.translate.instant('CANCEL_BUTTON')
-                },
-                {
-                    text: this.translate.instant('OK_BUTTON'),
-                    handler: data => {
-                        let extraPlayer =
-                            this.match.callUp.find(el => el.player.id.startsWith('extraPlayer') && el.player.name === data.name);
-                        this.matchesService.unjoinPlayerCallUp(this.match.id, extraPlayer.player.id)
-                            .subscribe(
-                                ok => {
-                                    this.messages.showSuccess('ACTION_OK', 'CONFIRMATION');
-                                    this.reloadMatch();
-                                },
-                                error => this.messages.showError(error)
-                            );
-                    }
-                }
-            ]
-        });
-        prompt.present();
-    }
-
-    private getNumExtraPlayers(): number {
-        return this.match.callUp ?
-            this.match.callUp.filter(el => el.player.id.startsWith('extraPlayer')).length
-            : 0;
     }
 
     private showListPlayersCallUp(players: Player[]) {

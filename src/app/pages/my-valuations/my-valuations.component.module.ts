@@ -3,15 +3,15 @@ import { IonicPageModule } from 'ionic-angular';
 
 import { TranslateModule } from '@ngx-translate/core';
 
-import { DiscardsPageComponent } from './discards.component';
+import { MyValuationsPageComponent } from './my-valuations.component';
 
 @NgModule({
     declarations: [
-        DiscardsPageComponent,
+        MyValuationsPageComponent,
     ],
     imports: [
-        IonicPageModule.forChild(DiscardsPageComponent),
+        IonicPageModule.forChild(MyValuationsPageComponent),
         TranslateModule
     ],
 })
-export class DiscardsPageModule {}
+export class MyValuationsPageModule {}

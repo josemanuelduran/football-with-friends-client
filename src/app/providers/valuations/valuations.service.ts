@@ -6,6 +6,7 @@ import { Observable } from 'rxjs/Observable';
 import { MatchScore } from '../../models';
 
 const MATCH_SCORING_URL = 'fwf/matchScoring';
+const MATCH_URL = 'fwf/match';
 
 @Injectable()
 export class ValuationsService {
@@ -17,6 +18,12 @@ export class ValuationsService {
     public fetchMatchScores(matchId: string, playerId: string): Observable<MatchScore> {
         let url = `${MATCH_SCORING_URL}?matchId=${matchId}&playerId=${playerId}`;
         return this.http.get<MatchScore>(url);
+    }
+
+    public fetchPlayersScores(matchId: string): Observable<any[]> {
+        let url = `${MATCH_URL}/${matchId}/scores`;
+        let result = this.http.get<any[]>(url);
+        return result;
     }
 
     public createMatchScore(matchScore: MatchScore): Observable<Object> {
