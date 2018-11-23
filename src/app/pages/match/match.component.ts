@@ -11,7 +11,7 @@ import {
 import { TranslateService } from '@ngx-translate/core';
 import * as moment from 'moment';
 
-import { Match, Role, User, Option, Action, Team, Player, PlayerDiscard } from '../../models';
+import { Match, Role, User, Option, Action, Player, PlayerDiscard } from '../../models';
 import {
     OverflowMenuComponent,
     AddMatchComponent,
