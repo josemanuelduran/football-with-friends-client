@@ -247,21 +247,10 @@ export class MatchPageComponent implements OnInit {
                     {match: this.match, player: this.player},
                     {enableBackdropDismiss: false});
             dialog.onDidDismiss(
-                ( result:
-                    {
-                        actionOk: boolean,
-                        teams: Team[]
-                    }
-                ) => {
-                    if (result.actionOk) {
-                        this.matchesService.updateTeams(this.match.id, result.teams)
-                            .subscribe(
-                                data => {
-                                    this.messages.showSuccess('ACTION_OK', 'CONFIRMATION');
-                                    this.reloadMatch();
-                                },
-                                error => this.messages.showError(error)
-                            );
+                ( actionOk: boolean ) => {
+                    if (actionOk) {
+                        this.messages.showSuccess('ACTION_OK', 'CONFIRMATION');
+                        this.reloadMatch();
                     }
                 });
             dialog.present();

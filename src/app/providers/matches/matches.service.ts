@@ -49,7 +49,7 @@ export class MatchesService {
         return this.http.put(`${MATCH_URL}/${matchId}/discards/player/${playerId}`, {});
     }
 
-    public updateTeams(matchId: string, teams: Team[]): Observable<Object> {
-        return this.http.put(`${MATCH_URL}/${matchId}/teams`, teams);
+    public updateTeams(matchId: string, playerId: string, teams: Team[]): Observable<Object> {
+        return this.http.put(`${MATCH_URL}/${matchId}/teams/${playerId}`, teams);
     }
 }
