@@ -74,7 +74,7 @@ export class TeamsMakerComponent implements OnInit {
             id: this.player.id,
             fixed: this.player.fixed
         };
-        this.matchesService.updateMatch(this.match)
+        this.matchesService.updateTeams(this.match.id, this.player.id, [this.match.team1, this.match.team2])
             .subscribe(
                 data => this.viewCtrl.dismiss(true),
                 error => this.messages.showError(error)

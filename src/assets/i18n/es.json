@@ -2,7 +2,7 @@
     "APPLICATION_DETAIL": {
         "COPYRIGHT": " 2018 Jose Manuel Durán. Todos los derechos reservados.",
         "NAME": "Fútbol Con Amigos",
-        "VERSION": "1.1.1",
+        "VERSION": "1.1.2",
         "VERSION_DATE": "23/11/2018",
         "IMAGE_SOURCE": "assets/img/png/FWF-logo_es.PNG",
         "AUTHOR": "Jose Manuel Durán"
@@ -62,6 +62,7 @@
         "DATA_HEADER": "Información del Partido",
         "CALL_UP": "Convocatoria",
         "TEAMS": "Equipos",
+        "TEAMS_MAKER": "Editar equipos",
         "SCOREBOARD": "Marcador",
         "MISTER": "Creador de los equipos",
         "DISCARDS": "Descartados",
