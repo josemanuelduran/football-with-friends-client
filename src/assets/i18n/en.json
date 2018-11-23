@@ -2,8 +2,8 @@
     "APPLICATION_DETAIL": {
         "COPYRIGHT": " 2018 Jose Manuel Durán. All rights reserved.",
         "NAME": "Football With Friends",
-        "VERSION": "1.1.0",
-        "VERSION_DATE": "11/11/2018",
+        "VERSION": "1.1.1",
+        "VERSION_DATE": "23/11/2018",
         "IMAGE_SOURCE": "assets/img/png/FWF-logo.PNG",
         "AUTHOR": "Jose Manuel Durán"
     },
@@ -82,8 +82,7 @@
             "EXIT_FROM_DISCARDS": "Exit from discards",
             "EDIT_CALL_UP": "Edit Call up",
             "EDIT_DISCARDS": "Edit discards",
-            "ADD_EXTRA_PLAYER": "Add extra Player",
-            "REMOVE_EXTRA_PLAYER": "Remove extra Player"
+            "ADD_NEW_PLAYER": "Add New Player"
         }
     },
     "ADD_MATCH_PAGE": {

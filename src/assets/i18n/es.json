@@ -2,8 +2,8 @@
     "APPLICATION_DETAIL": {
         "COPYRIGHT": " 2018 Jose Manuel Durán. Todos los derechos reservados.",
         "NAME": "Fútbol Con Amigos",
-        "VERSION": "1.1.0",
-        "VERSION_DATE": "11/11/2018",
+        "VERSION": "1.1.1",
+        "VERSION_DATE": "23/11/2018",
         "IMAGE_SOURCE": "assets/img/png/FWF-logo_es.PNG",
         "AUTHOR": "Jose Manuel Durán"
     },
@@ -82,8 +82,7 @@
             "EXIT_FROM_DISCARDS": "Salir de los descartes",
             "EDIT_CALL_UP": "Modificar Convocatoria",
             "EDIT_DISCARDS": "Modificar descartados",
-            "ADD_EXTRA_PLAYER": "Añadir Jugador extra",
-            "REMOVE_EXTRA_PLAYER": "Eliminar Jugador extra"
+            "ADD_NEW_PLAYER": "Añadir Nuevo Jugador"
         }
     },
     "ADD_MATCH_PAGE": {

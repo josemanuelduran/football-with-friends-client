@@ -12,8 +12,7 @@ export enum Action {
     SET_SCOREBOARD,
     EDIT_CALL_UP,
     EDIT_DISCARDS,
-    ADD_EXTRA_PLAYER,
-    REMOVE_EXTRA_PLAYER,
+    ADD_NEW_PLAYER,
 }
 
 export interface Option {
