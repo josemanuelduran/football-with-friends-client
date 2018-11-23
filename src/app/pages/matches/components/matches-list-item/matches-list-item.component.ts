@@ -25,7 +25,7 @@ export class MatchesListItemComponent implements OnInit {
 
     ngOnInit() {
         let currentDate = Date.now();
-        let matchDate = new Date(this.match.date).getTime() + 32400000; // Match day at 21:00h
+        let matchDate = new Date(this.match.date).getTime() + 75600000; // Match day at 21:00h
         this.matchPlayed = !this.match.cancelled && matchDate < currentDate;
         this.matchClosed = !this.match.openCallUp && !this.match.cancelled && !this.matchPlayed;
         this.matchCancelled = this.match.cancelled;
