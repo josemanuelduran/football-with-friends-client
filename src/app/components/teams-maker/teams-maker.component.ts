@@ -23,6 +23,8 @@ export class TeamsMakerComponent implements OnInit {
     match: Match;
     player: Player;
     numPlayersTeam: number;
+    colorWhite = TeamColor.WHITE;
+    colorBlack = TeamColor.BLACK;
 
     constructor(
             private viewCtrl: ViewController,
@@ -37,12 +39,12 @@ export class TeamsMakerComponent implements OnInit {
         this.match = this.navParams.get('match');
         this.player = this.navParams.get('player');
         this.listPlayers = this.match.callUp.map(playerCallUp => {
-            let team: number =
-            this.match.team1 && this.match.team1.players.filter(el => el.id === playerCallUp.player.id).length > 0 ?
-                    0 :
+            let team: TeamColor =
+                this.match.team1
+                && this.match.team1.players.filter(el => el.id === playerCallUp.player.id).length > 0 ?
+                    this.match.team1.color :
                     this.match.team2 && this.match.team2.players.filter(el => el.id === playerCallUp.player.id).length > 0 ?
-                        1 :
-                        undefined;
+                        this.match.team2.color : undefined;
             return {
                 player: playerCallUp.player,
                 team: team

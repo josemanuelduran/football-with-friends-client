@@ -55,8 +55,8 @@
                 <ion-label>{{i+1}}. {{playerTeam.player.name}} <span *ngIf="!playerTeam.player.fixed">(s)</span></ion-label>
                 <ion-select [(ngModel)]="playerTeam.team" (ionChange)="onSelectChange($event, playerTeam.player.id)">
                     <ion-option selected=true>---</ion-option>
-                    <ion-option [value]=0 disabled="{{listPlayersWhite.length === numPlayersTeam}}">{{'WHITE' | translate}}</ion-option>
-                    <ion-option [value]=1 disabled="{{listPlayersBlack.length === numPlayersTeam}}">{{'BLACK' | translate}}</ion-option>
+                    <ion-option [value]="colorWhite" disabled="{{listPlayersWhite.length === numPlayersTeam}}">{{'WHITE' | translate}}</ion-option>
+                    <ion-option [value]="colorBlack" disabled="{{listPlayersBlack.length === numPlayersTeam}}">{{'BLACK' | translate}}</ion-option>
                 </ion-select>
             </ion-item>
         </ion-list>        
