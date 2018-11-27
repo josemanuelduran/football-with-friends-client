@@ -39,7 +39,7 @@
                 {{ "MATCH_PAGE.SCOREBOARD" | translate}}
                 <h4 class="scoreboard">
                     <span *ngIf="matchPlayed; else elseBlock ">
-                        {{'WHITE' | translate}}: {{match.team1.goals}} - {{'BLACK' | translate}}: {{match.team2.goals}}
+                        {{match.team1.color | translate}}: {{match.team1.goals}} - {{match.team2.color | translate}}: {{match.team2.goals}}
                     </span>
                     <ng-template #elseBlock>
                         {{"MATCH_PAGE.NOT_PLAYED" | translate}}

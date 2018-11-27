@@ -1,5 +1,5 @@
 export enum TeamColor {
-    WHITE, BLACK
+    WHITE = 'WHITE', BLACK = 'BLACK'
 }
 
 export interface Match {
