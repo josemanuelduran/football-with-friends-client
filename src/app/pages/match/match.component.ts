@@ -400,8 +400,8 @@ export class MatchPageComponent implements OnInit {
 
     private setMatchPlayed(): void {
         this.matchPlayed =
-            this.match.team1 && !isUndefined(this.match.team1.goals)
-            && this.match.team2 && !isUndefined(this.match.team2.goals);
+            this.match.team1 && !isUndefined(this.match.team1.goals) && this.match.team1.goals !== null
+            && this.match.team2 && !isUndefined(this.match.team2.goals) && this.match.team2.goals !== null;
     }
 
     private setShowValuations(): void {
