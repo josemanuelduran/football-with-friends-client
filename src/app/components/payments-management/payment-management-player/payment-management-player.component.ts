@@ -5,7 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 import * as moment from 'moment';
 import * as _ from 'lodash';
 
-import { Player, Payment, PaymentsFilter } from '../../../models';
+import { Player, Payment, PaymentsFilter, Month } from '../../../models';
 import { PaymentsService, MessagesService } from '../../../providers';
 import { PaymentsFilterComponent } from '../../payments-filter/payments-filter.component';
 
@@ -54,9 +54,7 @@ export class PaymentManagementPlayerComponent implements OnInit {
                             name = matchDate.split('T')[0];
                         } else {
                             name = `${this.translate.instant('MONTHS.' + payment.month)} - ${payment.year}`;
-                            let month = payment.month.toLowerCase();
-                            month = month.charAt(0).toUpperCase() + month.slice(1);
-                            monthIndex = moment.months().indexOf(month);
+                            monthIndex = Month.getIndex(payment.month);
                         }
                         return <Payment> {
                             ...payment,
@@ -92,23 +90,23 @@ export class PaymentManagementPlayerComponent implements OnInit {
     }
 
     createPayment(): void {
-        let monthNewPayment = moment.months()[moment().month()];
+        let monthNewPayment: Month = Month.getMonth(moment().month());
+        let year = moment().year();
         if (this.payments && this.payments.length) {
-            let monthLastPayment = this.payments[0].month.toLowerCase();
-            monthLastPayment = monthLastPayment.charAt(0).toUpperCase() + monthLastPayment.slice(1);
-            const monthLastPaymentIndex = moment.months().indexOf(monthLastPayment);
-            if (monthLastPaymentIndex === 11) {
-                monthNewPayment = moment.months()[1];
+            let monthLastPayment = this.payments[0].month;
+            if (monthLastPayment === Month.DECEMBER) {
+                monthNewPayment = Month.JANUARY;
+                year++;
             } else {
-                monthNewPayment = moment.months()[monthLastPaymentIndex + 1];
+                monthNewPayment = Month.getMonth(Month.getIndex(monthLastPayment) + 1);
             }
         }
         const payment: Payment = {
             playerId: this.player.id,
-            year: moment().year(),
+            year: year,
             paid: false,
             amount: 15,
-            month: monthNewPayment.toUpperCase()
+            month: monthNewPayment
         };
         this.paymentService.createPayment(payment)
             .subscribe(
