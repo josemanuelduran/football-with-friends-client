@@ -6,10 +6,9 @@ import {
 } from 'ionic-angular';
 
 import { TranslateService } from '@ngx-translate/core';
-import * as moment from 'moment';
 import * as _ from 'lodash';
 
-import { Payment, Player, PaymentsFilter } from '../../models';
+import { Payment, Player, PaymentsFilter, Month } from '../../models';
 import { ContextService, MessagesService, PaymentsService } from '../../providers';
 import { PaymentsFilterComponent } from '../../components/payments-filter/payments-filter.component';
 
@@ -62,9 +61,7 @@ export class PaymentsPageComponent implements OnInit {
                             name = matchDate.split('T')[0];
                         } else {
                             name = `${this.translate.instant('MONTHS.' + payment.month)} - ${payment.year}`;
-                            let month = payment.month.toLowerCase();
-                            month = month.charAt(0).toUpperCase() + month.slice(1);
-                            monthIndex = moment.months().indexOf(month);
+                            monthIndex = Month.getIndex(payment.month);
                         }
                         return <Payment> {
                             ...payment,
