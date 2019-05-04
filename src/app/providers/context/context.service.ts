@@ -1,10 +1,14 @@
 import { Injectable } from '@angular/core';
 
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+
 import { User, Role, Player } from '../../models';
+import { isUndefined } from 'ionic-angular/util/util';
 
 @Injectable()
 export class ContextService {
 
+    readyRoles$: BehaviorSubject<boolean> = new BehaviorSubject(false);
     private userLogged: User;
     private playerLogged: Player;
 
@@ -17,6 +21,7 @@ export class ContextService {
 
     setUserLogged(user: User): void {
         this.userLogged = user;
+        this.readyRoles$.next(!isUndefined(this.userLogged));
     }
 
     getPlayerLogged(): Player {
@@ -33,5 +38,13 @@ export class ContextService {
             roleAdmin = this.userLogged.roles.findIndex(role => role === Role.ADMIN) >= 0;
         }
         return roleAdmin;
+    }
+
+    userLoggedIsTreasurer(): boolean {
+        let roleTreasurer: boolean;
+        if (this.userLogged) {
+            roleTreasurer = this.userLogged.roles.findIndex(role => role === Role.TREASURER) >= 0;
+        }
+        return roleTreasurer;
     }
 }

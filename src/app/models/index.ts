@@ -7,3 +7,5 @@ export * from './option.model';
 export * from './match-score.model';
 export * from './score.model';
 export * from './profile.model';
+export * from './payment.model';
+export * from './payment-filter.model';

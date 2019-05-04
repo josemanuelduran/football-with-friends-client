@@ -67,7 +67,8 @@ export class AddMatchComponent implements OnInit {
                 date: this.matchForm.controls['date'].value,
                 numPlayers: this.matchForm.controls['numPlayers'].value,
                 openCallUp: this.matchForm.controls['openCallUp'].value,
-                cancelled: false
+                cancelled: false,
+                played: false
             };
             this.matchesService.createMatch(match).subscribe(
                 data => this.viewCtrl.dismiss(true),

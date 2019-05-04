@@ -1,13 +1,17 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Output, EventEmitter, OnInit, Input, OnDestroy } from '@angular/core';
 import { MenuController, Content } from 'ionic-angular';
 
 import { TranslateService } from '@ngx-translate/core';
+import * as _ from 'lodash';
+
+import { ContextService } from '../../providers';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'fwf-menu',
   templateUrl: 'menu.component.html'
 })
-export class MenuComponent implements OnInit {
+export class MenuComponent implements OnInit, OnDestroy {
 
     @Input() content: Content;
 
@@ -15,14 +19,39 @@ export class MenuComponent implements OnInit {
 
     tiles1: any[];
     tiles2: any[];
+    private authSubscription: Subscription;
 
     constructor(
         private menu: MenuController,
         private translate: TranslateService,
+        private context: ContextService,
     ) { }
 
     ngOnInit(): void {
+        this.authSubscription = this.context.readyRoles$.subscribe(
+            ready => {
+                if (ready) {
+                    if (this.context.userLoggedIsAdmin() || this.context.userLoggedIsTreasurer()) {
+                        if (!this.tiles1.find(tile => tile.title === 'MENU.PAYMENT_MANAGEMENT')) {
+                            this.tiles1.push({
+                                title: 'MENU.PAYMENT_MANAGEMENT',
+                                target: 'tiles.payment_management',
+                                icon: 'cash'
+                            });
+                        }
+                    } else {
+                        _.remove(this.tiles2, function(tile) {
+                            return tile.title === 'MENU.PAYMENT_MANAGEMENT';
+                        });
+                    }
+                }
+            }
+        );
         this.initializeTiles();
+    }
+
+    ngOnDestroy(): void {
+        this.authSubscription.unsubscribe();
     }
 
     navigateTo(target): void {
@@ -62,16 +91,6 @@ export class MenuComponent implements OnInit {
             }
         ];
         this.tiles2 = [
-            // {
-            //     title: 'MENU.SETTINGS',
-            //     target: 'tiles.settings',
-            //     icon: 'settings'
-            // },
-            // {
-            //     title: 'MENU.LOCATION',
-            //     target: 'tiles.location',
-            //     icon: 'pin'
-            // },
             {
                 title: 'MENU.INTRODUCTION',
                 target: 'tiles.introduction',
@@ -86,7 +105,7 @@ export class MenuComponent implements OnInit {
                 title: 'MENU.LOGOUT',
                 target: 'tiles.logout',
                 icon: 'log-out'
-            },
+            }
         ];
     }
 

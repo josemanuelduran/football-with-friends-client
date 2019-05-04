@@ -2,8 +2,8 @@
     "APPLICATION_DETAIL": {
         "COPYRIGHT": " 2018 Jose Manuel Durán. Todos los derechos reservados.",
         "NAME": "Fútbol Con Amigos",
-        "VERSION": "1.1.3",
-        "VERSION_DATE": "28/11/2018",
+        "VERSION": "1.2.0",
+        "VERSION_DATE": "04/05/2019",
         "IMAGE_SOURCE": "assets/img/png/FWF-logo_es.PNG",
         "AUTHOR": "Jose Manuel Durán"
     },
@@ -38,7 +38,8 @@
         "ABOUT": "Acerca de",
         "LOGOUT": "Salir",
         "TITLE_DIVIDER": "Acciones",
-        "LOCATION": "Localización"
+        "LOCATION": "Localización",
+        "PAYMENT_MANAGEMENT": "Gestión de Pagos"
     },
     "LOGIN": {
         "LOGIN": "Entrar",
@@ -100,6 +101,16 @@
         "TITLE": "Pagos",
         "NO_FOUND": "No se han encontrado pagos."
     },
+    "PAYMENT_MANAGEMENT_PAGE": {
+        "TITLE": "Gestión de Pagos",
+        "PLAYERS_TAB": "Jugadores",
+        "PAYMENTS_TAB": "Pagos",
+        "FIXED_HEADER": "FIjos",
+        "NO_FIXED_HEADER": "No Fijos",
+        "NO_FOUND_PLAYERS": "No se han encontrado jugadores.",
+        "DELETE_PAYMENT": "Borrar Pago",
+        "DELETE_SURE": "¿Está seguro que quiere borrar este pago?"
+    },
     "PROFILE_PAGE": {
         "TITLE": "Perfil",
         "DATA_HEADER": "Información del Jugador",
@@ -145,6 +156,26 @@
     "TOAST": {
         "CLOSE": "Cerrar"
     },
+    "PAYMENTS_FILTER": {
+        "FILTER": "Filtro de pagos",
+        "SHOW_PAID": "Mostrar pagos pagados",
+        "SHOW_NO_PAID": "Mostrar pagos pendientes",
+        "YEAR": "Año"
+    },
+    "MONTHS": {
+        "JANUARY": "Enero",
+        "FEBRUARY": "Febrero",
+        "MARCH": "Marzo",
+        "APRIL": "Abril",
+        "MAY": "Mayo",
+        "JUNE": "Junio",
+        "JULY": "Julio",
+        "AUGUST": "Agosto",
+        "SEPTEMBER": "Septiembre",
+        "OCTOBER": "Octubre",
+        "NOVEMBER": "Noviembre",
+        "DECEMBER": "Diciembre"
+    },
     "OK_BUTTON": "Ok",
     "CANCEL_BUTTON": "Cancel",
     "DELETE_BUTTON": "Delete",
@@ -153,6 +184,8 @@
     "UNJOIN_BUTTON": "Salirse",
     "DISCARD_BUTTON": "Me descarto",
     "SAVE_BUTTON": "Guardar",
+    "PAID_BUTTON": "Pagado",
+    "UNDO_BUTTON": "Deshacer pago",
     "CONFIRMATION": "Confirmación",
     "ACTION_OK": "Acción completada con éxito",
     "INFORMATION": "Información",
@@ -160,5 +193,7 @@
     "BLACK": "Negro",
     "WHITE": "Blanco",
     "NOT_AVAILABLE": "No disponible",
-    "EXPIRED_SESSION": "Sesión Caducada"
+    "EXPIRED_SESSION": "Sesión Caducada",
+    "APPLY": "Aplicar",
+    "CLEAR_ALL": "Limpiar todos"
 }

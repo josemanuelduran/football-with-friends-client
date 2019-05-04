@@ -78,6 +78,9 @@ export class FootballWithFriendsAppComponent implements OnInit, OnDestroy {
         } else if (item === 'tiles.about') {
             this.nav.setRoot('AboutPage');
             return;
+        } else if (item === 'tiles.payment_management') {
+            this.nav.setRoot('PaymentManagementPage');
+            return;
         }
 
 

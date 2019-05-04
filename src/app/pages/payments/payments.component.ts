@@ -1,5 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {
+    IonicPage,
+    Refresher,
+    PopoverController
+} from 'ionic-angular';
+
+import { TranslateService } from '@ngx-translate/core';
+import * as moment from 'moment';
+import * as _ from 'lodash';
+
+import { Payment, Player, PaymentsFilter } from '../../models';
+import { ContextService, MessagesService, PaymentsService } from '../../providers';
+import { PaymentsFilterComponent } from '../../components/payments-filter/payments-filter.component';
 
 @IonicPage({
     name: 'PaymentsPage',
@@ -11,12 +23,97 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class PaymentsPageComponent implements OnInit {
 
-    constructor(
-        public navCtrl: NavController,
-        public navParams: NavParams,
-    ) { }
+    payments: Payment[] = [];
+    playerLogged: Player;
+    filterIconClass: string;
+    selectedFilters: PaymentsFilter = {};
 
-    ngOnInit() {
+    constructor(
+            private paymentService: PaymentsService,
+            private translate: TranslateService,
+            private popoverCtrl: PopoverController,
+            private context: ContextService,
+            private messages: MessagesService,
+    ) {
+        this.playerLogged = this.context.getPlayerLogged();
+     }
+
+    ionViewWillEnter() {
+        // It's necessary when comes here from back button'
+        this.loadListPayments();
     }
 
+    ngOnInit() {
+        this.selectedFilters.showPaidPayments = false;
+        this.selectedFilters.showNoPaidPayments = true;
+
+    }
+
+    loadListPayments(refresher?: Refresher): void {
+        this.paymentService
+            .fetchPayments(this.playerLogged.id, this.selectedFilters)
+            .subscribe(
+                data => {
+                    let payments = data.map(payment => {
+                        let matchDate = payment.matchDate;
+                        let name = '';
+                        let monthIndex = 0;
+                        if (matchDate) {
+                            name = matchDate.split('T')[0];
+                        } else {
+                            name = `${this.translate.instant('MONTHS.' + payment.month)} - ${payment.year}`;
+                            let month = payment.month.toLowerCase();
+                            month = month.charAt(0).toUpperCase() + month.slice(1);
+                            monthIndex = moment.months().indexOf(month);
+                        }
+                        return <Payment> {
+                            ...payment,
+                            name: name,
+                            monthIndex: monthIndex
+                        };
+                    });
+                    this.initializeList(payments);
+                },
+                err => {
+                    this.endAnimations(refresher);
+                    this.messages.showError(err);
+                },
+                () => this.endAnimations(refresher)
+            );
+    }
+
+    openFilter(clickEvent): void {
+        let popover = this.popoverCtrl.create(
+            PaymentsFilterComponent,
+            { cssClass: 'popover__filter' }
+        );
+        popover.onDidDismiss(selectedFilters => {
+            if (selectedFilters) {
+                this.selectedFilters = selectedFilters;
+                this.loadListPayments();
+                this.filterIconClass = this.getFilterIconClass(selectedFilters);
+            }
+        });
+        popover.present({
+            ev: clickEvent
+        });
+    }
+
+    private endAnimations(refresher: Refresher) {
+        if (refresher) {
+            refresher.complete();
+        }
+    }
+
+    private initializeList(data: Payment[]) {
+        this.payments = _.orderBy(data, ['year', 'monthIndex', 'matchDate'], ['desc', 'desc', 'desc']);
+    }
+
+    private getFilterIconClass(selectedFilters: PaymentsFilter): string {
+        let classIcon: string;
+        if (!selectedFilters.showNoPaidPayments || !selectedFilters.showPaidPayments || selectedFilters.year) {
+            classIcon = 'filter__in-use';
+        }
+        return classIcon;
+    }
 }

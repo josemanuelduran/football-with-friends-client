@@ -1,0 +1,32 @@
+<ion-list list-grouped>
+    <ion-list-header>
+        {{'PAYMENT_MANAGEMENT_PAGE.FIXED_HEADER' | translate}}
+    </ion-list-header>
+    <ion-item
+            detail-push 
+            *ngFor="let player of fixedPlayers" 
+            (click)="playerSelected(player)"
+            text-wrap>
+        <h3 class="payment-nmme">
+            {{player.alias}}
+        </h3>
+    </ion-item>
+</ion-list>
+<ion-list list-grouped>
+    <ion-list-header>
+        {{'PAYMENT_MANAGEMENT_PAGE.NO_FIXED_HEADER' | translate}}
+    </ion-list-header>
+    <ion-item
+            detail-push 
+            *ngFor="let player of noFixedPlayers" 
+            (click)="playerSelected(player)"
+            text-wrap>
+        <h3 class="payment-name">
+            {{player.alias}}
+        </h3>
+    </ion-item>
+</ion-list>
+<!--No treatments available to display-->
+<fwf-empty-state *ngIf="filteredPlayer?.length === 0">
+    {{'PAYMENT_MANAGEMENT_PAGE.NO_FOUND_PLAYERS' | translate}}
+</fwf-empty-state>
