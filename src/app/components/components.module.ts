@@ -11,6 +11,8 @@ import { OverflowMenuComponent } from './overflow-menu/overflow-menu.component';
 import { TeamsMakerComponent } from './teams-maker/teams-maker.component';
 import { ScoreboardComponent } from './scoreboard/scoreboard.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import { PaymentsFilterComponent } from './payments-filter/payments-filter.component';
+import { PaymentManagementPlayerComponent } from './payments-management/payment-management-player/payment-management-player.component';
 
 @NgModule({
     imports: [
@@ -27,16 +29,19 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
         TeamsMakerComponent,
         ScoreboardComponent,
         EditProfileComponent,
+        PaymentsFilterComponent,
+        PaymentManagementPlayerComponent,
     ],
     entryComponents: [
-    //     // A list of components that are not referenced in a reachable component template.
-    //     MenuComponent,
+        // A list of components that are not referenced in a reachable component template.
         EmptyStateComponent,
         AddMatchComponent,
         OverflowMenuComponent,
         TeamsMakerComponent,
         ScoreboardComponent,
         EditProfileComponent,
+        PaymentsFilterComponent,
+        PaymentManagementPlayerComponent,
     ],
     exports: [
         // A list of declarations — component, directive, and pipe classes — that an importing module can use.
@@ -44,6 +49,8 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
         EmptyStateComponent,
         AddMatchComponent,
         TeamsMakerComponent,
+        PaymentsFilterComponent,
+        PaymentManagementPlayerComponent,
     ],
     providers: [
         // A list of dependency injection providers.

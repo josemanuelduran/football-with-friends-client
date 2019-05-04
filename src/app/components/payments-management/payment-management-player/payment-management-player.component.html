@@ -1,0 +1,84 @@
+<ion-header>
+        <ion-navbar color="primary">
+            <!--Android pushes buttons to the left even if start attribute is present.
+                Check demo: http://ionicframework.com/docs/v2/components/#buttons-in-components-->
+            <!--If placing the menuToggle in a navbar or toolbar, it should be placed as a child of the <ion-navbar> or <ion-toolbar>, and not in the <ion-buttons> element
+            http://ionicframework.com/docs/v2/api/components/menu/MenuToggle/-->
+            <button ion-button menuToggle>
+                <ion-icon name="menu"></ion-icon>
+            </button>
+            <ion-title>
+                {{ "PAYMENTS_PAGE.TITLE" | translate}} {{player.alias}}
+            </ion-title>
+            <ion-buttons end>
+                <button ion-button
+                        icon-only
+                        clear
+                        [ngClass]="filterIconClass"
+                        (click)="openFilter($event)">
+                    <ion-icon name="funnel"></ion-icon>
+                </button>                    
+                <button *ngIf="player.fixed"
+                        ion-button
+                        icon-only
+                        clear
+                        (click)="createPayment()">
+                    <ion-icon name="add"></ion-icon>
+                </button>        
+            </ion-buttons>
+        </ion-navbar>
+    </ion-header>
+    <ion-content>
+        <ion-refresher (ionRefresh)="loadListPayments($event)">
+            <ion-refresher-content
+                    pullingIcon="arrow-dropdown"
+                    pullingText="{{'REFRESHER_COMPONENT.PULL_TO_REFRESH' | translate}}"
+                    refreshingSpinner="circles">
+            </ion-refresher-content>
+        </ion-refresher>
+    
+        <ion-list>
+            <ion-item-sliding #slidingItem *ngFor="let payment of payments">
+                <ion-item text-wrap>
+                    <ion-icon item-left *ngIf="payment.paid" name="thumbs-up"></ion-icon>
+                    <ion-icon item-left *ngIf="!payment.paid" name="thumbs-down"></ion-icon>
+                    <h3 class="payment-name">
+                        {{payment.name}}
+                    </h3>
+                    <h4 *ngIf="payment.paid">
+                        <span id="paymentAmount">
+                            {{payment.amount}} €
+                        </span>
+                    </h4>
+                    <h4 *ngIf="!payment.paid">
+                        <span id="paymentAmount" class="payment-amount-no-paid">
+                            {{payment.amount}} €
+                        </span>
+                    </h4>
+                </ion-item>
+                <ion-item-options side="left">
+                    <button ion-button color="danger"
+                            (click)="deletePayment(payment, slidingItem)">
+                        <ion-icon name="trash"></ion-icon>
+                        {{'DELETE_BUTTON' | translate}}
+                    </button>
+                </ion-item-options>
+                <ion-item-options side="right" (ionSwipe)="totalSwipeAction(payment, slidingItem)">
+                    <button ion-button color="primary"
+                            (click)="paid(payment, slidingItem)" *ngIf="!payment.paid">
+                        <ion-icon name="cash"></ion-icon>
+                        {{'PAID_BUTTON' | translate}}
+                    </button>
+                    <button ion-button color="secondary"
+                            (click)="undoPaid(payment, slidingItem)" *ngIf="payment.paid">
+                        <ion-icon name="undo"></ion-icon>
+                        {{'UNDO_BUTTON' | translate}}
+                    </button>
+                </ion-item-options>
+            </ion-item-sliding>
+        </ion-list>
+        <!--No treatments available to display-->
+        <fwf-empty-state *ngIf="filteredPayments?.length === 0">
+            {{'PAYMENTS_PAGE.NO_FOUND' | translate}}
+        </fwf-empty-state>
+    </ion-content>

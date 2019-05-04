@@ -14,21 +14,43 @@
             <button ion-button
                     icon-only
                     clear
-                    (click)="openSearchBox()">
-                <ion-icon name="search"></ion-icon>
+                    [ngClass]="filterIconClass"
+                    (click)="openFilter($event)">
+                <ion-icon name="funnel"></ion-icon>
             </button>        
-            <button ion-button
-                    icon-only
-                    clear
-                    *ngIf="hasAddPermission"
-                    (click)="addPayment()">
-                <ion-icon name="add"></ion-icon>
-            </button>
         </ion-buttons>
     </ion-navbar>
 </ion-header>
-<ion-content padding>
+<ion-content>
+    <ion-refresher (ionRefresh)="loadListPayments($event)">
+        <ion-refresher-content
+                pullingIcon="arrow-dropdown"
+                pullingText="{{'REFRESHER_COMPONENT.PULL_TO_REFRESH' | translate}}"
+                refreshingSpinner="circles">
+        </ion-refresher-content>
+    </ion-refresher>
 
-    <img src="assets/img/png/under-construction.png"/>
-
+    <ion-list>
+        <ion-item text-wrap *ngFor="let payment of payments">
+            <ion-icon item-left *ngIf="payment.paid" name="thumbs-up"></ion-icon>
+            <ion-icon item-left *ngIf="!payment.paid" name="thumbs-down"></ion-icon>
+            <h3 class="payment-nmme">
+                {{payment.name}}
+            </h3>
+            <h4 *ngIf="payment.paid">
+                <span id="paymentAmount">
+                    {{payment.amount}} €
+                </span>
+            </h4>
+            <h4 *ngIf="!payment.paid">
+                <span id="paymentAmount" class="payment-amount-no-paid">
+                    {{payment.amount}} €
+                </span>
+            </h4>
+        </ion-item>
+    </ion-list>
+    <!--No treatments available to display-->
+    <fwf-empty-state *ngIf="filteredPayments?.length === 0">
+        {{'PAYMENTS_PAGE.NO_FOUND' | translate}}
+    </fwf-empty-state>
 </ion-content>

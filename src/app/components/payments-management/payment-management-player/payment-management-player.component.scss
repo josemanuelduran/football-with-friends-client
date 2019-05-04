@@ -1,11 +1,10 @@
-
-fwf-page-payments {
+fwf-payment-management-player {
     
     $border-color: color($colors, primary);
-
+        
     .payment-amount-no-paid {
         color: red;
-    }    
+    }
 
     .filter__in-use.bar-button-default-md::after {
         border: 1px solid $border-color;
@@ -28,4 +27,4 @@ fwf-page-payments {
         top: 0;
         left: 2.5rem;
     }
-}
+}  

@@ -363,6 +363,8 @@ export class MatchPageComponent implements OnInit {
             if (data && data.actionOk) {
                 this.match.team1.goals = data.scoreWhite;
                 this.match.team2.goals = data.scoreBlack;
+                this.match.openCallUp = false;
+                this.match.played = true;
                 this.matchesService.updateMatch(this.match)
                     .subscribe(
                         ok => {

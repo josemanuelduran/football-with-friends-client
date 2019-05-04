@@ -2,8 +2,8 @@
     "APPLICATION_DETAIL": {
         "COPYRIGHT": " 2018 Jose Manuel Durán. All rights reserved.",
         "NAME": "Football With Friends",
-        "VERSION": "1.1.3",
-        "VERSION_DATE": "28/11/2018",
+        "VERSION": "1.2.0",
+        "VERSION_DATE": "04/05/2019",
         "IMAGE_SOURCE": "assets/img/png/FWF-logo.PNG",
         "AUTHOR": "Jose Manuel Durán"
     },
@@ -32,7 +32,8 @@
         "ABOUT": "About",
         "LOGOUT": "Log-out",
         "TITLE_DIVIDER": "Actions",
-        "LOCATION": "Location"
+        "LOCATION": "Location",
+        "PAYMENT_MANAGEMENT": "Payment Management"
     },
     "TABS": {
         "TAB1": "Matches",
@@ -100,6 +101,16 @@
         "TITLE": "Payments",
         "NO_FOUND": "No payments have been found."
     },
+    "PAYMENT_MANAGEMENT_PAGE": {
+        "TITLE": "Payment Management",
+        "PLAYERS_TAB": "Players",
+        "PAYMENTS_TAB": "Payments",
+        "FIXED_HEADER": "Fixed",
+        "NO_FIXED_HEADER": "No Fixed",
+        "NO_FOUND_PLAYERS": "No players have been found.",
+        "DELETE_PAYMENT": "Delete Payment",
+        "DELETE_SURE": "Are you sure of delete this payment?"
+    },
     "PROFILE_PAGE": {
         "TITLE": "Profile",
         "DATA_HEADER": "Player Data",
@@ -144,6 +155,26 @@
     "TOAST": {
         "CLOSE": "Close"
     },
+    "PAYMENTS_FILTER": {
+        "FILTER": "Payments Filter",
+        "SHOW_PAID": "Show paid payments",
+        "SHOW_NO_PAID": "Show pending payments",
+        "YEAR": "Year"
+    },
+    "MONTHS": {
+        "JANUARY": "January",
+        "FEBRUARY": "February",
+        "MARCH": "March",
+        "APRIL": "April",
+        "MAY": "May",
+        "JUNE": "June",
+        "JULY": "July",
+        "AUGUST": "August",
+        "SEPTEMBER": "September",
+        "OCTOBER": "October",
+        "NOVEMBER": "November",
+        "DECEMBER": "December"
+    },
     "OK_BUTTON": "Ok",
     "CANCEL_BUTTON": "Cancel",
     "DELETE_BUTTON": "Delete",
@@ -152,6 +183,8 @@
     "UNJOIN_BUTTON": "Unjoin",
     "DISCARD_BUTTON": "Discard me",
     "SAVE_BUTTON": "Save",
+    "PAID_BUTTON": "Paid",
+    "UNDO_BUTTON": "Undo Paid",
     "CONFIRMATION": "Confirmation",
     "ACTION_OK": "Action completed successfully",
     "INFORMATION": "Information",
@@ -159,5 +192,7 @@
     "BLACK": "Black",
     "WHITE": "White",
     "NOT_AVAILABLE": "Not available",
-    "EXPIRED_SESSION": "Expired session"
+    "EXPIRED_SESSION": "Expired session",
+    "APPLY": "Apply",
+    "CLEAR_ALL": "Clear All"
 }

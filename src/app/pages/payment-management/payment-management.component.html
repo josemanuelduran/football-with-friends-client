@@ -1,0 +1,36 @@
+<ion-header>
+    <ion-navbar color="primary">
+        <!--Android pushes buttons to the left even if start attribute is present.
+            Check demo: http://ionicframework.com/docs/v2/components/#buttons-in-components-->
+        <!--If placing the menuToggle in a navbar or toolbar, it should be placed as a child of the <ion-navbar> or <ion-toolbar>, and not in the <ion-buttons> element
+        http://ionicframework.com/docs/v2/api/components/menu/MenuToggle/-->
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>
+            {{ 'PAYMENT_MANAGEMENT_PAGE.TITLE' | translate}}
+        </ion-title>
+    </ion-navbar>
+    <ion-toolbar no-padding class="filter-container" color="primary">
+        <ion-segment name="selectedOption" [ngModel]="selectedOption" (ionChange)="onSelectionChanged($event.value)" color="primary">
+            <ion-segment-button value="players">
+                {{"PAYMENT_MANAGEMENT_PAGE.PLAYERS_TAB" | translate}}
+            </ion-segment-button>
+            <ion-segment-button value="payments">
+                {{"PAYMENT_MANAGEMENT_PAGE.PAYMENTS_TAB" | translate}}
+            </ion-segment-button>
+        </ion-segment>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <ng-container [ngSwitch]="selectedOption">
+        <div *ngSwitchCase="'players'">
+            <fwf-payment-management-players></fwf-payment-management-players>
+        </div>
+        <div *ngSwitchCase="'payments'" class="card-section">
+            <img src="assets/img/png/under-construction.png"/>
+        </div>
+    </ng-container>
+</ion-content>
+        
+
