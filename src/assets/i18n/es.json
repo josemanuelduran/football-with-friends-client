@@ -104,7 +104,7 @@
     "PAYMENT_MANAGEMENT_PAGE": {
         "TITLE": "Gestión de Pagos",
         "PLAYERS_TAB": "Jugadores",
-        "PAYMENTS_TAB": "Pagos",
+        "PAYMENTS_TAB": "Pagos Pendientes",
         "FIXED_HEADER": "FIjos",
         "NO_FIXED_HEADER": "No Fijos",
         "NO_FOUND_PLAYERS": "No se han encontrado jugadores.",
@@ -151,7 +151,7 @@
         "PULL_TO_REFRESH": "Arrastrar para refrescar"
     },
     "BUSY_INDICATOR": {
-        "PLEASE_WAIT": "Por favor, espere..." 
+        "PLEASE_WAIT": "Por favor, espere..."
     },
     "TOAST": {
         "CLOSE": "Cerrar"

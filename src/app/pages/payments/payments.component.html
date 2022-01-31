@@ -17,7 +17,7 @@
                     [ngClass]="filterIconClass"
                     (click)="openFilter($event)">
                 <ion-icon name="funnel"></ion-icon>
-            </button>        
+            </button>
         </ion-buttons>
     </ion-navbar>
 </ion-header>
@@ -50,7 +50,7 @@
         </ion-item>
     </ion-list>
     <!--No treatments available to display-->
-    <fwf-empty-state *ngIf="filteredPayments?.length === 0">
+    <fwf-empty-state *ngIf="payments?.length === 0">
         {{'PAYMENTS_PAGE.NO_FOUND' | translate}}
     </fwf-empty-state>
 </ion-content>

@@ -17,14 +17,14 @@
                         [ngClass]="filterIconClass"
                         (click)="openFilter($event)">
                     <ion-icon name="funnel"></ion-icon>
-                </button>                    
+                </button>
                 <button *ngIf="player.fixed"
                         ion-button
                         icon-only
                         clear
                         (click)="createPayment()">
                     <ion-icon name="add"></ion-icon>
-                </button>        
+                </button>
             </ion-buttons>
         </ion-navbar>
     </ion-header>
@@ -36,7 +36,7 @@
                     refreshingSpinner="circles">
             </ion-refresher-content>
         </ion-refresher>
-    
+
         <ion-list>
             <ion-item-sliding #slidingItem *ngFor="let payment of payments">
                 <ion-item text-wrap>
@@ -78,7 +78,7 @@
             </ion-item-sliding>
         </ion-list>
         <!--No treatments available to display-->
-        <fwf-empty-state *ngIf="filteredPayments?.length === 0">
+        <fwf-empty-state *ngIf="payments?.length === 0">
             {{'PAYMENTS_PAGE.NO_FOUND' | translate}}
         </fwf-empty-state>
     </ion-content>

@@ -96,7 +96,6 @@ export class PaymentManagementPlayerComponent implements OnInit {
             let monthLastPayment = this.payments[0].month;
             if (monthLastPayment === Month.DECEMBER) {
                 monthNewPayment = Month.JANUARY;
-                year++;
             } else {
                 monthNewPayment = Month.getMonth(Month.getIndex(monthLastPayment) + 1);
             }

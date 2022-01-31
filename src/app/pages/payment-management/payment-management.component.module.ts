@@ -7,11 +7,13 @@ import { TranslateModule } from '@ngx-translate/core';
 import { PaymentManagementPageComponent } from './payment-management.component';
 import { ComponentsModule } from '../../components/components.module';
 import { PaymentManagementPlayersComponent } from './components/payment-management-players/payment-management-players.component';
+import { PaymentManagementPendingComponent } from './components/payment-management-pending/payment-management-pending.component';
 
 @NgModule({
     declarations: [
         PaymentManagementPageComponent,
         PaymentManagementPlayersComponent,
+        PaymentManagementPendingComponent,
     ],
     imports: [
         IonicPageModule.forChild(PaymentManagementPageComponent),

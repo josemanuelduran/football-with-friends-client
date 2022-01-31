@@ -1,0 +1,70 @@
+<ion-list list-grouped>
+    <ion-list-header>
+        {{'PAYMENT_MANAGEMENT_PAGE.FIXED_HEADER' | translate}}
+    </ion-list-header>
+    <ion-item-sliding #slidingItem *ngFor="let playerPayment of fixedPlayersPayments">
+        <ion-item text-wrap>
+            <ion-icon item-left name="thumbs-down"></ion-icon>
+            <h2>
+                {{playerPayment.player.alias}}
+            </h2>
+            <h3>
+                {{playerPayment.payment.name}}
+            </h3>
+            <h4>
+                <span id="paymentAmount" class="payment-amount-no-paid">
+                    {{playerPayment.payment.amount}} €
+                </span>
+            </h4>
+        </ion-item>
+        <ion-item-options side="left">
+            <button ion-button color="danger"
+                    (click)="deletePayment(playerPayment.payment, slidingItem)">
+                <ion-icon name="trash"></ion-icon>
+                {{'DELETE_BUTTON' | translate}}
+            </button>
+        </ion-item-options>
+        <ion-item-options side="right" (ionSwipe)="paid(playerPayment.payment, slidingItem)">
+            <button ion-button color="primary"
+                    (click)="paid(playerPayment.payment, slidingItem)">
+                <ion-icon name="cash"></ion-icon>
+                {{'PAID_BUTTON' | translate}}
+            </button>
+        </ion-item-options>
+    </ion-item-sliding>
+</ion-list>
+<ion-list list-grouped>
+    <ion-list-header>
+        {{'PAYMENT_MANAGEMENT_PAGE.NO_FIXED_HEADER' | translate}}
+    </ion-list-header>
+    <ion-item-sliding #slidingItem *ngFor="let playerPayment of noFixedPlayersPayments">
+        <ion-item text-wrap>
+            <ion-icon item-left name="thumbs-down"></ion-icon>
+            <h2>
+                {{playerPayment.player.alias}}
+            </h2>
+            <h3>
+                {{playerPayment.payment.name}}
+            </h3>
+            <h4>
+                <span id="paymentAmount" class="payment-amount-no-paid">
+                    {{playerPayment.payment.amount}} €
+                </span>
+            </h4>
+        </ion-item>
+        <ion-item-options side="left">
+            <button ion-button color="danger"
+                    (click)="deletePayment(playerPayment.payment, slidingItem)">
+                <ion-icon name="trash"></ion-icon>
+                {{'DELETE_BUTTON' | translate}}
+            </button>
+        </ion-item-options>
+        <ion-item-options side="right" (ionSwipe)="paid(playerPayment.payment, slidingItem)">
+            <button ion-button color="primary"
+                    (click)="paid(playerPayment.payment, slidingItem)">
+                <ion-icon name="cash"></ion-icon>
+                {{'PAID_BUTTON' | translate}}
+            </button>
+        </ion-item-options>
+    </ion-item-sliding>
+</ion-list>

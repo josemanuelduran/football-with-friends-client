@@ -29,6 +29,11 @@ export class PaymentsService {
         return this.http.get<Payment[]>(url);
     }
 
+    public fetchPendingPayments(): Observable<Payment[]> {
+      let url = `${PAYMENT_URL}?paid=false`;
+      return this.http.get<Payment[]>(url);
+    }
+
     public getPayment(paymentId: string): Observable<Payment> {
         return this.http.get<Payment>(`${PAYMENT_URL}/${paymentId}`);
     }
