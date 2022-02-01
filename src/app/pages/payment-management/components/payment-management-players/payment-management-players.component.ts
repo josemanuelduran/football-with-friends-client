@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-
-// import { TranslateService } from '@ngx-translate/core';
+import { ModalController, NavController } from 'ionic-angular';
 
 import { Player } from '../../../../models';
 import { PlayersService, MessagesService } from '../../../../providers';
-import { NavController } from 'ionic-angular';
 import { PaymentManagementPlayerComponent } from '../../../../components';
+import { AddPaymentsComponent } from '../../../../components/payments-management/add-payments/add-payments.component';
 
 @Component({
   selector: 'fwf-payment-management-players',
@@ -18,9 +17,9 @@ export class PaymentManagementPlayersComponent implements OnInit {
 
     constructor(
         private navCtrl: NavController,
-        // private translate: TranslateService,
         private playersService: PlayersService,
         private messages: MessagesService,
+        private modalCtrl: ModalController,
     ) { }
 
     ngOnInit() {
@@ -43,5 +42,11 @@ export class PaymentManagementPlayersComponent implements OnInit {
             PaymentManagementPlayerComponent,
             { player: playerSelected }
         );
+    }
+
+    addPayments() {
+        let dialog = this.modalCtrl.create(AddPaymentsComponent, {fixedPlayerList: this.fixedPlayers}, {enableBackdropDismiss: false});
+          dialog.onDidDismiss((actionOk: boolean) => {});
+          dialog.present();
     }
 }

@@ -175,6 +175,15 @@
         "NOVEMBER": "November",
         "DECEMBER": "December"
     },
+    "ADD_PAYMENTS_PAGE": {
+        "TITLE": "Add Payments",
+        "DATE": "Month and year",
+        "PLAYER": "Player",
+        "ALL": "All",
+        "ERROR": "An error occurred when saving the changes",
+        "SURE": "Are you sure you want to cancel the process?",
+        "CANCEL": "Cancel modification"
+    },
     "OK_BUTTON": "Ok",
     "CANCEL_BUTTON": "Cancel",
     "DELETE_BUTTON": "Delete",

@@ -1,0 +1,44 @@
+<ion-header>
+        <ion-navbar color="primary" hideBackButton>
+            <ion-buttons left>
+                <button ion-button
+                        icon-only
+                        clear
+                        (click)="cancel()">
+                    <ion-icon name="close-circle"></ion-icon>
+                </button>
+            </ion-buttons>
+            <ion-title>
+                {{ "ADD_PAYMENTS_PAGE.TITLE" | translate}}
+            </ion-title>
+            <ion-buttons end>
+                <button ion-button
+                        icon-only
+                        clear
+                        (click)="savePayments()"
+                        [disabled]="!paymentForm.valid">
+                    <ion-icon name="checkmark-circle"></ion-icon>
+                </button>
+            </ion-buttons>
+        </ion-navbar>
+    </ion-header>
+
+<ion-content padding>
+    <form [formGroup]="paymentForm">
+        <ion-item>
+            <ion-label floating>{{'ADD_PAYMENTS_PAGE.DATE' | translate}}</ion-label>
+            <ion-datetime [formControl]="paymentForm.controls['date']" displayFormat="MMMM/YYYY"></ion-datetime>
+        </ion-item>
+
+        <ion-item>
+            <ion-label floating>{{'ADD_PAYMENTS_PAGE.PLAYER' | translate}}</ion-label>
+            <ion-select [formControl]="paymentForm.controls['player']">
+              <ion-option *ngFor="let player of fixedPlayerList" [value]="player?.id">
+                  {{ player.alias }}
+              </ion-option>
+          </ion-select>
+            <ion-option ></ion-option>
+        </ion-item>
+    </form>
+
+</ion-content>

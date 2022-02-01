@@ -176,6 +176,15 @@
         "NOVEMBER": "Noviembre",
         "DECEMBER": "Diciembre"
     },
+    "ADD_PAYMENTS_PAGE": {
+        "TITLE": "Añadir pagos",
+        "DATE": "Mes y año",
+        "PLAYER": "Jugador",
+        "ALL": "Todos",
+        "ERROR": "Se ha producido un error al guardar los cambios",
+        "SURE": "¿Está seguro de que quiere cancelar el proceso?",
+        "CANCEL": "Cancelar modificación"
+    },
     "OK_BUTTON": "Ok",
     "CANCEL_BUTTON": "Cancel",
     "DELETE_BUTTON": "Delete",

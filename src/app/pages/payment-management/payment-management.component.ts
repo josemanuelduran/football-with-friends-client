@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonicPage } from 'ionic-angular';
 
 import { ContextService } from '../../providers';
+import { PaymentManagementPendingComponent } from './components/payment-management-pending/payment-management-pending.component';
+import { PaymentManagementPlayersComponent } from './components/payment-management-players/payment-management-players.component';
 
 @IonicPage({
     name: 'PaymentManagementPage',
@@ -16,6 +18,9 @@ export class PaymentManagementPageComponent implements OnInit {
     hasPermission = false;
     selectedOption = 'players';
 
+    @ViewChild('pendingPaymentsTab') pendingPaymentsTab: PaymentManagementPendingComponent;
+    @ViewChild('playersTab') playersTab: PaymentManagementPlayersComponent;
+
     constructor(
         private context: ContextService,
     ) { }
@@ -26,5 +31,13 @@ export class PaymentManagementPageComponent implements OnInit {
 
     onSelectionChanged(selectedOption: string) {
         this.selectedOption = selectedOption;
+    }
+
+    addPayments() {
+        if (!!this.playersTab) {
+          this.playersTab.addPayments();
+        } else {
+          this.pendingPaymentsTab.addPayments();
+        }
     }
 }

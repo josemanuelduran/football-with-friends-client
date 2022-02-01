@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController, ItemSliding } from 'ionic-angular';
+import { AlertController, ItemSliding, ModalController } from 'ionic-angular';
 
 import { TranslateService } from '@ngx-translate/core';
 import * as _ from 'lodash';
 
 import { Month, Payment, Player } from '../../../../models';
 import { PlayersService, MessagesService, PaymentsService } from '../../../../providers';
+import { AddPaymentsComponent } from '../../../../components/payments-management/add-payments/add-payments.component';
 
 interface PlayerPendingPayment {
   player: Player;
@@ -28,6 +29,7 @@ export class PaymentManagementPendingComponent implements OnInit {
         private translate: TranslateService,
         private messages: MessagesService,
         private alertCtrl: AlertController,
+        private modalCtrl: ModalController,
     ) { }
 
     ngOnInit() {
@@ -121,8 +123,17 @@ export class PaymentManagementPendingComponent implements OnInit {
             player: player,
             payment: payment,
         } as PlayerPendingPayment;
-    })
+    });
     this.fixedPlayersPayments = playersPendingPayments.filter(el => el.player.fixed);
     this.noFixedPlayersPayments = playersPendingPayments.filter(el => !el.player.fixed);
+  }
+
+  addPayments() {
+    const fixedPlayers = this.playersList.filter(player => player.fixed);
+      let dialog = this.modalCtrl.create(AddPaymentsComponent, {fixedPlayerList: fixedPlayers}, {enableBackdropDismiss: false});
+        dialog.onDidDismiss((actionOk: boolean) => {
+          this.loadListPayments();
+        });
+        dialog.present();
   }
 }

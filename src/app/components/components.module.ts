@@ -13,6 +13,7 @@ import { ScoreboardComponent } from './scoreboard/scoreboard.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { PaymentsFilterComponent } from './payments-filter/payments-filter.component';
 import { PaymentManagementPlayerComponent } from './payments-management/payment-management-player/payment-management-player.component';
+import { AddPaymentsComponent } from './payments-management/add-payments/add-payments.component';
 
 @NgModule({
     imports: [
@@ -31,6 +32,7 @@ import { PaymentManagementPlayerComponent } from './payments-management/payment-
         EditProfileComponent,
         PaymentsFilterComponent,
         PaymentManagementPlayerComponent,
+        AddPaymentsComponent,
     ],
     entryComponents: [
         // A list of components that are not referenced in a reachable component template.
@@ -42,6 +44,7 @@ import { PaymentManagementPlayerComponent } from './payments-management/payment-
         EditProfileComponent,
         PaymentsFilterComponent,
         PaymentManagementPlayerComponent,
+        AddPaymentsComponent
     ],
     exports: [
         // A list of declarations — component, directive, and pipe classes — that an importing module can use.
@@ -51,6 +54,7 @@ import { PaymentManagementPlayerComponent } from './payments-management/payment-
         TeamsMakerComponent,
         PaymentsFilterComponent,
         PaymentManagementPlayerComponent,
+        AddPaymentsComponent
     ],
     providers: [
         // A list of dependency injection providers.
