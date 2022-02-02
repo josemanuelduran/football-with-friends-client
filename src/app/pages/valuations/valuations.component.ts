@@ -39,7 +39,8 @@ export class ValuationsPageComponent implements OnInit {
                             return <Score>{
                                 namePlayer: item.player.name,
                                 idPlayer: item.player.id,
-                                score: ((<number>item.totalScore) / (<number>item.numVotes))
+                                score: ((<number>item.totalScore) / (<number>item.numVotes)),
+                                voted: item.voted,
                             };
                         });
                         this.scores.sort((a, b) => {
