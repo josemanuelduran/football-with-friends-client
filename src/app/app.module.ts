@@ -29,6 +29,7 @@ import {
     ValuationsService,
     ProfileService,
     PaymentsService,
+    StatsService,
 } from './providers';
 import { ComponentsModule } from './components/components.module';
 
@@ -70,6 +71,7 @@ import { ComponentsModule } from './components/components.module';
         ValuationsService,
         ProfileService,
         PaymentsService,
+        StatsService,
         {
             provide: HTTP_INTERCEPTORS,
             useClass: TokenInterceptor,

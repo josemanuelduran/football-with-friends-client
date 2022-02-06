@@ -1,0 +1,24 @@
+ion-icon {
+    &[class*='app-'] {
+        // Instead of using the font-based icons
+        // We're applying SVG masks
+        mask-size: contain;
+        mask-position: 50% 50%;
+        mask-repeat: no-repeat;
+        width: 1em;
+        height: 1em;
+    }
+
+    &[class*='app-white-shirt'] {
+        background-image: url(../../assets/img/svg/shirt-outline.svg);
+    }
+
+    &[class*='app-black-shirt'] {
+      background-image: url(../../assets/img/svg/shirt.svg);
+    }
+
+    &[class*='app-handshake'] {
+      background-image: url(../../assets/img/png/handshake.png);
+    }
+
+}

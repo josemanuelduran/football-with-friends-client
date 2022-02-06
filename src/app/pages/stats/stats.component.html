@@ -13,5 +13,138 @@
     </ion-navbar>
 </ion-header>
 <ion-content padding>
-    <img src="assets/img/png/under-construction.png"/>
-</ion-content>
+    <ion-card>
+        <ion-card-header>
+            {{ "STATS_PAGE.MATCHES_PLAYED" | translate}} ({{ totalMatchesPlayed}} {{ "STATS_PAGE.TOTAL_MATCHES_PLAYED" | translate}})
+        </ion-card-header>
+        <ion-list>
+          <ion-item>
+            <ion-icon name="football" item-start></ion-icon>
+            {{ "STATS_PAGE.TOTAL" | translate}}
+                <h4>
+                    {{ matchesPlayedByPlayer }} ({{ ((matchesPlayedByPlayer / totalMatchesPlayed) * 100).toFixed(1) }} %)
+                </h4>
+          </ion-item>
+          <ion-item>
+            <ion-icon name="app-white-shirt" item-start></ion-icon>
+            {{ "STATS_PAGE.WHITE" | translate}}
+                <h4>
+                    {{ stats?.matchesPlayedAsWhite }} ({{ ((stats?.matchesPlayedAsWhite / matchesPlayedByPlayer) * 100).toFixed(1) }} %)
+                </h4>
+          </ion-item>
+          <ion-item>
+            <ion-icon name="app-black-shirt" item-start></ion-icon>
+            {{ "STATS_PAGE.BLACK" | translate}}
+                <h4>
+                    {{ stats?.matchesPlayedAsBlack }} ({{ ((stats?.matchesPlayedAsBlack / matchesPlayedByPlayer) * 100).toFixed(1) }} %)
+                </h4>
+          </ion-item>
+        </ion-list>
+    </ion-card>
+    <ion-card>
+        <ion-card-header>
+            {{ "STATS_PAGE.MATCHES_WON" | translate}}
+        </ion-card-header>
+        <ion-list>
+          <ion-item>
+            <ion-icon name="trophy" item-start></ion-icon>
+            {{ "STATS_PAGE.TOTAL" | translate}}
+                <h4>
+                    {{ matchesWonByPlayer }} ({{ ((matchesWonByPlayer / matchesPlayedByPlayer) * 100).toFixed(1) }} %)
+                </h4>
+          </ion-item>
+          <ion-item>
+            <ion-icon name="app-white-shirt" item-start></ion-icon>
+            {{ "STATS_PAGE.WHITE" | translate}}
+                <h4>
+                    {{ stats?.matchesWonAsWhite }} ({{ ((stats?.matchesWonAsWhite / matchesWonByPlayer) * 100).toFixed(1) }} %)
+                </h4>
+          </ion-item>
+          <ion-item>
+            <ion-icon name="app-black-shirt" item-start></ion-icon>
+            {{ "STATS_PAGE.BLACK" | translate}}
+                <h4>
+                    {{ stats?.matchesWonAsBlack }} ({{ ((stats?.matchesWonAsBlack / matchesWonByPlayer) * 100).toFixed(1) }} %)
+                </h4>
+          </ion-item>
+        </ion-list>
+    </ion-card>
+    <ion-card>
+        <ion-card-header>
+            {{ "STATS_PAGE.MATCHES_LOST" | translate}}
+        </ion-card-header>
+        <ion-list>
+          <ion-item>
+            <ion-icon name="thumbs-down" item-start></ion-icon>
+            {{ "STATS_PAGE.TOTAL" | translate}}
+                <h4>
+                  {{ matchesLostByPlayer }} ({{ ((matchesLostByPlayer / matchesPlayedByPlayer) * 100).toFixed(1) }} %)
+                </h4>
+          </ion-item>
+          <ion-item>
+            <ion-icon name="app-white-shirt" item-start></ion-icon>
+            {{ "STATS_PAGE.WHITE" | translate}}
+                <h4>
+                    {{ stats?.matchesLostAsWhite }} ({{ ((stats?.matchesLostAsWhite / matchesLostByPlayer) * 100).toFixed(1) }} %)
+                </h4>
+          </ion-item>
+          <ion-item>
+            <ion-icon name="app-black-shirt" item-start></ion-icon>
+            {{ "STATS_PAGE.BLACK" | translate}}
+                <h4>
+                    {{ stats?.matchesLostAsBlack }} ({{ ((stats?.matchesLostAsBlack / matchesLostByPlayer) * 100).toFixed(1) }} %)
+                </h4>
+          </ion-item>
+        </ion-list>
+    </ion-card>
+    <ion-card>
+        <ion-card-header>
+            {{ "STATS_PAGE.MATCHES_TIED" | translate}}
+        </ion-card-header>
+        <ion-list>
+          <ion-item>
+            <ion-icon name="app-handshake" class="handshake-icon" item-start></ion-icon>
+            {{ "STATS_PAGE.TOTAL" | translate}}
+                <h4>
+                  {{ matchesTiedByPlayer }} ({{ ((matchesTiedByPlayer / matchesPlayedByPlayer) * 100).toFixed(1) }} %)
+                </h4>
+          </ion-item>
+          <ion-item>
+            <ion-icon name="app-white-shirt" item-start></ion-icon>
+            {{ "STATS_PAGE.WHITE" | translate}}
+                <h4>
+                    {{ stats?.matchesTiedAsWhite }} ({{ ((stats?.matchesTiedAsWhite / matchesTiedByPlayer) * 100).toFixed(1) }} %)
+                </h4>
+          </ion-item>
+          <ion-item>
+            <ion-icon name="app-black-shirt" item-start></ion-icon>
+            {{ "STATS_PAGE.BLACK" | translate}}
+                <h4>
+                    {{ stats?.matchesTiedAsBlack }} ({{ ((stats?.matchesTiedAsBlack / matchesTiedByPlayer) * 100).toFixed(1) }} %)
+                </h4>
+          </ion-item>
+        </ion-list>
+    </ion-card>
+    <ion-card>
+        <ion-card-header>
+          {{ "STATS_PAGE.GOALS" | translate}}
+        </ion-card-header>
+        <ion-list>
+          <ion-item color="none">
+              <ion-icon name="thumbs-up" item-left></ion-icon>
+              {{ "STATS_PAGE.GOALS_SCORED" | translate}}
+              <h4>
+                  {{ stats?.goalsScored }}
+              </h4>
+          </ion-item>
+          <ion-item color="none">
+              <ion-icon name="thumbs-down" item-left></ion-icon>
+              {{ "STATS_PAGE.GOALS_CONCEDED" | translate}}
+              <h4>
+                  {{ stats?.goalsConceded }}
+              </h4>
+          </ion-item>
+        </ion-list>
+    </ion-card>
+
+  </ion-content>

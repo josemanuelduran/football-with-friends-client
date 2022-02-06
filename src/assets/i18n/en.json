@@ -144,7 +144,17 @@
     },
     "STATS_PAGE": {
         "TITLE": "Stats",
-        "NO_FOUND": "No stats have been found."
+        "MATCHES_PLAYED": "Matches played",
+        "TOTAL_MATCHES_PLAYED": "Total matches played",
+        "TOTAL": "Total",
+        "WHITE": "White Team",
+        "BLACK": "Black Team",
+        "MATCHES_WON": "Matches Won",
+        "MATCHES_LOST": "Matches Lost",
+        "NATCHES_TIED": "Matches Tied",
+        "GOALS": "Goals",
+        "GOALS_SCORED": "Goals Scored",
+        "GOALS_CONCEDED": "Goals Conceded"
     },
     "REFRESHER_COMPONENT": {
         "PULL_TO_REFRESH": "Pull to refresh"

@@ -145,7 +145,17 @@
     },
     "STATS_PAGE": {
         "TITLE": "Estadísticas",
-        "NO_FOUND": "No se han encontrado estadísticas."
+        "MATCHES_PLAYED": "Partidos Jugados",
+        "TOTAL_MATCHES_PLAYED": "Total de partidos disputados",
+        "TOTAL": "Total",
+        "WHITE": "De Blanco",
+        "BLACK": "De Negro",
+        "MATCHES_WON": "Partidos Ganados",
+        "MATCHES_LOST": "Partidos Perdidos",
+        "NATCHES_TIED": "Partidos Empatados",
+        "GOALS": "Goles",
+        "GOALS_SCORED": "Goles a favor",
+        "GOALS_CONCEDED": "Goles en contra"
     },
     "REFRESHER_COMPONENT": {
         "PULL_TO_REFRESH": "Arrastrar para refrescar"

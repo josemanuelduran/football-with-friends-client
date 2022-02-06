@@ -13,3 +13,4 @@ export * from './messages/messages.service';
 export * from './valuations/valuations.service';
 export * from './profile/profile.service';
 export * from './payments/payments.service';
+export * from './stats/stats.service';

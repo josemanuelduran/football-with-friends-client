@@ -9,3 +9,4 @@ export * from './score.model';
 export * from './profile.model';
 export * from './payment.model';
 export * from './payment-filter.model';
+export * from './playerStats.model';

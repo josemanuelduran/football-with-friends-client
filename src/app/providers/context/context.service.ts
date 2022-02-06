@@ -11,6 +11,7 @@ export class ContextService {
     readyRoles$: BehaviorSubject<boolean> = new BehaviorSubject(false);
     private userLogged: User;
     private playerLogged: Player;
+    private matchesPlayed: number;
 
     constructor() {
     }
@@ -46,5 +47,13 @@ export class ContextService {
             roleTreasurer = this.userLogged.roles.findIndex(role => role === Role.TREASURER) >= 0;
         }
         return roleTreasurer;
+    }
+
+    setMatchesPlayed(matchesPlayed: number): void {
+        this.matchesPlayed = matchesPlayed;
+    }
+
+    getMatchesPlayed(): number {
+        return this.matchesPlayed;
     }
 }

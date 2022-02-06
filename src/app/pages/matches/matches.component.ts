@@ -125,6 +125,7 @@ export class MatchesPageComponent implements OnInit {
                         };
                     });
                     this.initializeList(matches);
+                    this.setMatchesPlayed(matches);
                 },
                 err => {
                     this.endAnimations(refresher);
@@ -243,5 +244,9 @@ export class MatchesPageComponent implements OnInit {
                 match: match
             };
         });
+    }
+
+    private setMatchesPlayed(matches: Match[]): void {
+        this.context.setMatchesPlayed(matches.filter(match => !match.cancelled && match.played).length);
     }
 }
