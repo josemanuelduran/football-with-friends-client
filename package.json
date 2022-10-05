@@ -12,6 +12,7 @@
   "scripts": {
     "clean": "ionic-app-scripts clean",
     "build": "ionic-app-scripts build",
+    "build:prod": "ionic-app-scripts build --prod",
     "build:android": "ionic cordova build android",
     "serve": "ionic serve",
     "serve:android": "ionic serve --platform android",
