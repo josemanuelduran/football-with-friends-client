@@ -407,7 +407,8 @@ export class MatchPageComponent implements OnInit {
     }
 
     private setShowValuations(): void {
-        this.showMyValuations = this.matchPlayed && this.userLoggedHasPlayed();
+        // Quitamos las votaciones a Migue
+        this.showMyValuations = this.matchPlayed && this.userLoggedHasPlayed() && this.player.id !== '5ad75966c85fdf206c4d4ca9';
         let fechaPartido = moment(this.match.date);
         let fechaActual = moment();
         this.showValuations = fechaActual.diff(fechaPartido, 'days') > 2;
